@@ -19,6 +19,7 @@
             --gold: #D4AF37;
             --text-dark: #332225;
             --glass: rgba(74, 18, 30, 0.65);
+            --glass-wish: rgba(250, 246, 240, 0.35);
         }
 
         /* Reset rules & Extra Scroll Line Removal */
@@ -351,6 +352,31 @@
             font-weight: 600;
             display: block;
             margin-top: 2px;
+        }
+
+        /* Contact Details setup */
+        .contact-row {
+            background: rgba(255, 255, 255, 0.88);
+            padding: 1.1rem;
+            border-radius: 10px;
+            margin: 0.2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid var(--maroon);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-row p {
+            text-shadow: none !important;
+            text-align: left;
+        }
+
+        .contact-row a {
+            color: var(--maroon-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
         }
 
         /* Inputs configuration */
