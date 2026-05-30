@@ -667,6 +667,701 @@
             </div>
         </section>
 
+        <section id="details-view" class="animate-on-scroll"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walimatul Ursy - Azmin & Ameera</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Color Scheme Definitions */
+        :root {
+            --maroon: #6B1D2F;
+            --maroon-dark: #4A121E;
+            --sandalwood: #F4EBE1;
+            --sandalwood-solid: #FAF6F0;
+            --gold: #D4AF37;
+            --text-dark: #332225;
+            --glass: rgba(74, 18, 30, 0.65);
+            --glass-wish: rgba(250, 246, 240, 0.35);
+        }
+
+        /* Reset rules & Extra Scroll Line Removal */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--sandalwood); 
+            text-align: center;
+            background-color: var(--maroon-dark);
+            font-weight: 700; 
+            overflow-x: hidden;
+        }
+
+        body.lock-scroll {
+            overflow: hidden;
+        }
+
+        /* 100% Crisp Background Image Layer (No Blur) */
+        .bg-fixed-image {
+            position: fixed;
+            top: 0; left: 0; 
+            width: 100%; height: 100vh;
+            background-image: url('./background.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center 12%; /* Cropped 12% from top */
+            z-index: -2;
+            opacity: 0; 
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .bg-fixed-image.visible {
+            opacity: 1; 
+        }
+
+        .bg-tint-layer {
+            position: fixed;
+            top: 0; left: 0; 
+            width: 100%; height: 100vh;
+            background: linear-gradient(to bottom, rgba(74, 18, 30, 0.6), rgba(0, 0, 0, 0.25), rgba(107, 29, 47, 0.35));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .bg-tint-layer.visible {
+            opacity: 1;
+        }
+
+        .phone-wrapper {
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            background: transparent;
+        }
+
+        /* Compact Layout Spacings */
+        section, header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2.5rem 1rem;
+            position: relative;
+            background: transparent; 
+        }
+
+        header {
+            min-height: 100vh;
+        }
+
+        /* 3-SECOND MULTI-DIRECTIONAL TRANSITION ENTRANCE ANIMATIONS */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: opacity 3.0s cubic-bezier(0.16, 1, 0.3, 1), transform 3.0s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* WELCOME ENTRY SCREEN OVERLAY */
+        #welcome-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: var(--maroon-dark);
+            color: var(--sandalwood);
+            z-index: 200000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+        }
+
+        #welcome-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.02);
+        }
+
+        .welcome-card {
+            background-color: rgba(250, 246, 240, 0.08);
+            border: 2px solid var(--gold);
+            padding: 3.5rem 2rem;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        /* FLOATING TOP-LEFT MENU TRIGGER TOGGLE BUTTON */
+        .floating-menu-trigger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100000;
+            background-color: var(--maroon);
+            color: var(--sandalwood);
+            border: 2px solid var(--gold);
+            padding: 0.7rem 1.1rem;
+            border-radius: 30px;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            display: none;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .floating-menu-trigger:hover {
+            background-color: var(--gold);
+            color: var(--maroon-dark);
+            transform: scale(1.05);
+        }
+
+        /* SLIDING SIDEBAR OVERLAY DRAWER MODULE */
+        .sidebar-modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(34, 17, 20, 0.8);
+            z-index: 105000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-in-out;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .sidebar-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sidebar-drawer-card {
+            width: 280px;
+            height: 100%;
+            background-color: var(--maroon-dark);
+            border-right: 3px solid var(--gold);
+            padding: 3rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+            text-align: left;
+        }
+
+        .sidebar-modal-overlay.active .sidebar-drawer-card {
+            transform: translateX(0);
+        }
+
+        .sidebar-drawer-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-links-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .sidebar-links-stack a {
+            color: var(--sandalwood);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .sidebar-links-stack a:hover {
+            background-color: rgba(254, 235, 225, 0.1);
+            color: var(--gold);
+        }
+
+        .close-sidebar-x {
+            align-self: flex-end;
+            font-size: 1.6rem;
+            color: var(--sandalwood);
+            cursor: pointer;
+            margin-top: -1rem;
+            font-weight: 300;
+        }
+
+        /* TYPOGRAPHY OVERLAY WRAPPERS */
+        h1, h2 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            letter-spacing: 2px;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225, 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .couple-header-names {
+            font-family: 'Cinzel', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 1.2rem 0;
+            line-height: 1.3;
+            text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225, 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 2.3rem;
+            color: #fff;
+            margin: 1rem 0;
+            direction: rtl;
+            line-height: 1.8;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(107, 29, 47, 0.8);
+        }
+
+        .divider {
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin: 0.8rem 0;
+        }
+
+        section p {
+            color: var(--sandalwood);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.6;
+        }
+
+        .content-accessible-box {
+            background-color: var(--glass); 
+            border: 2px solid var(--maroon);
+            border-radius: 16px;
+            padding: 2.5rem 1.5rem;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* COUNTDOWN WIDGET BLOCK BOX PANELS */
+        #countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 1.5rem auto;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .countdown-box {
+            background: var(--maroon);
+            color: var(--sandalwood);
+            padding: 0.85rem 0.2rem;
+            border-radius: 8px;
+            border: 2px solid var(--sandalwood);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .countdown-num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            display: block;
+            color: var(--gold);
+        }
+
+        .countdown-lbl {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Contact Details setup */
+        .contact-row {
+            background: rgba(255, 255, 255, 0.88);
+            padding: 1.1rem;
+            border-radius: 10px;
+            margin: 0.2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid var(--maroon);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-row p {
+            text-shadow: none !important;
+            text-align: left;
+        }
+
+        .contact-row a {
+            color: var(--maroon-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* Inputs configuration */
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--maroon);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            background-color: rgba(255, 255, 255, 0.85);
+            color: var(--maroon-dark);
+            font-weight: 700;
+        }
+
+        /* Wishboard Scroll Timeline */
+        #wishes-scroll-box {
+            width: 100%;
+            margin-top: 1.5rem;
+            max-height: 350px;
+            overflow-y: auto;
+            text-align: left;
+            padding-right: 5px;
+        }
+
+        .wish-bubble {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 1.25rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--maroon);
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .empty-wishes-placeholder {
+            text-align: center;
+            padding: 2.5rem;
+            color: var(--gold);
+            font-style: italic;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .wish-author {
+            font-weight: 700;
+            color: var(--maroon-dark);
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Interactive Action Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--maroon);
+            color: var(--sandalwood);
+            padding: 0.85rem 2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--maroon);
+            cursor: pointer;
+            margin: 0.5rem auto;
+            width: 85%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn:hover {
+            background-color: var(--maroon-dark);
+            transform: translateY(-2px);
+        }
+
+        .map-action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 1.5rem 0;
+            width: 100%;
+        }
+
+        .map-action-grid .btn {
+            width: 100%;
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        .map-frame-box {
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%;
+            border: 3px solid var(--maroon);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .map-frame-box iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: 0;
+        }
+
+        /* Interactive RSVP Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(34, 17, 20, 0.75);
+            z-index: 120000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content-card {
+            background-color: var(--maroon);
+            color: var(--sandalwood);
+            max-width: 400px;
+            width: 100%;
+            padding: 3rem 2rem;
+            border-radius: 14px;
+            border: 3px solid var(--gold);
+            position: relative;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .modal-select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 2px solid var(--maroon);
+            background-color: var(--sandalwood-solid);
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--maroon-dark);
+            font-weight: 700;
+        }
+
+        /* PC Navigation cursor items */
+        .custom-cursor-dot, .custom-cursor-ring {
+            display: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            html, body, button, input, textarea, select, a, .btn {
+                cursor: default !important;
+            }
+            .custom-cursor-dot {
+                display: block;
+                width: 8px;
+                height: 8px;
+                background-color: black;
+                position: fixed;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1000000;
+                transform: translate(-50%, -50%);
+            }
+            .custom-cursor-ring {
+                display: block;
+                width: 26px;
+                height: 26px;
+                border: 2px solid black;
+                position: fixed;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 999999;
+                transform: translate(-50%, -50%);
+                transition: transform 0.08s ease-out;
+            }
+        }
+
+        #glitter-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            pointer-events: none; 
+            z-index: 998;
+        }
+
+        footer {
+            padding: 3rem 1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        #wishes-view {
+            padding-bottom: 2rem; 
+        }
+    </style>
+</head>
+<body class="phone-wrapper lock-scroll">
+
+    <canvas id="glitter-canvas"></canvas>
+
+    <div class="bg-fixed-image" id="global-backdrop"></div>
+    <div class="bg-tint-layer" id="global-tint"></div>
+
+    <div class="custom-cursor-dot" id="cursor-dot"></div>
+    <div class="custom-cursor-ring" id="cursor-ring"></div>
+
+    <button class="floating-menu-trigger" id="sidebar-open-btn" onclick="toggleSidebarDrawer(true)">
+        Menu ☰
+    </button>
+
+    <div class="sidebar-modal-overlay" id="sidebar-navigation-drawer" onclick="toggleSidebarDrawer(false)">
+        <div class="sidebar-drawer-card" onclick="event.stopPropagation()">
+            <span class="close-sidebar-x" onclick="toggleSidebarDrawer(false)">×</span>
+            <h3>Navigation</h3>
+            <div class="sidebar-links-stack">
+                <a href="#home-view" onclick="toggleSidebarDrawer(false)">🏠 Main (Home)</a>
+                <a href="#details-view" onclick="toggleSidebarDrawer(false)">📅 Event Info</a>
+                <a href="javascript:void(0)" onclick="handleSidebarModalBridging('rsvp-modal-element')">💌 Submit RSVP</a>
+                <a href="#wishes-view" onclick="toggleSidebarDrawer(false)">✨ Guestbook</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="welcome-overlay">
+        <div class="welcome-card">
+            <p style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 0.5rem;">Walimatul Ursy</p>
+            <h2 style="color: white; font-size: 2rem; text-shadow: none; margin-bottom: 1.5rem;">Azmin & Ameera</h2>
+            <div class="divider" style="color: var(--gold);">✦ ⚜ ✦</div>
+            <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.5rem; font-weight: 400; font-style: italic; color: var(--sandalwood);">
+                Assalamu alaikum Wr. Wb.<br>
+                We cordially invite you to share in our joy and receive blessings on the auspicious occasion of the wedding reception of our beloved brother and sister.
+            </p>
+            <button class="btn" onclick="grantEntranceToInvitationSite()">✨ View Invitation</button>
+        </div>
+    </div>
+
+    <div id="main-content-site" style="display: none;">
+
+        <header id="home-view">
+            <div class="hero-title">Walimatul Ursy</div>
+            <div class="divider">✦ ⚜ ✦</div>
+            <div class="couple-header-names">Mohamed Azmin<br>&<br>Ameera</div>
+            
+            <p style="font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225, 0 4px 10px rgba(0,0,0,0.4);">SATURDAY • 12.09.2026</p>
+            
+            <div id="countdown">
+                <div class="countdown-box"><span id="lbl-days" class="countdown-num">00</span><span class="countdown-lbl">Days</span></div>
+                <div class="countdown-box"><span id="lbl-hours" class="countdown-num">00</span><span class="countdown-lbl">Hrs</span></div>
+                <div class="countdown-box"><span id="lbl-minutes" class="countdown-num">00</span><span class="countdown-lbl">Min</span></div>
+                <div class="countdown-box"><span id="lbl-seconds" class="countdown-num">00</span><span class="countdown-lbl">Sec</span></div>
+            </div>
+
+            <button class="btn" style="margin-top: 1rem;" onclick="triggerCalendarIntent()">📅 Set Event Reminder</button>
+        </header>
+
+        <section class="animate-on-scroll">
+            <div class="content-accessible-box">
+                <div class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">In the name of Allah, the Most Gracious, the Most Merciful</p>
+                
+                <div class="arabic-text" style="font-size: 1.8rem;">بَارَكَ اللهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
+                <p style="font-style: italic; font-size: 0.9rem; line-height: 1.5; padding: 0 0.5rem;">
+                    "May Allah bless for you your spouse, and bless you, and may He unite both of you in goodness." (Sunan Abi Dawud)
+                </p>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll">
+            <div class="content-accessible-box">
+                <h2>With Great Pleasure We Invite You</h2>
+                <div class="divider">⚜</div>
+                <p style="font-size: 0.9rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;">Parents of the Groom</p>
+                <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.3rem; margin-bottom: 1.5rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Mohamed Idris & Hajira Ammal</p>
+                
+                <div class="divider" style="font-size: 1rem; margin: 0.5rem 0;">&</div>
+                
+                <p style="font-size: 0.9rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;">Parents of the Bride</p>
+                <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.3rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Abdul Rahubu & Yasmin</p>
+                <div class="divider">✦</div>
+                <p style="font-size: 0.95rem; font-style: italic; padding: 0 1rem;">To the wedding reception celebrating the union of their beloved children:</p>
+            </div>
+        </section>
+
         <section id="details-view" class="animate-on-scroll">
             <div class="content-accessible-box">
                 <h2>The Happy Couple</h2>
@@ -699,6 +1394,38 @@
 
                 <div class="map-frame-box">
                     <iframe src="https://maps.google.com/maps?q=414,%20Jalan%20Hutton,%20George%20Town,%2010050%20George%20Town,%20Pulau%20Pinang&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll">
+            <div class="content-accessible-box">
+                <h2>Contact Family</h2>
+                <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--gold);">Click below to connect with us directly on WhatsApp:</p>
+                <div class="divider">✦</div>
+                
+                <div class="contact-row">
+                    <div>
+                        <p style="color: var(--maroon-dark); font-size:1.05rem; font-weight:700;">Mr. Idris</p>
+                        <p style="font-size:0.75rem; color:#666; font-weight: 500;">Father of the Groom</p>
+                    </div>
+                    <a href="https://wa.me/60183891696" target="_blank">📲 WhatsApp</a>
+                </div>
+                
+                <div class="contact-row">
+                    <div>
+                        <p style="color: var(--maroon-dark); font-size:1.05rem; font-weight:700;">Mr. Naina</p>
+                        <p style="font-size:0.75rem; color:#666; font-weight: 500;">Family Representative</p>
+                    </div>
+                    <a href="https://wa.me/60164402003" target="_blank">📲 WhatsApp</a>
+                </div>
+                
+                <div class="contact-row">
+                    <div>
+                        <p style="color: var(--maroon-dark); font-size:1.05rem; font-weight:700;">Azhar</p>
+                        <p style="font-size:0.75rem; color:#666; font-weight: 500;">Brother of the Groom</p>
+                    </div>
+                    <a href="https://wa.me/60182369616" target="_blank">📲 WhatsApp</a>
                 </div>
             </div>
         </section>
@@ -1044,7 +1771,7 @@
             renderGuestbookBoard();
         }
 
-        // CLEAN OBJECT-LESS ENCODING SANITIZER
+        // STABLE ARRAY INDEX SPLITTING STRING SANITIZER
         function sanitizeInput(str) {
             var chars = ["&", "<", ">", "'", '"'];
             var entities = ["&amp;", "&lt;", "&gt;", "&#39;", "&quot;"];
