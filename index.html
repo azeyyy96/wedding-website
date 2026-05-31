@@ -1,766 +1,767 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Walimatul Ursy - Azmin Weds Ameera</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Color Scheme Definitions */
-        :root {
-            --maroon: #6B1D2F;
-            --maroon-dark: #4A121E;
-            --sandalwood: #F4EBE1;
-            --sandalwood-solid: #FAF6F0;
-            --gold: #D4AF37;
-            --text-dark: #332225;
-            --glass: rgba(74, 18, 30, 0.65);
-            --glass-wish: rgba(250, 246, 240, 0.35);
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walimatul Ursy - Azmin Weds Ameera</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Color Scheme Definitions */
+        :root {
+            --maroon: #6B1D2F;
+            --maroon-dark: #4A121E;
+            --sandalwood: #F4EBE1;
+            --sandalwood-solid: #FAF6F0;
+            --gold: #D4AF37;
+            --text-dark: #332225;
+            --glass: rgba(74, 18, 30, 0.65);
+            --glass-wish: rgba(250, 246, 240, 0.35);
+        }
 
-        /* Reset rules & Extra Scroll Line Removal */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
+        /* Reset rules & Extra Scroll Line Removal */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--sandalwood); 
-            text-align: center;
-            background-color: var(--maroon-dark);
-            font-weight: 700; 
-            overflow-x: hidden;
-        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--sandalwood); 
+            text-align: center;
+            background-color: var(--maroon-dark);
+            font-weight: 700; 
+            overflow-x: hidden;
+        }
 
-        body.lock-scroll {
-            overflow: hidden;
-        }
+        body.lock-scroll {
+            overflow: hidden;
+        }
 
-        /* 100% Crisp Background Image Layer (No Blur) */
-        .bg-fixed-image {
-            position: fixed;
-            top: 0; left: 0; 
-            width: 100%; height: 100vh;
-            background-image: url('./background.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center 12%; /* Cropped 12% from top */
-            z-index: -2;
-            opacity: 0; 
-            transition: opacity 1.5s ease-in-out;
-        }
+        /* 100% Crisp Background Image Layer (No Blur) */
+        .bg-fixed-image {
+            position: fixed;
+            top: 0; left: 0; 
+            width: 100%; height: 100vh;
+            background-image: url('./background.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center 12%; /* Cropped 12% from top */
+            z-index: -2;
+            opacity: 0; 
+            transition: opacity 1.5s ease-in-out;
+        }
 
-        .bg-fixed-image.visible {
-            opacity: 1; 
-        }
+        .bg-fixed-image.visible {
+            opacity: 1; 
+        }
 
-        .bg-tint-layer {
-            position: fixed;
-            top: 0; left: 0; 
-            width: 100%; height: 100vh;
-            background: linear-gradient(to bottom, rgba(74, 18, 30, 0.6), rgba(0, 0, 0, 0.25), rgba(107, 29, 47, 0.35));
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
+        .bg-tint-layer {
+            position: fixed;
+            top: 0; left: 0; 
+            width: 100%; height: 100vh;
+            background: linear-gradient(to bottom, rgba(74, 18, 30, 0.6), rgba(0, 0, 0, 0.25), rgba(107, 29, 47, 0.35));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
 
-        .bg-tint-layer.visible {
-            opacity: 1;
-        }
+        .bg-tint-layer.visible {
+            opacity: 1;
+        }
 
-        .phone-wrapper {
-            width: 100%;
-            max-width: 650px;
-            margin: 0 auto;
-            position: relative;
-            background: transparent;
-        }
+        .phone-wrapper {
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            background: transparent;
+        }
 
-        /* Compact Layout Spacings */
-        section, header {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2.5rem 1rem;
-            position: relative;
-            background: transparent; 
-        }
+        /* Compact Layout Spacings */
+        section, header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2.5rem 1rem;
+            position: relative;
+            background: transparent; 
+        }
 
-        header {
-            min-height: 100vh;
-        }
+        header {
+            min-height: 100vh;
+        }
 
-        /* 3-SECOND MULTI-DIRECTIONAL TRANSITION ENTRANCE ANIMATIONS */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(40px) scale(0.95);
-            transition: opacity 3.0s cubic-bezier(0.16, 1, 0.3, 1), transform 3.0s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        /* 3-SECOND MULTI-DIRECTIONAL TRANSITION ENTRANCE ANIMATIONS */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: opacity 3.0s cubic-bezier(0.16, 1, 0.3, 1), transform 3.0s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-        .animate-on-scroll.revealed {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        .animate-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
 
-        /* WELCOME ENTRY SCREEN OVERLAY */
-        #welcome-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background-color: var(--maroon-dark);
-            color: var(--sandalwood);
-            z-index: 200000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
-        }
+        /* WELCOME ENTRY SCREEN OVERLAY */
+        #welcome-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: var(--maroon-dark);
+            color: var(--sandalwood);
+            z-index: 200000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+        }
 
-        #welcome-overlay.fade-out {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(1.02);
-        }
+        #welcome-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.02);
+        }
 
-        .welcome-card {
-            background-color: rgba(250, 246, 240, 0.08);
-            border: 2px solid var(--gold);
-            padding: 3.5rem 2rem;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 500px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-        }
+        .welcome-card {
+            background-color: rgba(250, 246, 240, 0.08);
+            border: 2px solid var(--gold);
+            padding: 3.5rem 2rem;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
 
-        /* FLOATING TOP-LEFT MENU TRIGGER TOGGLE BUTTON */
-        .floating-menu-trigger {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 100000;
-            background-color: var(--maroon);
-            color: var(--sandalwood);
-            border: 2px solid var(--gold);
-            padding: 0.7rem 1.1rem;
-            border-radius: 30px;
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            display: none;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
+        /* FLOATING TOP-LEFT MENU TRIGGER TOGGLE BUTTON */
+        .floating-menu-trigger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100000;
+            background-color: var(--maroon);
+            color: var(--sandalwood);
+            border: 2px solid var(--gold);
+            padding: 0.7rem 1.1rem;
+            border-radius: 30px;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            display: none;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
 
-        .floating-menu-trigger:hover {
-            background-color: var(--gold);
-            color: var(--maroon-dark);
-            transform: scale(1.05);
-        }
+        .floating-menu-trigger:hover {
+            background-color: var(--gold);
+            color: var(--maroon-dark);
+            transform: scale(1.05);
+        }
 
-        /* SLIDING SIDEBAR OVERLAY DRAWER MODULE */
-        .sidebar-modal-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background-color: rgba(34, 17, 20, 0.8);
-            z-index: 105000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease-in-out;
-            display: flex;
-            justify-content: flex-start;
-        }
+        /* SLIDING SIDEBAR OVERLAY DRAWER MODULE */
+        .sidebar-modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(34, 17, 20, 0.8);
+            z-index: 105000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-in-out;
+            display: flex;
+            justify-content: flex-start;
+        }
 
-        .sidebar-modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .sidebar-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-        .sidebar-drawer-card {
-            width: 280px;
-            height: 100%;
-            background-color: var(--maroon-dark);
-            border-right: 3px solid var(--gold);
-            padding: 3rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            transform: translateX(-100%);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
-            text-align: left;
-        }
+        .sidebar-drawer-card {
+            width: 280px;
+            height: 100%;
+            background-color: var(--maroon-dark);
+            border-right: 3px solid var(--gold);
+            padding: 3rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+            text-align: left;
+        }
 
-        .sidebar-modal-overlay.active .sidebar-drawer-card {
-            transform: translateX(0);
-        }
+        .sidebar-modal-overlay.active .sidebar-drawer-card {
+            transform: translateX(0);
+        }
 
-        .sidebar-drawer-card h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--gold);
-            font-size: 1.3rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 0.5rem;
-            letter-spacing: 1px;
-        }
+        .sidebar-drawer-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
 
-        .sidebar-links-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
+        .sidebar-links-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
 
-        .sidebar-links-stack a {
-            color: var(--sandalwood);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
+        .sidebar-links-stack a {
+            color: var(--sandalwood);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
 
-        .sidebar-links-stack a:hover {
-            background-color: rgba(254, 235, 225, 0.1);
-            color: var(--gold);
-        }
+        .sidebar-links-stack a:hover {
+            background-color: rgba(254, 235, 225, 0.1);
+            color: var(--gold);
+        }
 
-        .close-sidebar-x {
-            align-self: flex-end;
-            font-size: 1.6rem;
-            color: var(--sandalwood);
-            cursor: pointer;
-            margin-top: -1rem;
-            font-weight: 300;
-        }
+        .close-sidebar-x {
+            align-self: flex-end;
+            font-size: 1.6rem;
+            color: var(--sandalwood);
+            cursor: pointer;
+            margin-top: -1rem;
+            font-weight: 300;
+        }
 
-        /* TYPOGRAPHY OVERLAY WRAPPERS */
-        h1, h2 {
-            font-family: 'Cinzel', serif;
-            color: #fff;
-            letter-spacing: 2px;
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225, 0 4px 10px rgba(0,0,0,0.5);
-        }
+        /* TYPOGRAPHY OVERLAY WRAPPERS */
+        h1, h2 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            letter-spacing: 2px;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225, 0 4px 10px rgba(0,0,0,0.5);
+        }
 
-        .hero-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--gold);
-            letter-spacing: 4px;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-        }
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
 
-        .couple-header-names {
-            font-family: 'Cinzel', serif;
-            font-size: 2.3rem;
-            font-weight: 700;
-            color: #fff;
-            margin: 1.2rem 0;
-            line-height: 1.3;
-            text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225, 0 5px 20px rgba(0,0,0,0.5);
-        }
+        .couple-header-names {
+            font-family: 'Cinzel', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 1.2rem 0;
+            line-height: 1.3;
+            text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225, 0 5px 20px rgba(0,0,0,0.5);
+        }
 
-        .arabic-text {
-            font-family: 'Amiri', serif;
-            font-size: 2.3rem;
-            color: #fff;
-            margin: 1rem 0;
-            direction: rtl;
-            line-height: 1.8;
-            font-weight: 700;
-            text-shadow: 0 2px 10px rgba(107, 29, 47, 0.8);
-        }
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 2.3rem;
+            color: #fff;
+            margin: 1rem 0;
+            direction: rtl;
+            line-height: 1.8;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(107, 29, 47, 0.8);
+        }
 
-        .divider {
-            font-size: 1.3rem;
-            color: var(--gold);
-            margin: 0.8rem 0;
-        }
+        .divider {
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin: 0.8rem 0;
+        }
 
-        section p {
-            color: var(--sandalwood);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            line-height: 1.6;
-        }
+        section p {
+            color: var(--sandalwood);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.6;
+        }
 
-        .content-accessible-box {
-            background-color: var(--glass); 
-            border: 2px solid var(--maroon);
-            border-radius: 16px;
-            padding: 2.5rem 1.5rem;
-            width: 100%;
-            max-width: 550px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
+        .content-accessible-box {
+            background-color: var(--glass); 
+            border: 2px solid var(--maroon);
+            border-radius: 16px;
+            padding: 2.5rem 1.5rem;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
 
-        /* COUNTDOWN WIDGET BLOCK BOX PANELS */
-        #countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin: 1.5rem auto;
-            width: 100%;
-            max-width: 450px;
-        }
+        /* COUNTDOWN WIDGET BLOCK BOX PANELS */
+        #countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 1.5rem auto;
+            width: 100%;
+            max-width: 450px;
+        }
 
-        .countdown-box {
-            background: var(--maroon);
-            color: var(--sandalwood);
-            padding: 0.85rem 0.2rem;
-            border-radius: 8px;
-            border: 2px solid var(--sandalwood);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
+        .countdown-box {
+            background: var(--maroon);
+            color: var(--sandalwood);
+            padding: 0.85rem 0.2rem;
+            border-radius: 8px;
+            border: 2px solid var(--sandalwood);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
 
-        .countdown-num {
-            font-size: 1.6rem;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
-            display: block;
-            color: var(--gold);
-        }
+        .countdown-num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            display: block;
+            color: var(--gold);
+        }
 
-        .countdown-lbl {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            display: block;
-            margin-top: 2px;
-        }
+        .countdown-lbl {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            display: block;
+            margin-top: 2px;
+        }
 
-        /* Contact Details setup */
-        .contact-row {
-            background: rgba(255, 255, 255, 0.88);
-            padding: 1.1rem;
-            border-radius: 10px;
-            margin: 0.2rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 2px solid var(--maroon);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+        /* Contact Details setup */
+        .contact-row {
+            background: rgba(255, 255, 255, 0.88);
+            padding: 1.1rem;
+            border-radius: 10px;
+            margin: 0.2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid var(--maroon);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-        .contact-row p {
-            text-shadow: none !important;
-            text-align: left;
-        }
+        .contact-row p {
+            text-shadow: none !important;
+            text-align: left;
+        }
 
-        .contact-row a {
-            color: var(--maroon-dark);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
+        .contact-row a {
+            color: var(--maroon-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
 
-        /* Inputs configuration */
-        .input-group {
-            margin-bottom: 1.2rem;
-            text-align: left;
-        }
+        /* Inputs configuration */
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
 
-        .input-group label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            color: var(--gold);
-            font-size: 0.9rem;
-        }
+        .input-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
 
-        .input-group input, .input-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid var(--maroon);
-            border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
-            background-color: rgba(255, 255, 255, 0.85);
-            color: var(--maroon-dark);
-            font-weight: 700;
-        }
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--maroon);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            background-color: rgba(255, 255, 255, 0.85);
+            color: var(--maroon-dark);
+            font-weight: 700;
+        }
 
-        /* Wishboard Scroll Timeline */
-        #wishes-scroll-box {
-            width: 100%;
-            margin-top: 1.5rem;
-            max-height: 350px;
-            overflow-y: auto;
-            text-align: left;
-            padding-right: 5px;
-        }
+        /* Wishboard Scroll Timeline */
+        #wishes-scroll-box {
+            width: 100%;
+            margin-top: 1.5rem;
+            max-height: 350px;
+            overflow-y: auto;
+            text-align: left;
+            padding-right: 5px;
+        }
 
-        .wish-bubble {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 1.25rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            border-left: 5px solid var(--maroon);
-            border-bottom: 2px solid var(--gold);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-        }
+        .wish-bubble {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 1.25rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--maroon);
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
 
-        .empty-wishes-placeholder {
-            text-align: center;
-            padding: 2.5rem;
-            color: var(--gold);
-            font-style: italic;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
+        .empty-wishes-placeholder {
+            text-align: center;
+            padding: 2.5rem;
+            color: var(--gold);
+            font-style: italic;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
 
-        .wish-author {
-            font-weight: 700;
-            color: var(--maroon-dark);
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-        }
+        .wish-author {
+            font-weight: 700;
+            color: var(--maroon-dark);
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
 
-        /* Interactive Action Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--maroon);
-            color: var(--sandalwood);
-            padding: 0.85rem 2rem;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border: 2px solid var(--maroon);
-            cursor: pointer;
-            margin: 0.5rem auto;
-            width: 85%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            position: relative;
-            z-index: 2;
-        }
+        /* Interactive Action Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--maroon);
+            color: var(--sandalwood);
+            padding: 0.85rem 2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--maroon);
+            cursor: pointer;
+            margin: 0.5rem auto;
+            width: 85%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 2;
+        }
 
-        .btn:hover {
-            background-color: var(--maroon-dark);
-            transform: translateY(-2px);
-        }
+        .btn:hover {
+            background-color: var(--maroon-dark);
+            transform: translateY(-2px);
+        }
 
-        .map-action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 1.5rem 0;
-            width: 100%;
-        }
+        .map-action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 1.5rem 0;
+            width: 100%;
+        }
 
-        .map-action-grid .btn {
-            width: 100%;
-            margin: 0;
-            font-size: 0.85rem;
-        }
+        .map-action-grid .btn {
+            width: 100%;
+            margin: 0;
+            font-size: 0.85rem;
+        }
 
-        .map-frame-box {
-            margin-top: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            padding-top: 56.25%;
-            border: 3px solid var(--maroon);
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
+        .map-frame-box {
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%;
+            border: 3px solid var(--maroon);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
 
-        .map-frame-box iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: 0;
-        }
+        .map-frame-box iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: 0;
+        }
 
-        /* Interactive RSVP Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(34, 17, 20, 0.75);
-            z-index: 120000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            padding: 1rem;
-        }
+        /* Interactive RSVP Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(34, 17, 20, 0.75);
+            z-index: 120000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            padding: 1rem;
+        }
 
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-        .modal-content-card {
-            background-color: var(--maroon);
-            color: var(--sandalwood);
-            max-width: 400px;
-            width: 100%;
-            padding: 3rem 2rem;
-            border-radius: 14px;
-            border: 3px solid var(--gold);
-            position: relative;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
+        .modal-content-card {
+            background-color: var(--maroon);
+            color: var(--sandalwood);
+            max-width: 400px;
+            width: 100%;
+            padding: 3rem 2rem;
+            border-radius: 14px;
+            border: 3px solid var(--gold);
+            position: relative;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
 
-        .close-modal-btn {
-            position: absolute;
-            top: 10px; right: 15px;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--gold);
-            font-weight: 700;
-        }
+        .close-modal-btn {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--gold);
+            font-weight: 700;
+        }
 
-        .modal-select {
-            width: 100%;
-            padding: 0.75rem;
-            border-radius: 8px;
-            border: 2px solid var(--maroon);
-            background-color: var(--sandalwood-solid);
-            margin-bottom: 1rem;
-            font-family: 'Montserrat', sans-serif;
-            color: var(--maroon-dark);
-            font-weight: 700;
-        }
+        .modal-select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 2px solid var(--maroon);
+            background-color: var(--sandalwood-solid);
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--maroon-dark);
+            font-weight: 700;
+        }
 
-        /* PC Navigation cursor items */
-        .custom-cursor-dot, .custom-cursor-ring {
-            display: none;
-        }
+        /* PC Navigation cursor items */
+        .custom-cursor-dot, .custom-cursor-ring {
+            display: none;
+        }
 
-        @media (hover: hover) and (pointer: fine) {
-            html, body, button, input, textarea, select, a, .btn {
-                cursor: default !important;
-            }
-            .custom-cursor-dot {
-                display: block;
-                width: 8px;
-                height: 8px;
-                background-color: black;
-                position: fixed;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 1000000;
-                transform: translate(-50%, -50%);
-            }
-            .custom-cursor-ring {
-                display: block;
-                width: 26px;
-                height: 26px;
-                border: 2px solid black;
-                position: fixed;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 999999;
-                transform: translate(-50%, -50%);
-                transition: transform 0.08s ease-out;
-            }
-        }
+        @media (hover: hover) and (pointer: fine) {
+            html, body, button, input, textarea, select, a, .btn {
+                cursor: default !important;
+            }
+            .custom-cursor-dot {
+                display: block;
+                width: 8px;
+                height: 8px;
+                background-color: black;
+                position: fixed;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1000000;
+                transform: translate(-50%, -50%);
+            }
+            .custom-cursor-ring {
+                display: block;
+                width: 26px;
+                height: 26px;
+                border: 2px solid black;
+                position: fixed;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 999999;
+                transform: translate(-50%, -50%);
+                transition: transform 0.08s ease-out;
+            }
+        }
 
-        #glitter-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100vh;
-            pointer-events: none; 
-            z-index: 998;
-        }
+        #glitter-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            pointer-events: none; 
+            z-index: 998;
+        }
 
-        footer {
-            padding: 3rem 1rem;
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
+        footer {
+            padding: 3rem 1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
 
-        #wishes-view {
-            padding-bottom: 2rem; 
-        }
-    </style>
+        #wishes-view {
+            padding-bottom: 2rem; 
+        }
+    </style>
 </head>
 <body class="phone-wrapper lock-scroll">
 
-    <canvas id="glitter-canvas"></canvas>
+    <canvas id="glitter-canvas"></canvas>
 
-    <div class="bg-fixed-image" id="global-backdrop"></div>
-    <div class="bg-tint-layer" id="global-tint"></div>
+    <div class="bg-fixed-image" id="global-backdrop"></div>
+    <div class="bg-tint-layer" id="global-tint"></div>
 
-    <div class="custom-cursor-dot" id="cursor-dot"></div>
-    <div class="custom-cursor-ring" id="cursor-ring"></div>
+    <div class="custom-cursor-dot" id="cursor-dot"></div>
+    <div class="custom-cursor-ring" id="cursor-ring"></div>
 
-    <button class="floating-menu-trigger" id="sidebar-open-btn" onclick="toggleSidebarDrawer(true)">
-        Menu ☰
-    </button>
+    <button class="floating-menu-trigger" id="sidebar-open-btn" onclick="toggleSidebarDrawer(true)">
+        Menu ☰
+    </button>
 
-    <div class="sidebar-modal-overlay" id="sidebar-navigation-drawer" onclick="toggleSidebarDrawer(false)">
-        <div class="sidebar-drawer-card" onclick="event.stopPropagation()">
-            <span class="close-sidebar-x" onclick="toggleSidebarDrawer(false)">×</span>
-            <h3>Navigation</h3>
-            <div class="sidebar-links-stack">
-                <a href="#home-view" onclick="toggleSidebarDrawer(false)">🏠 Main (Home)</a>
-                <a href="#details-view" onclick="toggleSidebarDrawer(false)">📅 Event Info</a>
-                <a href="javascript:void(0)" onclick="handleSidebarModalBridging('rsvp-modal-element')">💌 Submit RSVP</a>
-                <a href="#wishes-view" onclick="toggleSidebarDrawer(false)">✨ Guestbook</a>
-            </div>
-        </div>
-    </div>
+    <div class="sidebar-modal-overlay" id="sidebar-navigation-drawer" onclick="toggleSidebarDrawer(false)">
+        <div class="sidebar-drawer-card" onclick="event.stopPropagation()">
+            <span class="close-sidebar-x" onclick="toggleSidebarDrawer(false)">×</span>
+            <h3>Navigation</h3>
+            <div class="sidebar-links-stack">
+                <a href="#home-view" onclick="toggleSidebarDrawer(false)">🏠 Main (Home)</a>
+                <a href="#details-view" onclick="toggleSidebarDrawer(false)">📅 Event Info</a>
+                <a href="javascript:void(0)" onclick="handleSidebarModalBridging('rsvp-modal-element')">💌 Submit RSVP</a>
+                <a href="#wishes-view" onclick="toggleSidebarDrawer(false)">✨ Guestbook</a>
+            </div>
+        </div>
+    </div>
 
-    <div id="welcome-overlay">
-        <div class="welcome-card">
-            <p style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 0.5rem;">Walimatul Ursy</p>
-            <h2 style="color: white; font-size: 2rem; text-shadow: none; margin-bottom: 1.5rem;">Azmin Weds Ameera</h2>
-            <div class="divider" style="color: var(--gold);">✦ ⚜ ✦</div>
-            <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.5rem; font-weight: 400; font-style: italic; color: var(--sandalwood);">
-                Assalamu alaikum Wr. Wb.<br>
-                We cordially invite you to share in our joy and receive blessings on the auspicious occasion of the wedding reception of our beloved brother and sister.
-            </p>
-            <button class="btn" onclick="grantEntranceToInvitationSite()">✨ View Invitation</button>
-        </div>
-    </div>
+    <div id="welcome-overlay">
+        <div class="welcome-card">
+            <p style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 0.5rem;">Walimatul Ursy</p>
+            <h2 style="color: white; font-size: 2rem; text-shadow: none; margin-bottom: 1.5rem;">Azmin Weds Ameera</h2>
+            <div class="divider" style="color: var(--gold);">✦ ⚜ ✦</div>
+            <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.5rem; font-weight: 400; font-style: italic; color: var(--sandalwood);">
+                Assalamu alaikum Wr. Wb.<br>
+                We cordially invite you to share in our joy and receive blessings on the auspicious occasion of the wedding reception of our beloved brother and sister.
+            </p>
+            <button class="btn" onclick="grantEntranceToInvitationSite()">✨ View Invitation</button>
+        </div>
+    </div>
 
-    <div id="main-content-site" style="display: none;">
+    <div id="main-content-site" style="display: none;">
 
-        <header id="home-view">
-            <div class="hero-title">Walimatul Ursy</div>
-            <div class="divider">✦ ⚜ ✦</div>
-            <div class="couple-header-names">Mohamed Azmin<br>Weds<br>Ameera</div>
-            
-            <p style="font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225, 0 4px 10px rgba(0,0,0,0.4);">SATURDAY • 12.09.2026</p>
-            
-            <div id="countdown">
-                <div class="countdown-box"><span id="lbl-days" class="countdown-num">00</span><span class="countdown-lbl">Days</span></div>
-                <div class="countdown-box"><span id="lbl-hours" class="countdown-num">00</span><span class="countdown-lbl">Hrs</span></div>
-                <div class="countdown-box"><span id="lbl-minutes" class="countdown-num">00</span><span class="countdown-lbl">Min</span></div>
-                <div class="countdown-box"><span id="lbl-seconds" class="countdown-num">00</span><span class="countdown-lbl">Sec</span></div>
-            </div>
+        <header id="home-view">
+            <div class="hero-title">Walimatul Ursy</div>
+            <div class="divider">✦ ⚜ ✦</div>
+            <div class="couple-header-names">Mohamed Azmin<br>Weds<br>Ameera</div>
+            
+            <p style="font-weight: 700; font-size: 1rem; letter-spacing: 2px; color: #fff; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225, 0 4px 10px rgba(0,0,0,0.4);">SATURDAY • 12.09.2026</p>
+            
+            <div id="countdown">
+                <div class="countdown-box"><span id="lbl-days" class="countdown-num">00</span><span class="countdown-lbl">Days</span></div>
+                <div class="countdown-box"><span id="lbl-hours" class="countdown-num">00</span><span class="countdown-lbl">Hrs</span></div>
+                <div class="countdown-box"><span id="lbl-minutes" class="countdown-num">00</span><span class="countdown-lbl">Min</span></div>
+                <div class="countdown-box"><span id="lbl-seconds" class="countdown-num">00</span><span class="countdown-lbl">Sec</span></div>
+            </div>
 
-            <button class="btn" style="margin-top: 1rem;" onclick="triggerCalendarIntent()">📅 Set Event Reminder</button>
-        </header>
+            <button class="btn" style="margin-top: 1rem;" onclick="triggerCalendarIntent()">📅 Set Event Reminder</button>
+        </header>
 
-        <section class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <div class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">In the name of Allah, the Most Gracious, the Most Merciful</p>
-                
-                <div class="arabic-text" style="font-size: 1.8rem;">بَارَكَ اللهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
-                <p style="font-style: italic; font-size: 0.9rem; line-height: 1.5; padding: 0 0.5rem;">
-                    "May Allah bless for you your spouse, and bless you, and may He unite both of you in goodness." (Sunan Abi Dawud)
-                </p>
-            </div>
-        </section>
+        <section class="animate-on-scroll">
+            <div class="content-accessible-box">
+                <div class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">In the name of Allah, the Most Gracious, the Most Merciful</p>
+                
+                <div class="arabic-text" style="font-size: 1.8rem;">بَارَكَ اللهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
+                <p style="font-style: italic; font-size: 0.9rem; line-height: 1.5; padding: 0 0.5rem;">
+                    "May Allah bless for you your spouse, and bless you, and may He unite both of you in goodness." (Sunan Abi Dawud)
+                </p>
+            </div>
+        </section>
 
-        <section class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>With Great Pleasure We Invite You</h2>
-                <div class="divider">⚜</div>
-                <p style="font-size: 0.9rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;">Parents of the Groom</p>
-                <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.3rem; margin-bottom: 1.5rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Mohamed Idris & Hajira Ammal</p>
-                
-                <div class="divider" style="font-size: 1rem; margin: 0.5rem 0;">&</div>
-                
-                <p style="font-size: 0.9rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;">Parents of the Bride</p>
-                <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.3rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Abdul Rahubu & Yasmin</p>
-                <div class="divider">✦</div>
-                <p style="font-size: 0.95rem; font-style: italic; padding: 0 1rem;">To the wedding reception celebrating the union of their beloved children:</p>
-            </div>
-        </section>
+        <section class="animate-on-scroll">
+            <div class="content-accessible-box">
+                <h2>With Great Pleasure We Invite You</h2>
+                <div class="divider">⚜</div>
+                <p style="font-size: 0.9rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;">Parents of the Groom</p>
+                <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.3rem; margin-bottom: 1.5rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Mohamed Idris & Hajira Ammal</p>
+                
+                <div class="divider" style="font-size: 1rem; margin: 0.5rem 0;">&</div>
+                
+                <p style="font-size: 0.9rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;">Parents of the Bride</p>
+                <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.3rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Abdul Rahubu & Yasmin</p>
+                <div class="divider">✦</div>
+                <p style="font-size: 0.95rem; font-style: italic; padding: 0 1rem;">To the wedding reception celebrating the union of their beloved children:</p>
+            </div>
+        </section>
 
-        <section id="details-view" class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>The Happy Couple</h2>
-                <div class="divider">⚜</div>
-                
-                <div style="font-size: 1rem; line-height: 1.6; gap:0.5rem; display:flex; flex-direction:column;">
-                    <p style="font-size:0.8rem; text-transform:uppercase; font-weight:700; letter-spacing:1px; color: var(--gold);">Groom</p>
-                    <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.25rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Mohamed Azmin Bin Mohamed Idris</p>
-                    
-                    <div class="divider" style="font-size:0.9rem;">&</div>
-                    
-                    <p style="font-size:0.8rem; text-transform:uppercase; font-weight:700; letter-spacing:1px; color: var(--gold);">Bride</p>
-                    <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.25rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Ameera Binti Abdul Rahubu</p>
-                </div>
+        <section id="details-view" class="animate-on-scroll">
+            <div class="content-accessible-box">
+                <h2>The Happy Couple</h2>
+                <div class="divider">⚜</div>
+                
+                <div style="font-size: 1rem; line-height: 1.6; gap:0.5rem; display:flex; flex-direction:column;">
+                    <p style="font-size:0.8rem; text-transform:uppercase; font-weight:700; letter-spacing:1px; color: var(--gold);">Groom</p>
+                    <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.25rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Mohamed Azmin Bin Mohamed Idris</p>
+                    
+                    <div class="divider" style="font-size:0.9rem;">&</div>
+                    
+                    <p style="font-size:0.8rem; text-transform:uppercase; font-weight:700; letter-spacing:1px; color: var(--gold);">Bride</p>
+                    <p style="font-family:'Cinzel'; color:#fff; font-weight:700; font-size: 1.25rem; text-shadow: -1px -1px 0 #332225, 1px -1px 0 #332225, -1px 1px 0 #332225, 1px 1px 0 #332225;">Ameera Binti Abdul Rahubu</p>
+                </div>
 
-                <h2 style="margin-top: 1.5rem;">Event Details</h2>
-                <div class="divider">✦</div>
-                <p style="font-size: 1rem;">Saturday, 12 September 2026</p>
-                <p style="font-size: 1.1rem; color: var(--gold); font-weight: 700;">6:00 PM - 10:00 PM</p>
-                
-                <p style="margin-top: 1rem; font-size: 0.95rem; line-height: 1.5;">
-                    📍 Venue Location:<br>
-                    Alam Indah Banquet Hall<br>414, Jalan Hutton, George Town,<br>10050 George Town, Pulau Pinang
-                </p>
+                <h2 style="margin-top: 1.5rem;">Event Details</h2>
+                <div class="divider">✦</div>
+                <p style="font-size: 1rem;">Saturday, 12 September 2026</p>
+                <p style="font-size: 1.1rem; color: var(--gold); font-weight: 700;">6:00 PM - 10:00 PM</p>
+                
+                <p style="margin-top: 1rem; font-size: 0.95rem; line-height: 1.5;">
+                    📍 Venue Location:<br>
+                    Alam Indah Banquet Hall<br>414, Jalan Hutton, George Town,<br>10050 George Town, Pulau Pinang
+                </p>
 
-                <div class="map-action-grid">
-                    <a href="https://maps.google.com/?q=414,+Jalan+Hutton,+George+Town,+10050+George+Town,+Pulau+Pinang" target="_blank" class="btn">🗺️ Google Maps</a>
-                    <a href="https://waze.com/ul?q=414+Jalan+Hutton+George+Town+Penang" target="_blank" class="btn">🚗 Waze Drive</a>
-                </div>
+                <div class="map-action-grid">
+                    <a href="https://maps.google.com/?q=414,+Jalan+Hutton,+George+Town,+10050+George+Town,+Pulau+Pinang" target="_blank" class="btn">🗺️ Google Maps</a>
+                    <a href="https://waze.com/ul?q=414+Jalan+Hutton+George+Town+Penang" target="_blank" class="btn">🚗 Waze Drive</a>
+                </div>
 
-                <div class="map-frame-box">
-                    <iframe src="https://maps.google.com/maps?q=414,%20Jalan%20Hutton,%20George%20Town,%2010050%20George%20Town,%20Pulau%20Pinang&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </section>
+                <div class="map-frame-box">
+                    <iframe src="https://maps.google.com/maps?q=414,%20Jalan%20Hutton,%20George%20Town,%2010050%20George%20Town,%20Pulau%20Pinang&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
 
-        <section class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>Contact Family</h2>
-                <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--gold);">Click below to connect with us directly on WhatsApp:</p>
-                <div class="divider">✦</div>
-                
-                <div class="contact-row">
-                    <div>
-                        <p style="color: var(--maroon-dark); font-size:1.05rem; font-weight:700;">Mr. Idris</p>
-                        <p style="font-size:0.75rem; color:#666; font-weight: 500;">Father of the Groom</p>
-                    </div>
-                    <a href="https://wa.me/60183891696" target="_blank">📲 WhatsApp</a>
-                </div>
-                
-                <div class="contact-row">
-                    <div>
-                        <p style="color: var(--maroon-dark); font-size:1.05rem; font-weight:700;">Mr. Naina</p>
-                        <p style="font-size:0.75rem; color:#666; font-weight: 500;">Paternal Uncle of the Groom</p>
-                    </div>
-                    <a href="https://wa.me/60164402003" target="_blank">📲 WhatsApp</a>
-                </div>
-                
-                <div class="contact-row">
-                    <div>
-                        <p style="color: var(--maroon-dark); font-size:1.05rem; font-weight:700;">Azhar</p>
-                        <p style="font-size:0.75rem; color:#666; font-weight: 500;">Brother of the Groom</p>
-                    </div>
-                    <a href="https://wa.me/60182369616" target="_blank">📲 WhatsApp</a>
-                </div>
-            </div>
-        </section>
+        <section class="animate-on-scroll">
+            <div class="content-accessible-box">
+                <h2>Contact Family</h2>
+                <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--gold);">Click below to connect with us directly on WhatsApp:</p>
+                <div class="divider">✦</div>
+                
+                <div class="contact-row">
+                    <div>
+                        <p style="color: var(--maroon-dark); font-size:1.05rem; font-weight:700;">Mr. Idris</p>
+                        <p style="font-size:0.75rem; color:#666; font-weight: 500;">Father of the Groom</p>
+                    </div>
+                    <a href="https://wa.me/60183891696" target="_blank">📲 WhatsApp</a>
+                </div>
+                
+                <div class="contact-row">
+                    <div>
+                        <p style="color: var(--maroon-dark); font-size:1.05rem; font-weight:700;">Mr. Naina</p>
+                        <p style="font-size:0.75rem; color:#666; font-weight: 500;">Uncle of the Groom</p>
+                    </div>
+                    <a href="https://wa.me/60164402003" target="_blank">📲 WhatsApp</a>
+                </div>
+                
+                <div class="contact-row">
+                    <div>
+                        <p style="color: var(--maroon-dark); font-size:1.05rem; font-weight:700;">Azhar</p>
+                        <p style="font-size:0.75rem; color:#666; font-weight: 500;">Brother of the Groom</p>
+                    </div>
+                    <a href="https://wa.me/60182369616" target="_blank">📲 WhatsApp</a>
+                </div>
+            </div>
+        </section>
 
+        <!-- BACKGROUND IMAGE SECTION -->
         <section class="animate-on-scroll">
             <div class="content-accessible-box">
                 <h2>Event Background</h2>
@@ -770,356 +771,399 @@
             </div>
         </section>
 
-        <section class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>Leave Your Blessings</h2>
-                <p style="font-size: 0.9rem; font-weight: 600; color: var(--gold);">Send your prayers, congratulations, and warm wishes to the couple:</p>
-                <div class="divider">✦</div>
+        <section class="animate-on-scroll">
+            <div class="content-accessible-box">
+                <h2>Leave Your Blessings</h2>
+                <p style="font-size: 0.9rem; font-weight: 600; color: var(--gold);">Send your prayers, congratulations, and warm wishes to the couple:</p>
+                <div class="divider">✦</div>
 
-                <form id="wish-input-form" onsubmit="handleNewWishPosting(event)">
-                    <div class="input-group">
-                        <label for="input-author">Full Name:</label>
-                        <input type="text" id="input-author" required placeholder="e.g., Uncle Zainal & Family">
-                    </div>
-                    <div class="input-group">
-                        <label for="input-msg">Message / Blessing:</label>
-                        <textarea id="input-msg" rows="3" required placeholder="May Allah bless your marriage journey..."></textarea>
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%; margin: 0;">Send Wish ✨</button>
-                </form>
-            </div>
-        </section>
+                <form id="wish-input-form" onsubmit="handleNewWishPosting(event)">
+                    <div class="input-group">
+                        <label for="input-author">Full Name:</label>
+                        <input type="text" id="input-author" required placeholder="e.g., Uncle Zainal & Family">
+                    </div>
+                    <div class="input-group">
+                        <label for="input-msg">Message / Blessing:</label>
+                        <textarea id="input-msg" rows="3" required placeholder="May Allah bless your marriage journey..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; margin: 0;">Send Wish ✨</button>
+                </form>
+            </div>
+        </section>
 
-        <section id="wishes-view" class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>Guestbook Board</h2>
-                <p style="font-size: 0.85rem; font-weight: 600; color: var(--gold);">Warm greetings sent by our beloved website visitors:</p>
-                <div class="divider">⚜</div>
-                
-                <div id="wishes-scroll-box">
-                    </div>
-            </div>
-        </section>
+        <section id="wishes-view" class="animate-on-scroll">
+            <div class="content-accessible-box">
+                <h2>Guestbook Board</h2>
+                <p style="font-size: 0.85rem; font-weight: 600; color: var(--gold);">Warm greetings sent by our beloved website visitors:</p>
+                <div class="divider">⚜</div>
+                
+                <div id="wishes-scroll-box">
+                    </div>
+            </div>
+        </section>
 
-        <footer>
-            <p> #TwoAsBecomeOne • 12.09.2026</p>
-        </footer>
+        <footer>
+            <p> #TwoAsBecomeOne • 12.09.2026</p>
+        </footer>
 
-        <div id="rsvp-modal-element" class="modal-overlay">
-            <div class="modal-content-card">
-                <span class="close-modal-btn" onclick="toggleModal('rsvp-modal-element', false)">×</span>
-                <h3 style="font-family:'Cinzel'; color:var(--gold); margin-bottom:1rem; font-weight: 700; text-shadow:none;">RSVP Attendance</h3>
-                <form onsubmit="processRsvpForm(event)">
-                    <div class="input-group">
-                        <label>Full Name:</label>
-                        <input type="text" id="rsvp-name" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Attendance Status:</label>
-                        <select id="rsvp-status" class="modal-select">
-                            <option value="Hadir">Attending</option>
-                            <option value="Tidak Hadir">Declining</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Number of Guests (Pax):</label>
-                        <select id="rsvp-pax" class="modal-select">
-                            <option value="1">1 Person</option>
-                            <option value="2">2 People</option>
-                            <option value="3">3 People</option>
-                            <option value="4">4 People</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn" style="width:100%;">Submit RSVP</button>
-                </form>
-            </div>
-        </div>
+        <div id="rsvp-modal-element" class="modal-overlay">
+            <div class="modal-content-card">
+                <span class="close-modal-btn" onclick="toggleModal('rsvp-modal-element', false)">×</span>
+                <h3 style="font-family:'Cinzel'; color:var(--gold); margin-bottom:1rem; font-weight: 700; text-shadow:none;">RSVP Attendance</h3>
+                <form onsubmit="processRsvpForm(event)">
+                    <div class="input-group">
+                        <label>Full Name:</label>
+                        <input type="text" id="rsvp-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Attendance Status:</label>
+                        <select id="rsvp-status" class="modal-select">
+                            <option value="Hadir">Attending</option>
+                            <option value="Tidak Hadir">Declining</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Number of Guests (Pax):</label>
+                        <select id="rsvp-pax" class="modal-select">
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                            <option value="6">6 People</option>
+                            <option value="7">7 People</option>
+                            <option value="8">8 People</option>
+                            <option value="9">9 People</option>
+                            <option value="10">10 People</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;">Submit RSVP</button>
+                </form>
+            </div>
+        </div>
 
-    </div>
+    </div>
 
-    <script>
-        // Set deep scroll lock on entry page initialization natively
-        document.documentElement.classList.add("lock-scroll");
+    <script>
+        // Set deep scroll lock on entry page initialization natively
+        document.documentElement.classList.add("lock-scroll");
 
-        // WELCOME SCREEN GATEKEEPER ENGINE CONTROL
-        function grantEntranceToInvitationSite() {
-            const entryScreen = document.getElementById("welcome-overlay");
-            const structuralSite = document.getElementById("main-content-site");
-            const backdropImg = document.getElementById("global-backdrop");
-            const backdropTint = document.getElementById("global-tint");
-            const triggerBtn = document.getElementById("sidebar-open-btn");
-            
-            structuralSite.style.display = "block";
-            backdropImg.classList.add("visible");
-            backdropTint.classList.add("visible");
-            entryScreen.classList.add("fade-out");
-            
-            document.body.classList.remove("lock-scroll");
-            
-            // Redirect window target framing flush to countdown hero block instantly
-            document.getElementById("home-view").scrollIntoView();
+        // WELCOME SCREEN GATEKEEPER ENGINE CONTROL
+        function grantEntranceToInvitationSite() {
+            const entryScreen = document.getElementById("welcome-overlay");
+            const structuralSite = document.getElementById("main-content-site");
+            const backdropImg = document.getElementById("global-backdrop");
+            const backdropTint = document.getElementById("global-tint");
+            const triggerBtn = document.getElementById("sidebar-open-btn");
+            
+            structuralSite.style.display = "block";
+            backdropImg.classList.add("visible");
+            backdropTint.classList.add("visible");
+            entryScreen.classList.add("fade-out");
+            
+            document.body.classList.remove("lock-scroll");
+            
+            // Redirect window target framing flush to countdown hero block instantly
+            document.getElementById("home-view").scrollIntoView();
 
-            setTimeout(() => {
-                entryScreen.remove();
-                triggerBtn.style.display = "inline-flex"; 
-                
-                runClockTicker();
-                renderGuestbookBoard();
-                initScrollAnimationsTracker(); 
-                handleGlitterLoop(); 
-            }, 1200);
-        }
+            setTimeout(() => {
+                entryScreen.remove();
+                triggerBtn.style.display = "inline-flex"; 
+                
+                runClockTicker();
+                renderGuestbookBoard();
+                initScrollAnimationsTracker(); 
+                handleGlitterLoop(); 
+            }, 1200);
+        }
 
-        // SIDEBAR MODAL SYSTEM MECHANICS
-        function toggleSidebarDrawer(openState) {
-            const drawerContainer = document.getElementById("sidebar-navigation-drawer");
-            if (openState) {
-                drawerContainer.classList.add("active");
-            } else {
-                drawerContainer.classList.remove("active");
-            }
-        }
+        // SIDEBAR MODAL SYSTEM MECHANICS
+        function toggleSidebarDrawer(openState) {
+            const drawerContainer = document.getElementById("sidebar-navigation-drawer");
+            if (openState) {
+                drawerContainer.classList.add("active");
+            } else {
+                drawerContainer.classList.remove("active");
+            }
+        }
 
-        function handleSidebarModalBridging(targetModalId) {
-            toggleSidebarDrawer(false);
-            setTimeout(() => {
-                toggleModal(targetModalId, true);
-            }, 300);
-        }
+        function handleSidebarModalBridging(targetModalId) {
+            toggleSidebarDrawer(false);
+            setTimeout(() => {
+                toggleModal(targetModalId, true);
+            }, 300);
+        }
 
-        // MOUSE POSITION VECTORS
-        const dotNode = document.getElementById("cursor-dot");
-        const ringNode = document.getElementById("cursor-ring");
-        let currentMouseX = 0, currentMouseY = 0;
+        // MOUSE POSITION VECTORS
+        const dotNode = document.getElementById("cursor-dot");
+        const ringNode = document.getElementById("cursor-ring");
+        let currentMouseX = 0, currentMouseY = 0;
 
-        window.addEventListener("mousemove", function(e) {
-            currentMouseX = e.clientX;
-            currentMouseY = e.clientY;
-            
-            if (dotNode && ringNode) {
-                dotNode.style.left = currentMouseX + "px";
-                dotNode.style.top = currentMouseY + "px";
-                ringNode.style.left = currentMouseX + "px";
-                ringNode.style.top = currentMouseY + "px";
-            }
-        });
+        window.addEventListener("mousemove", function(e) {
+            currentMouseX = e.clientX;
+            currentMouseY = e.clientY;
+            
+            if (dotNode && ringNode) {
+                dotNode.style.left = currentMouseX + "px";
+                dotNode.style.top = currentMouseY + "px";
+                ringNode.style.left = currentMouseX + "px";
+                ringNode.style.top = currentMouseY + "px";
+            }
+        });
 
-        // CANVAS PARTICLES GENERATOR: OPERATES BOTH move-trails and click radial splashes
-        const canvas = document.getElementById("glitter-canvas");
-        const ctx = canvas.getContext("2d");
-        let particleArray = [];
+        // CANVAS PARTICLES GENERATOR: OPERATES BOTH move-trails and click radial splashes
+        const canvas = document.getElementById("glitter-canvas");
+        const ctx = canvas.getContext("2d");
+        let particleArray = [];
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener("resize", resizeCanvas);
-        resizeCanvas();
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
 
-        class GlitterParticle {
-            constructor(x, y, isClickSplash) {
-                this.x = x;
-                this.y = y;
-                this.size = Math.random() * 3.5 + 1;
-                
-                if (isClickSplash) {
-                    const randomAngle = Math.random() * Math.PI * 2;
-                    const blastVelocity = Math.random() * 4.5 + 1.5;
-                    this.speedX = Math.cos(randomAngle) * blastVelocity;
-                    this.speedY = Math.sin(randomAngle) * blastVelocity + 0.2;
-                } else {
-                    this.speedX = (Math.random() * 2 - 1);
-                    this.speedY = (Math.random() * 1.5 + 0.5);
-                }
-                
-                const colors = ["#D4AF37", "#F4EBE1", "#6B1D2F", "#E6C65B", "#FFFFFF"];
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.alpha = 1;
-                this.decay = Math.random() * 0.012 + 0.008;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.alpha -= this.decay;
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-        }
+        class GlitterParticle {
+            constructor(x, y, isClickSplash) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 3.5 + 1;
+                
+                if (isClickSplash) {
+                    const randomAngle = Math.random() * Math.PI * 2;
+                    const blastVelocity = Math.random() * 4.5 + 1.5;
+                    this.speedX = Math.cos(randomAngle) * blastVelocity;
+                    this.speedY = Math.sin(randomAngle) * blastVelocity + 0.2;
+                } else {
+                    this.speedX = (Math.random() * 2 - 1);
+                    this.speedY = (Math.random() * 1.5 + 0.5);
+                }
+                
+                const colors = ["#D4AF37", "#F4EBE1", "#6B1D2F", "#E6C65B", "#FFFFFF"];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.alpha = 1;
+                this.decay = Math.random() * 0.012 + 0.008;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.alpha -= this.decay;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
 
-        // MOVE EFFECT: Trail emissions tracking
-        let lastScrollTop = window.scrollY;
-        window.addEventListener("scroll", function() {
-            let scrollTop = window.scrollY;
-            let delta = Math.abs(scrollTop - lastScrollTop);
-            if (delta > 2) {
-                for (let i = 0; i < Math.min(delta / 3, 4); i++) {
-                    let spawnX = currentMouseX + (Math.random() * 40 - 20);
-                    let spawnY = currentMouseY + (Math.random() * 40 - 20);
-                    particleArray.push(new GlitterParticle(spawnX, spawnY, false));
-                }
-            }
-            lastScrollTop = scrollTop;
-        });
+        // MOVE EFFECT: Trail emissions tracking
+        let lastScrollTop = window.scrollY;
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.scrollY;
+            let delta = Math.abs(scrollTop - lastScrollTop);
+            if (delta > 2) {
+                for (let i = 0; i < Math.min(delta / 3, 4); i++) {
+                    let spawnX = currentMouseX + (Math.random() * 40 - 20);
+                    let spawnY = currentMouseY + (Math.random() * 40 - 20);
+                    particleArray.push(new GlitterParticle(spawnX, spawnY, false));
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
 
-        // TOUCH & CLICK IMPACT ENGAGEMENT SYSTEM
-        window.addEventListener("pointerdown", function(e) {
-            if (document.getElementById("main-content-site").style.display === "block") {
-                for (let i = 0; i < 20; i++) {
-                    particleArray.push(new GlitterParticle(e.clientX, e.clientY, true));
-                }
-            }
-            if (ringNode && dotNode) {
-                ringNode.style.transform = "translate(-50%, -50%) scale(0.6)";
-                dotNode.style.transform = "translate(-50%, -50%) scale(1.5)";
-            }
-        });
-        window.addEventListener("pointerup", () => {
-            if (ringNode && dotNode) {
-                ringNode.style.transform = "translate(-50%, -50%) scale(1)";
-                dotNode.style.transform = "translate(-50%, -50%) scale(1)";
-            }
-        });
+        // TOUCH & CLICK IMPACT ENGAGEMENT SYSTEM
+        window.addEventListener("pointerdown", function(e) {
+            if (document.getElementById("main-content-site").style.display === "block") {
+                for (let i = 0; i < 20; i++) {
+                    particleArray.push(new GlitterParticle(e.clientX, e.clientY, true));
+                }
+            }
+            if (ringNode && dotNode) {
+                ringNode.style.transform = "translate(-50%, -50%) scale(0.6)";
+                dotNode.style.transform = "translate(-50%, -50%) scale(1.5)";
+            }
+        });
+        window.addEventListener("pointerup", () => {
+            if (ringNode && dotNode) {
+                ringNode.style.transform = "translate(-50%, -50%) scale(1)";
+                dotNode.style.transform = "translate(-50%, -50%) scale(1)";
+            }
+        });
 
-        function handleGlitterLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particleArray.length; i++) {
-                particleArray[i].update();
-                particleArray[i].draw();
-                if (particleArray[i].alpha <= 0) {
-                    particleArray.splice(i, 1);
-                    i--;
-                }
-            }
-            requestAnimationFrame(handleGlitterLoop);
-        }
+        function handleGlitterLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particleArray.length; i++) {
+                particleArray[i].update();
+                particleArray[i].draw();
+                if (particleArray[i].alpha <= 0) {
+                    particleArray.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(handleGlitterLoop);
+        }
 
-        // INFINITE MULTI-DIRECTION SCROLL RE-TRIGGER REVEALS
-        const scrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("revealed"); 
-                } else {
-                    entry.target.classList.remove("revealed"); 
-                }
-            });
-        }, {
-            threshold: 0.10
-        });
+        // INFINITE MULTI-DIRECTION SCROLL RE-TRIGGER REVEALS
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("revealed"); 
+                } else {
+                    entry.target.classList.remove("revealed"); 
+                }
+            });
+        }, {
+            threshold: 0.10
+        });
 
-        function initScrollAnimationsTracker() {
-            document.querySelectorAll(".animate-on-scroll").forEach(el => {
-                scrollObserver.observe(el);
-            });
-        }
+        function initScrollAnimationsTracker() {
+            document.querySelectorAll(".animate-on-scroll").forEach(el => {
+                scrollObserver.observe(el);
+            });
+        }
 
-        // Countdown Ticker Calculations Runtime Engine
-        const weddingTimestamp = new Date("Sept 12, 2026 18:00:00").getTime();
+        // Countdown Ticker Calculations Runtime Engine
+        const weddingTimestamp = new Date("Sept 12, 2026 18:00:00").getTime();
 
-        function runClockTicker() {
-            const now = new Date().getTime();
-            const remainder = weddingTimestamp - now;
+        function runClockTicker() {
+            const now = new Date().getTime();
+            const remainder = weddingTimestamp - now;
 
-            if (remainder < 0) {
-                document.getElementById("countdown").innerHTML = "<p style='color:var(--gold); font-weight:700; grid-column: span 4; font-size:1.1rem;'>The Event Has Started! 🎉</p>";
-                return;
-            }
+            if (remainder < 0) {
+                document.getElementById("countdown").innerHTML = "<p style='color:var(--gold); font-weight:700; grid-column: span 4; font-size:1.1rem;'>The Event Has Started! 🎉</p>";
+                return;
+            }
 
-            const d = Math.floor(remainder / (1000 * 60 * 60 * 24));
-            const h = Math.floor((remainder % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((remainder % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((remainder % (1000 * 60)) / 1000);
+            const d = Math.floor(remainder / (1000 * 60 * 60 * 24));
+            const h = Math.floor((remainder % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((remainder % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((remainder % (1000 * 60)) / 1000);
 
-            document.getElementById("lbl-days").innerText = d < 10 ? "0" + d : d;
-            document.getElementById("lbl-hours").innerText = h < 10 ? "0" + h : h;
-            document.getElementById("lbl-minutes").innerText = m < 10 ? "0" + m : m;
-            document.getElementById("lbl-seconds").innerText = s < 10 ? "0" + s : s;
-        }
-        setInterval(runClockTicker, 1000);
+            document.getElementById("lbl-days").innerText = d < 10 ? "0" + d : d;
+            document.getElementById("lbl-hours").innerText = h < 10 ? "0" + h : h;
+            document.getElementById("lbl-minutes").innerText = m < 10 ? "0" + m : m;
+            document.getElementById("lbl-seconds").innerText = s < 10 ? "0" + s : s;
+        }
+        setInterval(runClockTicker, 1000);
 
-        function triggerCalendarIntent() {
-            const gCalEndpoint = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-                "&text=" + encodeURIComponent("Walimatul Ursy: Azmin Weds Ameera") +
-                "&dates=20260912T100000Z/20260912T140000Z" + 
-                "&details=" + encodeURIComponent("Wedding reception of Azmin & Ameera at Alam Indah Banquet Hall, Penang.") +
-                "&location=" + encodeURIComponent("414, Jalan Hutton, George Town, 10050 George Town, Pulau Pinang") +
-                "&sf=true&output=xml";
-            window.open(gCalEndpoint, '_blank');
-        }
+        function triggerCalendarIntent() {
+            const gCalEndpoint = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+                "&text=" + encodeURIComponent("Walimatul Ursy: Azmin Weds Ameera") +
+                "&dates=20260912T100000Z/20260912T140000Z" + 
+                "&details=" + encodeURIComponent("Wedding reception of Azmin & Ameera at Alam Indah Banquet Hall, Penang.") +
+                "&location=" + encodeURIComponent("414, Jalan Hutton, George Town, 10050 George Town, Pulau Pinang") +
+                "&sf=true&output=xml";
+            window.open(gCalEndpoint, '_blank');
+        }
 
-        function toggleModal(modalId, displayState) {
-            const modalTarget = document.getElementById(modalId);
-            if (displayState) {
-                modalTarget.classList.add('active');
-            } else {
-                modalTarget.classList.remove('active');
-            }
-        }
+        function toggleModal(modalId, displayState) {
+            const modalTarget = document.getElementById(modalId);
+            if (displayState) {
+                modalTarget.classList.add('active');
+            } else {
+                modalTarget.classList.remove('active');
+            }
+        }
 
-        function processRsvpForm(e) {
-            e.preventDefault();
-            const name = document.getElementById("rsvp-name").value;
-            const status = document.getElementById("rsvp-status").value;
-            const pax = document.getElementById("rsvp-pax").value;
+        function processRsvpForm(e) {
+            e.preventDefault();
+            
+            // Get the submit button
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            // Change text and disable the button to prevent double-clicks
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.7";
 
-            alert(`Thank you ${name}! Your RSVP status [${status} - ${pax} Pax] has been successfully recorded.`);
-            toggleModal('rsvp-modal-element', false);
-            document.getElementById("rsvp-name").value = "";
-        }
+            // Gather the data from the form
+            const payload = {
+                Name: document.getElementById("rsvp-name").value,
+                Status: document.getElementById("rsvp-status").value,
+                Pax: document.getElementById("rsvp-pax").value
+            };
 
-        // PERMANENT STORAGE WISH MANAGER ENGINE
-        function renderGuestbookBoard() {
-            const wallViewport = document.getElementById("wishes-scroll-box");
-            let dataset = JSON.parse(localStorage.getItem("walimatul_ursy_wishes")) || [];
+            // Your live Google Apps Script URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycby-VNTsfSIzTTC9O8wG0T8V0psu_flAZBoNFiOMyBlVa0db2SWS9YjdFKMQH4o0WwnQ/exec';
 
-            if (dataset.length === 0) {
-                wallViewport.innerHTML = `<div class="empty-wishes-placeholder">No messages yet. Be the first to leave a wedding blessing!</div>`;
-                return;
-            }
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors', // BYPASSES BROWSER SECURITY BLOCKS
+                body: JSON.stringify(payload),
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+            })
+            .then(() => {
+                alert(`Thank you ${payload.Name}! Your RSVP has been successfully recorded.`);
+                toggleModal('rsvp-modal-element', false);
+                document.getElementById("rsvp-name").value = "";
+                
+                // Reset the button back to normal
+                submitBtn.innerText = "Submit RSVP";
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+            })
+            .catch(error => {
+                alert("Oops! Something went wrong. Please check your connection and try again.");
+                
+                // Reset the button back to normal if it fails
+                submitBtn.innerText = "Submit RSVP";
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+                console.error('Error!', error.message);
+            });
+        }
 
-            wallViewport.innerHTML = "";
-            dataset.slice().reverse().forEach(item => {
-                const bubble = document.createElement("div");
-                bubble.className = "wish-bubble";
-                bubble.innerHTML = `<div class="wish-author">${sanitizeInput(item.author)}</div><div style="font-size:0.85rem; color:var(--text-dark); margin-top:4px; line-height:1.4; font-weight:500;">${sanitizeInput(item.message)}</div>`;
-                wallViewport.appendChild(bubble);
-            });
-        }
+        // PERMANENT STORAGE WISH MANAGER ENGINE
+        function renderGuestbookBoard() {
+            const wallViewport = document.getElementById("wishes-scroll-box");
+            let dataset = JSON.parse(localStorage.getItem("walimatul_ursy_wishes")) || [];
 
-        function handleNewWishPosting(e) {
-            e.preventDefault();
-            const authorBox = document.getElementById("input-author");
-            const messageBox = document.getElementById("input-msg");
+            if (dataset.length === 0) {
+                wallViewport.innerHTML = `<div class="empty-wishes-placeholder">No messages yet. Be the first to leave a wedding blessing!</div>`;
+                return;
+            }
 
-            const payload = {
-                author: authorBox.value.trim(),
-                message: messageBox.value.trim()
-            };
+            wallViewport.innerHTML = "";
+            dataset.slice().reverse().forEach(item => {
+                const bubble = document.createElement("div");
+                bubble.className = "wish-bubble";
+                bubble.innerHTML = `<div class="wish-author">${sanitizeInput(item.author)}</div><div style="font-size:0.85rem; color:var(--text-dark); margin-top:4px; line-height:1.4; font-weight:500;">${sanitizeInput(item.message)}</div>`;
+                wallViewport.appendChild(bubble);
+            });
+        }
 
-            let dataset = JSON.parse(localStorage.getItem("walimatul_ursy_wishes")) || [];
-            dataset.push(payload);
-            localStorage.setItem("walimatul_ursy_wishes", JSON.stringify(dataset));
+        function handleNewWishPosting(e) {
+            e.preventDefault();
+            const authorBox = document.getElementById("input-author");
+            const messageBox = document.getElementById("input-msg");
 
-            authorBox.value = "";
-            messageBox.value = "";
-            renderGuestbookBoard();
-        }
+            const payload = {
+                author: authorBox.value.trim(),
+                message: messageBox.value.trim()
+            };
 
-        // STABLE ARRAY INDEX SPLITTING STRING SANITIZER
-        function sanitizeInput(str) {
-            var chars = ["&", "<", ">", "'", '"'];
-            var entities = ["&", "<", ">", "'", """];
-            for (var i = 0; i < chars.length; i++) {
-                str = str.split(chars[i]).join(entities[i]);
-            }
-            return str;
-        }
-    </script>
+            let dataset = JSON.parse(localStorage.getItem("walimatul_ursy_wishes")) || [];
+            dataset.push(payload);
+            localStorage.setItem("walimatul_ursy_wishes", JSON.stringify(dataset));
+
+            authorBox.value = "";
+            messageBox.value = "";
+            renderGuestbookBoard();
+        }
+
+        // STABLE ARRAY INDEX SPLITTING STRING SANITIZER
+        function sanitizeInput(str) {
+            var chars = ["&", "<", ">", "'", '"'];
+            var entities = ["&amp;", "&lt;", "&gt;", "&#39;", "&quot;"];
+            for (var i = 0; i < chars.length; i++) {
+                str = str.split(chars[i]).join(entities[i]);
+            }
+            return str;
+        }
+    </script>
 </body>
 </html>
