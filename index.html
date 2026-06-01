@@ -761,7 +761,6 @@
             </div>
         </section>
 
-        <!-- BACKGROUND IMAGE SECTION -->
         <section class="animate-on-scroll">
             <div class="content-accessible-box">
                 <h2>Event Background</h2>
@@ -843,6 +842,9 @@
         </div>
 
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
         // Set deep scroll lock on entry page initialization natively
@@ -1117,42 +1119,81 @@
             });
         }
 
-        // PERMANENT STORAGE WISH MANAGER ENGINE
+
+        // ==========================================
+        // REAL-TIME CLOUD WISH MANAGER (FIREBASE)
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6976b_EFI99HPrT9XqYJt4ndDd9G3-Tw",
+            authDomain: "azmin-wedding.firebaseapp.com",
+            projectId: "azmin-wedding",
+            storageBucket: "azmin-wedding.firebasestorage.app",
+            messagingSenderId: "432906898873",
+            appId: "1:432906898873:web:bb948ded85ca641e257a68",
+            databaseURL: "https://azmin-wedding-default-rtdb.asia-southeast1.firebasedatabase.app",
+            measurementId: "G-TBYZB9FLKS"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const wishesRef = database.ref('guestbook_wishes');
+
         function renderGuestbookBoard() {
-            const wallViewport = document.getElementById("wishes-scroll-box");
-            let dataset = JSON.parse(localStorage.getItem("walimatul_ursy_wishes")) || [];
+            wishesRef.on('value', (snapshot) => {
+                const wallViewport = document.getElementById("wishes-scroll-box");
+                const data = snapshot.val();
 
-            if (dataset.length === 0) {
-                wallViewport.innerHTML = `<div class="empty-wishes-placeholder">No messages yet. Be the first to leave a wedding blessing!</div>`;
-                return;
-            }
+                if (!data) {
+                    wallViewport.innerHTML = `<div class="empty-wishes-placeholder">No messages yet. Be the first to leave a wedding blessing!</div>`;
+                    return;
+                }
 
-            wallViewport.innerHTML = "";
-            dataset.slice().reverse().forEach(item => {
-                const bubble = document.createElement("div");
-                bubble.className = "wish-bubble";
-                bubble.innerHTML = `<div class="wish-author">${sanitizeInput(item.author)}</div><div style="font-size:0.85rem; color:var(--text-dark); margin-top:4px; line-height:1.4; font-weight:500;">${sanitizeInput(item.message)}</div>`;
-                wallViewport.appendChild(bubble);
+                wallViewport.innerHTML = "";
+                
+                // Convert Firebase data to an array and reverse it (newest on top)
+                const dataset = Object.values(data).reverse();
+                
+                dataset.forEach(item => {
+                    const bubble = document.createElement("div");
+                    bubble.className = "wish-bubble";
+                    bubble.innerHTML = `<div class="wish-author">${sanitizeInput(item.author)}</div><div style="font-size:0.85rem; color:var(--text-dark); margin-top:4px; line-height:1.4; font-weight:500;">${sanitizeInput(item.message)}</div>`;
+                    wallViewport.appendChild(bubble);
+                });
             });
         }
 
         function handleNewWishPosting(e) {
             e.preventDefault();
+            
+            // Prevent double clicking while sending
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
+
             const authorBox = document.getElementById("input-author");
             const messageBox = document.getElementById("input-msg");
 
             const payload = {
                 author: authorBox.value.trim(),
-                message: messageBox.value.trim()
+                message: messageBox.value.trim(),
+                timestamp: Date.now()
             };
 
-            let dataset = JSON.parse(localStorage.getItem("walimatul_ursy_wishes")) || [];
-            dataset.push(payload);
-            localStorage.setItem("walimatul_ursy_wishes", JSON.stringify(dataset));
-
-            authorBox.value = "";
-            messageBox.value = "";
-            renderGuestbookBoard();
+            // Push the payload to the cloud
+            wishesRef.push(payload)
+                .then(() => {
+                    authorBox.value = "";
+                    messageBox.value = "";
+                    submitBtn.innerText = "Send Wish ✨";
+                    submitBtn.disabled = false;
+                })
+                .catch((error) => {
+                    alert("There was an error sending your wish. Please check your connection.");
+                    console.error(error);
+                    submitBtn.innerText = "Send Wish ✨";
+                    submitBtn.disabled = false;
+                });
         }
 
         // STABLE ARRAY INDEX SPLITTING STRING SANITIZER
