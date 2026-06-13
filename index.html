@@ -5,25 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Walimatul Ursy - Azmin Weds Ameera</title>
     
-    <!-- Tab Icon (Favicon) Configuration -->
     <link rel="icon" type="image/png" href="./background.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700;900&family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700;800;900&family=Marcellus&family=Montserrat:wght@200;300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <style>
         /* Royal Luxury Color System */
         :root {
-            --maroon-dark: #1A0409;
-            --maroon-mid: #3A0B16;
-            --maroon-bright: #5C1324;
-            --sandalwood: #F7E7D4;
-            --gold-pure: #D4AF37;
-            --gold-bright: #FFF3A8;
-            --gold-dark: #AA820A;
-            --liquid-glass: rgba(26, 4, 9, 0.65);
-            --luxury-border: linear-gradient(135deg, #D4AF37, rgba(255,243,168,0.3), #AA820A, rgba(212,175,55,0.2));
+            --maroon-dark: #0D0204;
+            --maroon-mid: #25050C;
+            --maroon-bright: #420A14;
+            --sandalwood: #F2E3D0;
+            --gold-pure: #C5A059;
+            --gold-bright: #FFF2D4;
+            --gold-dark: #8E6B2E;
+            --liquid-glass: rgba(13, 2, 4, 0.92);
+            --luxury-border: linear-gradient(135deg, #C5A059, rgba(255,242,212,0.4), #8E6B2E, rgba(197,160,89,0.1));
+            --curvy-radius-lg: 30px;
+            --curvy-radius-md: 20px;
+            --curvy-radius-btn: 50px;
         }
 
         /* Ultimate Optimization Overrides */
@@ -34,96 +36,119 @@
             scroll-behavior: smooth;
         }
 
-        html {
-            scroll-padding-top: 20px;
+        html, body {
+            width: 100%;
+            height: 100vh; 
+            background-color: var(--maroon-dark);
+            background-image: url('./background.png');
+            background-size: cover;          
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-attachment: fixed;    
+            overflow: hidden; 
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             color: var(--sandalwood); 
             text-align: center;
-            background-color: var(--maroon-dark);
-            font-weight: 400; 
-            overflow-x: hidden;
+            font-weight: 300; 
             perspective: 1200px;
-        }
-
-        body.lock-scroll {
-            overflow: hidden;
-        }
-
-        /* Cinematic Full-Screen Fixed Parallax Canvas Background */
-        .bg-fixed-image {
-            position: fixed;
-            top: 0; left: 0; 
-            width: 100%; height: 100vh;
-            background-image: url('./background.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center 15%;
-            z-index: -2;
-            opacity: 0; 
-            transform: scale(1.15);
-            transition: opacity 2.5s cubic-bezier(0.1, 1, 0.1, 1), transform 3s cubic-bezier(0.1, 1, 0.1, 1);
-        }
-
-        .bg-fixed-image.visible {
-            opacity: 1; 
-            transform: scale(1);
-        }
-
-        .bg-tint-layer {
-            position: fixed;
-            top: 0; left: 0; 
-            width: 100%; height: 100vh;
-            background: linear-gradient(to bottom, rgba(26, 4, 9, 0.8), rgba(0, 0, 0, 0.35), rgba(26, 4, 9, 0.92));
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 2s ease;
-        }
-
-        .bg-tint-layer.visible {
-            opacity: 1;
-        }
-
-        .phone-wrapper {
-            width: 100%;
-            max-width: 620px;
-            margin: 0 auto;
             position: relative;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Ambient shading layer covering the entire page canvas smoothly */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(13, 2, 4, 0.6), rgba(13, 2, 4, 0.2), rgba(13, 2, 4, 0.75));
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body.allow-scroll, html.allow-scroll {
+            height: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        body.lock-scroll, html.lock-scroll {
+            height: 100vh;
+            overflow: hidden !important;
+        }
+
+        #main-content-site {
+            width: 100%;
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background: transparent;
+            z-index: 1;
+        }
+
+        .page-content-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 5;
             background: transparent;
         }
 
-        /* Structural Layout Grid System */
-        section, header {
+        header {
             width: 100%;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 4.5rem 1.2rem;
+            padding: 8rem 1.5rem 4.5rem 1.5rem;
             position: relative;
-            background: transparent; 
+            gap: 1.5rem;
+            z-index: 10;
         }
 
-        header {
-            min-height: 100vh;
+        section {
+            width: 100%;
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            gap: 2rem;
+            align-items: center;
+            padding: 4rem 1.5rem;
+            position: relative;
+            margin: 0 auto;
+            z-index: 20;
+        }
+
+        .site-footer {
+            width: 100%;
+            border-top: 1px solid rgba(197, 160, 89, 0.25);
+            padding: 0;
+            background: #070102;
+            position: relative;
+            z-index: 20;
         }
 
         /* Website Royal Emblem/Logo Wrapper */
         .logo-container {
-            width: 135px;
-            height: 135px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto 1rem auto;
             border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, var(--gold-pure), #fff, var(--gold-dark), var(--maroon-bright));
+            padding: 3px;
+            background: linear-gradient(135deg, var(--gold-pure), #fff, var(--gold-dark), var(--gold-bright));
             background-size: 300% 300%;
-            animation: gradientShift 6s ease infinite, emblemFloat 4.5s ease-in-out infinite;
+            animation: gradientShift 4s ease infinite, emblemFloat 6s ease-in-out infinite;
             overflow: hidden;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.75), 0 0 20px rgba(197, 160, 89, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -135,15 +160,16 @@
             object-fit: cover;
             object-position: top;
             border-radius: 50%;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
         .logo-container:hover img {
-            transform: scale(1.08);
+            transform: scale(1.15) rotate(2deg);
         }
 
         @keyframes emblemFloat {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.02); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         @keyframes gradientShift {
@@ -152,11 +178,11 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Mind-Blowing Interactive 3D Perspective Reveal Arrays */
+        /* Interactive 3D Perspective Reveal Arrays */
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(80px) translateZ(-100px) rotateX(15deg);
-            transition: opacity 1.6s cubic-bezier(0.15, 0.85, 0.35, 1), transform 1.6s cubic-bezier(0.15, 0.85, 0.35, 1);
+            transform: translateY(60px) translateZ(-40px) rotateX(8deg);
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
             transform-style: preserve-3d;
         }
 
@@ -165,7 +191,7 @@
             transform: translateY(0) translateZ(0) rotateX(0deg);
         }
 
-        /* ELITE WELCOME GATEKEEPER CARD STACK */
+        /* WELCOME GATEKEEPER CENTER OVERLAY */
         #welcome-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -178,68 +204,84 @@
             justify-content: center;
             align-items: center;
             padding: 1.5rem;
-            transition: opacity 1.4s cubic-bezier(0.76, 0, 0.24, 1), transform 1.4s cubic-bezier(0.76, 0, 0.24, 1);
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         #welcome-overlay.fade-out {
             opacity: 0;
             pointer-events: none;
-            transform: scale(1.1) translateZ(200px);
+            transform: scale(1.05) translateZ(100px);
         }
 
         .welcome-card {
-            background: linear-gradient(180deg, rgba(58, 11, 22, 0.45) 0%, rgba(10, 2, 4, 0.85) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 4rem 2rem;
-            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(25, 4, 8, 0.95) 0%, rgba(10, 2, 3, 0.99) 100%);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            padding: 4.5rem 2.5rem;
+            border-radius: var(--curvy-radius-lg);
             width: 100%;
-            max-width: 460px;
-            box-shadow: 0 30px 70px rgba(0,0,0,0.85), inset 0 0 30px rgba(212, 175, 55, 0.15);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            max-width: 480px;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 30px rgba(197, 160, 89, 0.15);
+            margin: 0 auto;
+            position: relative;
+            animation: cardEntranceGlow 8s ease-in-out infinite alternate;
+        }
+        
+        .welcome-card::before {
+            content: '';
+            position: absolute;
+            top: 12px; left: 12px; right: 12px; bottom: 12px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: calc(var(--curvy-radius-lg) - 8px);
+            pointer-events: none;
         }
 
-        /* FLOATING NAVIGATION MATRIX CONTROLLERS */
+        @keyframes cardEntranceGlow {
+            0% { border-color: rgba(197, 160, 89, 0.3); }
+            100% { border-color: rgba(255, 242, 212, 0.6); box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 25px rgba(197, 160, 89, 0.2); }
+        }
+
+        /* NAVIGATION TRIGGER BUTTON */
         .floating-menu-trigger {
-            position: fixed;
+            position: absolute;
             top: 25px;
             left: 25px;
-            z-index: 100000;
-            background: rgba(26, 4, 9, 0.8);
-            color: var(--sandalwood);
+            right: auto;
+            z-index: 2000001;
+            background: rgba(13, 2, 4, 0.95);
+            color: var(--gold-bright);
             border: 1px solid var(--gold-pure);
-            padding: 0.8rem 1.4rem;
-            border-radius: 40px;
+            padding: 0.8rem 1.6rem;
+            border-radius: var(--curvy-radius-btn);
             font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 15px rgba(197, 160, 89, 0.2);
             display: none;
             align-items: center;
-            gap: 8px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            gap: 10px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.4s, color 0.4s, border-color 0.4s, opacity 0.4s, box-shadow 0.4s;
         }
 
         .floating-menu-trigger:hover {
             background-color: var(--gold-pure);
             color: var(--maroon-dark);
-            transform: scale(1.08) translateY(-2px);
-            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+            border-color: var(--gold-bright);
+            box-shadow: 0 10px 35px rgba(197, 160, 89, 0.5);
         }
 
-        /* SLIDING SIDEBAR OVERLAY DRAWER MODULE */
+        /* SLIDING NAVIGATION DRAWER */
         .sidebar-modal-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: rgba(10, 2, 4, 0.9);
-            z-index: 105000;
+            background-color: rgba(7, 1, 2, 0.94);
+            z-index: 1000000;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             justify-content: flex-start;
         }
@@ -250,17 +292,17 @@
         }
 
         .sidebar-drawer-card {
-            width: 310px;
+            width: 320px;
             height: 100%;
-            background: linear-gradient(185deg, var(--maroon-dark), #0A0204);
-            border-right: 1px solid var(--gold-pure);
-            padding: 4.5rem 2rem;
+            background: linear-gradient(185deg, #120205, #070102);
+            border-right: 1px solid rgba(197, 160, 89, 0.4);
+            padding: 5rem 2.5rem;
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 3rem;
             transform: translateX(-100%);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 15px 0 50px rgba(0,0,0,0.8);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 20px 0 60px rgba(0,0,0,0.9);
             text-align: left;
         }
 
@@ -271,39 +313,40 @@
         .sidebar-drawer-card h3 {
             font-family: 'Cinzel', serif;
             color: var(--gold-pure);
-            font-size: 1.4rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-            padding-bottom: 0.7rem;
-            letter-spacing: 2px;
-            font-weight: 600;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding-bottom: 0.8rem;
+            letter-spacing: 3px;
+            font-weight: 500;
+            text-transform: uppercase;
         }
 
         .sidebar-links-stack {
             display: flex;
             flex-direction: column;
-            gap: 1.4rem;
+            gap: 1.5rem;
         }
 
         .sidebar-links-stack a {
             color: var(--sandalwood);
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 0.7rem 1rem;
-            border-radius: 12px;
-            letter-spacing: 1px;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-size: 0.85rem;
+            font-weight: 400;
+            font-family: 'Marcellus', serif;
+            display: block;
+            padding: 0.6rem 1rem;
+            border-radius: var(--curvy-radius-btn);
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
             border: 1px solid transparent;
         }
 
         .sidebar-links-stack a:hover {
-            background-color: rgba(212, 175, 55, 0.08);
-            border-color: rgba(212, 175, 55, 0.3);
             color: var(--gold-bright);
-            transform: translateX(8px);
+            background: rgba(197, 160, 89, 0.15);
+            border-color: rgba(197, 160, 89, 0.25);
+            transform: translateX(10px);
         }
 
         .close-sidebar-x {
@@ -311,164 +354,282 @@
             font-size: 2.2rem;
             color: var(--gold-pure);
             cursor: pointer;
-            margin-top: -1.5rem;
+            margin-top: -2rem;
             font-weight: 200;
-            transition: transform 0.4s;
+            transition: transform 0.5s;
         }
-        .close-sidebar-x:hover { transform: rotate(180deg); }
+        .close-sidebar-x:hover { transform: rotate(90deg); }
 
-        /* TYPOGRAPHY METICULOUS ART DIRECTION */
+        /* INTERACTIVE MODAL COMPONENT */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: rgba(7, 1, 2, 0.92);
+            z-index: 2000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            padding: 1.5rem;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .modal-content-card {
+            background: linear-gradient(180deg, #1A0408 0%, #0D0204 100%);
+            border: 1px solid var(--gold-pure);
+            padding: 3.5rem 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.9);
+            position: relative;
+            border-radius: var(--curvy-radius-lg);
+            transform: scale(0.85) translateY(30px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .modal-overlay.active .modal-content-card {
+            transform: scale(1) translateY(0);
+        }
+        
+        .close-modal-btn {
+            position: absolute;
+            top: 20px; right: 25px;
+            font-size: 2.5rem;
+            color: var(--gold-pure);
+            cursor: pointer;
+            font-weight: 200;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .close-modal-btn:hover { color: #fff; transform: scale(1.1); }
+
+        /* TYPOGRAPHY STRUCTURES */
         h1, h2 {
             font-family: 'Cinzel', serif;
             color: #fff;
             letter-spacing: 4px;
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
             text-transform: uppercase;
-            font-weight: 600;
-            text-shadow: 0 5px 20px rgba(0,0,0,0.7);
+            font-weight: 400;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.8);
         }
 
         .hero-title {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--gold-pure);
-            letter-spacing: 7px;
-            font-weight: 700;
+            letter-spacing: 8px;
+            font-weight: 400;
             text-transform: uppercase;
+            animation: lightPulse 4s ease-in-out infinite;
         }
 
         .couple-header-names {
             font-family: 'Cinzel', serif;
-            font-size: 2.6rem;
-            font-weight: 700;
-            color: #fff;
-            margin: 1.5rem 0;
-            line-height: 1.4;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #fff 10%, var(--gold-bright) 50%, #fff 90%);
+            font-size: 2.8rem;
+            font-weight: 400;
+            margin: 2rem 0;
+            line-height: 1.3;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, #fff 0%, var(--gold-bright) 25%, var(--gold-pure) 50%, var(--gold-bright) 75%, #fff 100%);
+            background-size: 200% auto;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 6px 15px rgba(0,0,0,0.6));
+            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.75));
+            animation: goldShimmerFlow 6s linear infinite;
+        }
+
+        @keyframes goldShimmerFlow {
+            0% { background-position: 0% center; }
+            100% { background-position: -200% center; }
+        }
+
+        @keyframes lightPulse {
+            0%, 100% { opacity: 0.8; text-shadow: 0 0 5px rgba(197,160,89,0.2); }
+            50% { opacity: 1; text-shadow: 0 0 20px rgba(255,242,212,0.6); }
+        }
+        
+        .script-connective {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 3.5rem;
+            color: var(--gold-pure);
+            text-transform: lowercase;
+            display: block;
+            margin: 0.3rem 0;
+            -webkit-text-fill-color: initial;
+            background: none;
+            filter: none;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .arabic-text {
-            font-family: 'Amiri', serif;
-            font-size: 2.75rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
             color: var(--gold-bright);
-            margin: 1.2rem 0;
-            direction: rtl;
-            line-height: 1.8;
-            font-weight: 500;
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.7));
+            margin: 1.8rem 0;
+            letter-spacing: 2px;
+            line-height: 1.9;
+            font-weight: 400;
+            text-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
         }
 
         .divider {
-            font-size: 1.4rem;
+            font-size: 1rem;
             color: var(--gold-pure);
-            margin: 1.1rem 0;
+            margin: 1rem 0;
             letter-spacing: 6px;
             opacity: 0.8;
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+            transition: transform 0.6s ease;
         }
 
         section p {
             color: var(--sandalwood);
-            line-height: 1.8;
+            line-height: 1.9;
             font-weight: 300;
             font-size: 0.95rem;
+            letter-spacing: 0.8px;
         }
 
-        /* Gilded Kinetic Border Glass Content Blocks */
+        /* SECTION LUXURY CONTAINER BOXES WITH SHINE LOOP EFFECT */
         .content-accessible-box {
             background: var(--liquid-glass);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(197, 160, 89, 0.25);
             position: relative;
-            border-radius: 28px;
-            padding: 3.5rem 2rem;
+            border-radius: var(--curvy-radius-lg);
+            padding: 4.2rem 2.8rem;
             width: 100%;
-            max-width: 540px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.15);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            max-width: 560px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.65);
             display: flex;
             flex-direction: column;
-            gap: 1.6rem;
+            gap: 1.8rem;
             z-index: 1;
+            overflow: hidden;
+            transition: border-color 0.5s, box-shadow 0.5s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* NEW WOW UPGRADE: 2.5s Intermittent Metallic Reflection Beam */
+        .content-accessible-box::after {
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: -150%;
+            width: 60%; 
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent 0%, 
+                rgba(255, 242, 212, 0.0) 20%, 
+                rgba(255, 242, 212, 0.25) 50%, 
+                rgba(255, 242, 212, 0.0) 80%, 
+                transparent 100%
+            );
+            transform: skewX(-30deg);
+            pointer-events: none;
+            animation: periodicShineLoop 2.5s cubic-bezier(0.43, 0.03, 0.21, 1) infinite;
+        }
+
+        @keyframes periodicShineLoop {
+            0% { left: -150%; }
+            50%, 100% { left: 200%; } /* Shines smoothly across frame then rests/disappears temporarily */
+        }
+
+        .content-accessible-box:hover {
+            border-color: rgba(255, 242, 212, 0.45);
+            box-shadow: 0 35px 80px rgba(0,0,0,0.85), 0 0 25px rgba(197, 160, 89, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .content-accessible-box:hover .divider {
+            transform: scale(1.25) rotate(180deg);
+            color: var(--gold-bright);
         }
         
-        /* Shimmering Active Glow Line Overlays */
-        .content-accessible-box::after {
-            content: ''; position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px;
-            border-radius: 28px; pointer-events: none;
-            background: linear-gradient(135deg, transparent 30%, rgba(255,243,168,0.2) 50%, transparent 70%);
-            background-size: 200% 200%;
-            animation: borderShimmer 4.5s linear infinite;
-            z-index: -1;
+        .content-accessible-box::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            border-radius: calc(var(--curvy-radius-lg) - 10px);
+            pointer-events: none;
+            transition: border-color 0.5s;
         }
 
-        @keyframes borderShimmer {
-            0% { background-position: 200% 0%; }
-            100% { background-position: -200% 0%; }
+        .content-accessible-box:hover::before {
+            border-color: rgba(197, 160, 89, 0.25);
         }
 
-        /* EXQUISITE LIQUID GLOW COUNTDOWN COMPONENT */
+        /* COUNTDOWN COMPONENT */
         #countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin: 2rem auto;
+            gap: 20px;
+            margin: 2.5rem auto;
             width: 100%;
-            max-width: 480px;
+            max-width: 520px;
         }
 
         .countdown-box {
-            background: linear-gradient(180deg, rgba(92, 19, 36, 0.45) 0%, rgba(26, 4, 9, 0.85) 100%);
+            background: linear-gradient(180deg, rgba(37, 5, 12, 0.8) 0%, rgba(13, 2, 4, 0.99) 100%);
             color: var(--sandalwood);
-            padding: 1.2rem 0.2rem;
-            border-radius: 16px;
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.05);
-            position: relative;
+            padding: 1.5rem 0.2rem;
+            border-radius: var(--curvy-radius-md);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s;
+        }
+
+        .countdown-box:hover {
+            transform: translateY(-6px) scale(1.05);
+            border-color: var(--gold-pure);
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.2);
         }
 
         .countdown-num {
-            font-size: 2rem;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            font-family: 'Marcellus', serif;
             display: block;
             color: var(--gold-bright);
-            text-shadow: 0 3px 6px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 242, 212, 0.2);
         }
 
         .countdown-lbl {
             font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
+            letter-spacing: 2.5px;
+            font-weight: 400;
             display: block;
-            margin-top: 5px;
-            color: rgba(247, 231, 212, 0.65);
+            margin-top: 8px;
+            color: rgba(242, 227, 208, 0.6);
         }
 
         /* Luxury Contact Matrix Cells */
         .contact-row {
-            background: rgba(26, 4, 9, 0.5);
-            padding: 1.3rem;
-            border-radius: 16px;
-            margin: 0.2rem 0;
+            background: rgba(13, 2, 4, 0.65);
+            padding: 1.4rem 1.8rem;
+            margin: 0.3rem 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: var(--curvy-radius-md);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
         .contact-row:hover {
-            transform: translateY(-3px) scale(1.01);
             border-color: var(--gold-pure);
-            background: rgba(92, 19, 36, 0.3);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            background: rgba(37, 5, 12, 0.6);
+            transform: translateX(6px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
 
         .contact-row p { text-shadow: none; text-align: left; }
@@ -476,243 +637,247 @@
         .contact-row a {
             color: var(--gold-bright);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.8rem;
+            font-weight: 500;
+            font-size: 0.75rem;
             border: 1px solid var(--gold-pure);
-            padding: 0.5rem 1.2rem;
-            border-radius: 25px;
-            background: rgba(26, 4, 9, 0.6);
-            letter-spacing: 1.5px;
+            padding: 0.6rem 1.4rem;
+            border-radius: var(--curvy-radius-btn);
+            background: rgba(13, 2, 4, 0.85);
+            letter-spacing: 2px;
             text-transform: uppercase;
             transition: all 0.3s ease;
         }
+        
         .contact-row a:hover {
             background: var(--gold-pure);
             color: var(--maroon-dark);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
         }
 
-        /* Hyper-Responsive Inputs Infrastructure */
+        /* Inputs Options Box */
         .input-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             text-align: left;
         }
 
         .input-group label {
             display: block;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 0.6rem;
             color: var(--gold-bright);
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .input-group input, .input-group textarea, .modal-select {
             width: 100%;
-            padding: 1.05rem;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 14px;
+            padding: 1.1rem;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: var(--curvy-radius-md);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.9rem;
-            background-color: rgba(10, 2, 4, 0.65);
+            background-color: rgba(7, 1, 2, 0.9);
             color: #fff;
             font-weight: 300;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.3s ease;
         }
+        
         .input-group input:focus, .input-group textarea:focus, .modal-select:focus {
             outline: none;
             border-color: var(--gold-pure);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
-            background-color: rgba(10, 2, 4, 0.85);
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.35);
+            background-color: #0d0204;
         }
 
-        /* Wishboard Scroll Timeline Pipeline */
+        /* Wishes Scroll Board */
         #wishes-scroll-box {
             width: 100%;
             margin-top: 1.5rem;
-            max-height: 420px;
+            max-height: 450px;
             overflow-y: auto;
             text-align: left;
-            padding-right: 8px;
+            padding-right: 10px;
         }
-        #wishes-scroll-box::-webkit-scrollbar { width: 4px; }
-        #wishes-scroll-box::-webkit-scrollbar-thumb { background: var(--gold-pure); border-radius: 10px; }
+        #wishes-scroll-box::-webkit-scrollbar { width: 3px; }
+        #wishes-scroll-box::-webkit-scrollbar-thumb { background: var(--gold-pure); border-radius: var(--curvy-radius-btn); }
 
         .wish-bubble {
-            background: rgba(10, 2, 4, 0.45);
+            background: rgba(7, 1, 2, 0.6);
             padding: 1.5rem;
-            border-radius: 18px;
             margin-bottom: 1.2rem;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            border-left: 4px solid var(--gold-pure);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            border-radius: var(--curvy-radius-md);
+            border-left: 3px solid var(--gold-pure);
+            transition: border-color 0.3s, background-color 0.3s, transform 0.3s;
         }
-        .wish-bubble:hover { transform: scale(1.025); border-color: rgba(212, 175, 55, 0.3); }
+
+        .wish-bubble:hover {
+            border-color: rgba(197, 160, 89, 0.4);
+            background: rgba(37, 5, 12, 0.45);
+            transform: translateX(4px);
+        }
 
         .empty-wishes-placeholder {
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem;
             color: var(--gold-pure);
             font-style: italic;
-            font-size: 0.95rem;
-            opacity: 0.8;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            opacity: 0.7;
         }
 
         .wish-author {
-            font-weight: 700;
+            font-weight: 500;
             color: var(--gold-bright);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-family: 'Cinzel', serif;
             margin-bottom: 0.5rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
-        /* Liquid Gold High-Action Buttons Layout */
+        /* PREMIUM ACTION BUTTONS */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--maroon-mid), var(--maroon-bright));
-            color: var(--sandalwood);
-            padding: 1.1rem 2.4rem;
+            background: linear-gradient(135deg, #25050C 0%, #150307 100%);
+            color: var(--gold-bright);
+            padding: 1.1rem 2.5rem;
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 2.5px;
+            border-radius: var(--curvy-radius-btn); 
+            font-family: 'Cinzel', serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             border: 1px solid var(--gold-pure);
             cursor: pointer;
             margin: 0.5rem auto;
-            width: 85%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+            width: 90%;
             position: relative;
-            overflow: hidden;
-            z-index: 2;
-        }
-        .btn::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
-            transition: all 0.6s ease;
-        }
-        .btn:hover::before { left: 100%; }
-        .btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
-            border-color: var(--gold-bright);
-        }
-
-        .map-action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin: 1.5rem 0;
-            width: 100%;
-        }
-
-        .map-action-grid .btn {
-            width: 100%;
-            margin: 0;
-            font-size: 0.8rem;
-            padding: 1rem;
-        }
-
-        .map-frame-box {
-            margin-top: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            padding-top: 56.25%;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-        }
-
-        .map-frame-box iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: 0;
-            filter: contrast(1.05) brightness(0.9);
-        }
-
-        /* Exquisite Structural RSVP Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 2, 4, 0.94);
-            z-index: 120000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 1rem;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,242,212,0.3), transparent);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            color: #fff;
+            border-color: var(--gold-bright);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.3);
+            background: linear-gradient(135deg, var(--maroon-bright) 0%, #25050C 100%);
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
+        .hashtag-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold-pure);
+            letter-spacing: 4px;
+            font-weight: 400;
         }
 
-        .modal-content-card {
-            background: linear-gradient(180deg, var(--maroon-dark) 0%, #0A0204 100%);
-            color: var(--sandalwood);
-            max-width: 440px;
+        /* CREATOR PROFILE CONTAINER */
+        .premium-developer-showcase {
             width: 100%;
-            padding: 4rem 2rem;
-            border-radius: 28px;
-            border: 1px solid var(--gold-pure);
+            background: #050102; 
+            padding: 6rem 2rem;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
             position: relative;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.7);
-            transform: translateY(40px) scale(0.92);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .modal-overlay.active .modal-content-card { transform: translateY(0) scale(1); }
-
-        .close-modal-btn {
+        
+        .premium-developer-showcase::before {
+            content: '';
             position: absolute;
-            top: 15px; right: 22px;
-            font-size: 2.2rem;
-            cursor: pointer;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 1px;
+            background: var(--gold-pure);
+        }
+
+        .creator-profile-card {
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            border-radius: var(--curvy-radius-lg);
+            background: rgba(13, 2, 4, 0.4);
+            padding: 3.5rem 2rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .creator-title-sub {
+            font-family: 'Marcellus', serif;
+            font-size: 0.8rem;
             color: var(--gold-pure);
-            font-weight: 200;
-            transition: transform 0.3s;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            display: block;
         }
-        .close-modal-btn:hover { transform: rotate(180deg); }
 
-        .modal-select {
-            background-color: rgba(10, 2, 4, 0.7);
-            cursor: pointer;
-        }
-        .modal-select option {
-            background-color: var(--maroon-dark);
+        .creator-title-main {
+            font-family: 'Cinzel', serif;
             color: #fff;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
         }
 
-        /* Custom Desktop Navigation Vectors */
-        .custom-cursor-dot, .custom-cursor-ring { display: none; }
+        .credit-links-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
 
-        @media (hover: hover) and (pointer: fine) {
-            html, body, button, input, textarea, select, a, .btn {
-                cursor: default !important;
-            }
-            .custom-cursor-dot {
-                display: block; width: 6px; height: 6px; background-color: var(--gold-pure);
-                position: fixed; border-radius: 50%; pointer-events: none; z-index: 1000000;
-                transform: translate(-50%, -50%);
-            }
-            .custom-cursor-ring {
-                display: block; width: 34px; height: 34px; border: 1px solid var(--gold-bright);
-                position: fixed; border-radius: 50%; pointer-events: none; z-index: 999999;
-                transform: translate(-50%, -50%);
-                transition: transform 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
+        .credit-links-row a {
+            color: var(--sandalwood);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.75rem;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            border-radius: var(--curvy-radius-btn);
+            padding: 0.7rem 1.6rem;
+            background: transparent;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .credit-links-row a:hover {
+            background: var(--gold-pure);
+            color: var(--maroon-dark);
+            border-color: var(--gold-bright);
+            transform: translateY(-2px);
+        }
+
+        .copyright-disclaimer {
+            font-size: 0.75rem;
+            color: rgba(242, 227, 208, 0.3);
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-top: 4rem;
+            text-transform: uppercase;
         }
 
         #glitter-canvas {
@@ -722,132 +887,70 @@
             pointer-events: none; 
             z-index: 998;
         }
-
-        /* High-Value Developer End-Footer Stack */
-        .site-footer {
-            background: linear-gradient(to top, #0A0204 20%, rgba(26, 4, 9, 0.98) 100%);
-            border-top: 1px solid var(--gold-pure);
-            padding: 4rem 1.5rem;
-            margin-top: 5rem;
+        
+        /* Map Setup Frame */
+        .map-frame-box {
             width: 100%;
+            height: 250px;
+            margin-top: 1.5rem;
+            border: 2px solid rgba(197, 160, 89, 0.35);
+            border-radius: var(--curvy-radius-md);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        .footer-container {
-            max-width: 520px;
-            margin: 0 auto;
+        .map-frame-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: none !important;
+        }
+        .map-action-grid {
             display: flex;
-            flex-direction: column;
-            gap: 1.4rem;
-        }
-
-        .hashtag-text {
-            font-family: 'Cinzel', serif;
-            font-size: 1.25rem;
-            color: var(--gold-pure);
-            letter-spacing: 3px;
-            font-weight: 700;
-            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
-        }
-
-        .creator-credit {
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: rgba(247, 231, 212, 0.75);
-            border-top: 1px solid rgba(212, 175, 55, 0.12);
-            padding-top: 1.6rem;
-            line-height: 1.8;
-        }
-
-        .creator-credit span {
-            font-family: 'Cinzel', serif;
-            color: #fff;
-            letter-spacing: 2px;
-            font-weight: 600;
-            display: block;
-            font-size: 0.95rem;
-            margin-bottom: 0.6rem;
-        }
-
-        .creator-credit strong {
-            color: var(--gold-bright);
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-        }
-
-        .credit-links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
+            width: 100%;
+            gap: 12px;
             margin-top: 1rem;
         }
-
-        .credit-links a {
-            color: var(--gold-pure);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            padding: 0.45rem 1.2rem;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.01);
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .credit-links a:hover {
-            background: var(--gold-pure);
-            color: var(--maroon-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .copyright-disclaimer {
-            font-size: 0.75rem;
-            color: rgba(247, 231, 212, 0.4);
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            margin-top: 0.6rem;
+        .map-action-grid .btn {
+            width: 50%;
+            padding: 0.9rem 1rem;
+            font-size: 0.7rem;
         }
     </style>
 </head>
-<body class="phone-wrapper lock-scroll">
+<body class="lock-scroll">
 
     <canvas id="glitter-canvas"></canvas>
 
-    <div class="bg-fixed-image" id="global-backdrop"></div>
-    <div class="bg-tint-layer" id="global-tint"></div>
-
-    <div class="custom-cursor-dot" id="cursor-dot"></div>
-    <div class="custom-cursor-ring" id="cursor-ring"></div>
-
+    <!-- Fixed Sticky Top-Left Menu Component Framework -->
     <button class="floating-menu-trigger" id="sidebar-open-btn" onclick="toggleSidebarDrawer(true)">
         Menu ☰
     </button>
 
+    <!-- Side Navigation Bar Menu System Component Overlay -->
     <div class="sidebar-modal-overlay" id="sidebar-navigation-drawer" onclick="toggleSidebarDrawer(false)">
         <div class="sidebar-drawer-card" onclick="event.stopPropagation()">
             <span class="close-sidebar-x" onclick="toggleSidebarDrawer(false)">×</span>
             <h3>Navigation</h3>
             <div class="sidebar-links-stack">
-                <a href="#home-view" onclick="toggleSidebarDrawer(false)">🏠 Main (Home)</a>
-                <a href="#details-view" onclick="toggleSidebarDrawer(false)">📅 Event Info</a>
-                <a href="javascript:void(0)" onclick="handleSidebarModalBridging('rsvp-modal-element')">💌 Submit RSVP</a>
-                <a href="#wishes-view" onclick="toggleSidebarDrawer(false)">✨ Guestbook</a>
+                <a href="#home-view" onclick="toggleSidebarDrawer(false)">🏠 Main Frame</a>
+                <a href="#details-view" onclick="toggleSidebarDrawer(false)">📅 Event Architecture</a>
+                <a href="#contact-view" onclick="toggleSidebarDrawer(false)">📲 Contact Channels</a>
+                <a href="#wishes-view" onclick="toggleSidebarDrawer(false)">✨ Guestbook Scroll</a>
+                <a href="javascript:void(0)" onclick="handleSidebarModalBridging('rsvp-modal-element')" style="color: var(--gold-pure); font-weight: 600;">💌 Transmit RSVP</a>
             </div>
         </div>
     </div>
 
-    <!-- Immersive Experiential Welcome Gateway -->
+    <!-- Entrance Screening Gatekeeper Interface Overlay -->
     <div id="welcome-overlay">
-        <div class="welcome-card stack-3d">
+        <div class="welcome-card">
             <div class="logo-container">
                 <img src="./background.png" alt="Wedding Emblem">
             </div>
             <p style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold-pure); letter-spacing: 4px; margin-bottom: 0.6rem;">Walimatul Ursy</p>
-            <h2 style="color: white; font-size: 2.2rem; text-shadow: none; margin-bottom: 1.5rem; font-weight: 500; letter-spacing: 1px;">Azmin Weds Ameera</h2>
+            <h2 style="color: white; font-size: 2.2rem; text-shadow: none; margin-bottom: 1.5rem; font-weight: 400; letter-spacing: 1px;">Azmin Weds Ameera</h2>
             <div class="divider" style="color: var(--gold-pure);">✦ ⚜ ✦</div>
-            <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 2.5rem; font-weight: 300; font-style: italic; color: var(--sandalwood); padding: 0 1rem;">
+            <p style="font-size: 0.9rem; line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300; font-style: italic; color: var(--sandalwood); padding: 0 1rem; letter-spacing: 0.5px;">
                 Assalamu alaikum Wr. Wb.<br><br>
                 We cordially invite you to share in our joy and receive blessings on the auspicious occasion of the wedding reception of our beloved brother and sister.
             </p>
@@ -855,193 +958,179 @@
         </div>
     </div>
 
-    <div id="main-content-site" style="display: none;">
+    <!-- Main Live Dynamic Architecture Container Canvas -->
+    <div id="main-content-site">
+        <div class="page-content-container">
 
-        <header id="home-view">
-            <div class="logo-container" style="margin-bottom: 0.5rem; width: 110px; height: 110px;">
-                <img src="./background.png" alt="Wedding Emblem">
-            </div>
-            <div class="hero-title">Walimatul Ursy</div>
-            <div class="divider">✦ ⚜ ✦</div>
-            <div class="couple-header-names">Mohamed Azmin<br>Weds<br>Ameera</div>
-            
-            <p style="font-weight: 600; font-size: 0.95rem; letter-spacing: 4px; color: #fff; margin-bottom: 0.5rem;">SATURDAY • 12.09.2026</p>
-            
-            <div id="countdown">
-                <div class="countdown-box"><span id="lbl-days" class="countdown-num">00</span><span class="countdown-lbl">Days</span></div>
-                <div class="countdown-box"><span id="lbl-hours" class="countdown-num">00</span><span class="countdown-lbl">Hrs</span></div>
-                <div class="countdown-box"><span id="lbl-minutes" class="countdown-num">00</span><span class="countdown-lbl">Min</span></div>
-                <div class="countdown-box"><span id="lbl-seconds" class="countdown-num">00</span><span class="countdown-lbl">Sec</span></div>
-            </div>
+            <header id="home-view">
+                <div class="logo-container" style="margin-bottom: 0.5rem; width: 110px; height: 110px;">
+                    <img src="./background.png" alt="Wedding Emblem">
+                </div>
+                <div class="hero-title">Walimatul Ursy</div>
+                <div class="divider">✦ ⚜ ✦</div>
+                <div class="couple-header-names">Mohamed Azmin<span class="script-connective">weds</span>Ameera</div>
+                <p style="font-weight: 500; font-size: 0.9rem; letter-spacing: 5px; color: #fff; margin-bottom: 0.5rem; font-family: 'Marcellus';">SATURDAY • 12.09.2026</p>
+            </header>
 
-            <button class="btn" style="margin-top: 0.5rem;" onclick="triggerCalendarIntent()">📅 Set Event Reminder</button>
-        </header>
+            <section>
+                <div id="countdown">
+                    <div class="countdown-box"><span id="lbl-days" class="countdown-num">00</span><span class="countdown-lbl">Days</span></div>
+                    <div class="countdown-box"><span id="lbl-hours" class="countdown-num">00</span><span class="countdown-lbl">Hrs</span></div>
+                    <div class="countdown-box"><span id="lbl-minutes" class="countdown-num">00</span><span class="countdown-lbl">Min</span></div>
+                    <div class="countdown-box"><span id="lbl-seconds" class="countdown-num">00</span><span class="countdown-lbl">Sec</span></div>
+                </div>
+                <button class="btn" style="margin-top: 0.5rem;" onclick="triggerCalendarIntent()">📅 Set Event Reminder</button>
+            </section>
 
-        <section class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <div class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-                <p style="font-size: 0.95rem; font-weight: 400; color: var(--gold-bright); margin-bottom: 0.5rem;">In the name of Allah, the Most Gracious, the Most Merciful</p>
-                
-                <div class="arabic-text" style="font-size: 1.95rem; line-height: 1.6;">بَارَكَ اللهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
-                <p style="font-style: italic; font-size: 0.9rem; line-height: 1.7; padding: 0 0.8rem; color: rgba(247, 231, 212, 0.85);">
-                    "May Allah bless for you your spouse, and bless you, and may He unite both of you in goodness." <br><span style="font-size: 0.8rem; color: var(--gold-pure); font-weight: 400; letter-spacing: 0.5px;">(Sunan Abi Dawud)</span>
-                </p>
-            </div>
-        </section>
+            <section class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <div class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                    <p style="font-size: 0.9rem; font-weight: 400; color: var(--gold-bright); margin-bottom: 0.5rem; letter-spacing: 1px; font-family: 'Marcellus';">In the name of Allah, the Most Gracious, the Most Merciful</p>
+                    <div class="arabic-text" style="line-height: 1.8; text-transform: none;">بَارَكَ اللهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
+                    <p style="font-style: italic; font-size: 0.9rem; line-height: 1.8; padding: 0 0.8rem; color: rgba(242, 227, 208, 0.85);">
+                        "May Allah bless for you your spouse, and bless you, and may He unite both of you in goodness." <br><span style="font-size: 0.8rem; color: var(--gold-pure); font-weight: 400; letter-spacing: 0.5px; font-family: 'Marcellus';">(Sunan Abi Dawud)</span>
+                    </p>
+                </div>
+            </section>
 
-        <section class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>With Great Pleasure We Invite You</h2>
-                <div class="divider">⚜</div>
-                <p style="font-size: 0.8rem; color: var(--gold-pure); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.2rem; font-weight: 600;">Parents of the Groom</p>
-                <p style="font-family:'Cinzel'; color:#fff; font-weight:600; font-size: 1.4rem; margin-bottom: 1.5rem;">Mohamed Idris & Hajira Ammal</p>
-                
-                <div class="divider" style="font-size: 1.1rem; margin: 0.2rem 0;">&</div>
-                
-                <p style="font-size: 0.8rem; color: var(--gold-pure); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.2rem; font-weight: 600;">Parents of the Bride</p>
-                <p style="font-family:'Cinzel'; color:#fff; font-weight:600; font-size: 1.4rem;">Abdul Rahubu & Yasmin</p>
-                <div class="divider">✦</div>
-                <p style="font-size: 0.95rem; font-style: italic; padding: 0 1rem; color: rgba(247, 231, 212, 0.85);">To the wedding reception celebrating the union of their beloved children:</p>
-            </div>
-        </section>
+            <section class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>With Great Pleasure We Invite You</h2>
+                    <div class="divider">⚜</div>
+                    <p style="font-size: 0.75rem; color: var(--gold-pure); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.2rem; font-weight: 500; font-family: 'Marcellus';">Parents of the Groom</p>
+                    <p style="font-family:'Cinzel'; color:#fff; font-weight:400; font-size: 1.35rem; margin-bottom: 1.5rem; letter-spacing: 1px;">Mohamed Idris & Hajira Ammal</p>
+                    <div class="divider" style="font-size: 1.1rem; margin: 0.2rem 0;">&</div>
+                    <p style="font-size: 0.75rem; color: var(--gold-pure); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.2rem; font-weight: 500; font-family: 'Marcellus';">Parents of the Bride</p>
+                    <p style="font-family:'Cinzel'; color:#fff; font-weight:400; font-size: 1.35rem; letter-spacing: 1px;">Abdul Rahubu & Yasmin</p>
+                    <div class="divider">✦</div>
+                    <p style="font-size: 0.95rem; font-style: italic; padding: 0 1rem; color: rgba(242, 227, 208, 0.855);">To the wedding reception celebrating the union of their beloved children:</p>
+                </div>
+            </section>
 
-        <section id="details-view" class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>The Happy Couple</h2>
-                <div class="divider">⚜</div>
-                
-                <div style="font-size: 1rem; line-height: 1.6; gap:0.4rem; display:flex; flex-direction:column;">
-                    <p style="font-size:0.75rem; text-transform:uppercase; font-weight:600; letter-spacing:2px; color: var(--gold-pure);">Groom</p>
-                    <p style="font-family:'Cinzel'; color:#fff; font-weight:600; font-size: 1.35rem;">Mohamed Azmin Bin Mohamed Idris</p>
+            <section id="details-view" class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>The Happy Couple</h2>
+                    <div class="divider">⚜</div>
+                    <div style="font-size: 1rem; line-height: 1.6; gap:0.5rem; display:flex; flex-direction:column;">
+                        <p style="font-size:0.75rem; text-transform:uppercase; font-weight:500; letter-spacing:3px; color: var(--gold-pure); font-family: 'Marcellus';">Groom</p>
+                        <p style="font-family:'Cinzel'; color:#fff; font-weight:400; font-size: 1.3rem; letter-spacing: 1px;">Mohamed Azmin Bin Mohamed Idris</p>
+                        <div class="divider" style="font-size:1rem; margin: 0.5rem 0;">&</div>
+                        <p style="font-size:0.75rem; text-transform:uppercase; font-weight:500; letter-spacing:3px; color: var(--gold-pure); font-family: 'Marcellus';">Bride</p>
+                        <p style="font-family:'Cinzel'; color:#fff; font-weight:400; font-size: 1.3rem; letter-spacing: 1px;">Ameera Binti Abdul Rahubu</p>
+                    </div>
+
+                    <h2 style="margin-top: 2.5rem;">Event Details</h2>
+                    <div class="divider">✦</div>
+                    <p style="font-size: 1.05rem; font-weight: 400; letter-spacing: 2px; font-family: 'Marcellus';">Saturday, 12 September 2026</p>
+                    <p style="font-size: 1.35rem; color: var(--gold-bright); font-weight: 400; letter-spacing: 2px; font-family: 'Marcellus';">6:00 PM - 10:00 PM</p>
+                    <p style="margin-top: 0.6rem; font-size: 0.95rem; line-height: 1.7; color: rgba(242, 227, 208, 0.95);">
+                        📍 <strong style="color:#fff; font-family:'Cinzel'; letter-spacing:1px; font-size: 0.85rem;">Venue Location:</strong><br>
+                        Alam Indah Banquet Hall<br>414, Jalan Hutton, George Town,<br>10050 George Town, Pulau Pinang
+                    </p>
+
+                    <div class="map-action-grid">
+                        <a href="http://maps.google.com/?q=Alam+Indah+Banquet+Hall+Hutton+Penang" target="_blank" class="btn">🗺️ Google Maps</a>
+                        <a href="https://waze.com/ul?q=414+Jalan+Hutton+George+Town+Penang" target="_blank" class="btn">🚗 Waze Drive</a>
+                    </div>
                     
-                    <div class="divider" style="font-size:1rem; margin: 0.4rem 0;">&</div>
+                    <div class="map-frame-box">
+                        <iframe src="https://maps.google.com/maps?q=414,%20Jalan%20Hutton,%20George%20Town,%20Penang&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact-view" class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>Contact Family</h2>
+                    <p style="font-size: 0.9rem; color: var(--gold-bright); letter-spacing: 0.8px;">Connect with our lines directly via mobile WhatsApp:</p>
+                    <div class="divider">✦</div>
                     
-                    <p style="font-size:0.75rem; text-transform:uppercase; font-weight:600; letter-spacing:2px; color: var(--gold-pure);">Bride</p>
-                    <p style="font-family:'Cinzel'; color:#fff; font-weight:600; font-size: 1.35rem;">Ameera Binti Abdul Rahubu</p>
-                </div>
-
-                <h2 style="margin-top: 2rem;">Event Details</h2>
-                <div class="divider">✦</div>
-                <p style="font-size: 1.05rem; font-weight: 400; letter-spacing: 1.5px;">Saturday, 12 September 2026</p>
-                <p style="font-size: 1.25rem; color: var(--gold-bright); font-weight: 600; letter-spacing: 1px;">6:00 PM - 10:00 PM</p>
-                
-                <p style="margin-top: 0.5rem; font-size: 0.95rem; line-height: 1.6; color: rgba(247, 231, 212, 0.9);">
-                    📍 <strong style="color:#fff; font-family:'Cinzel'; letter-spacing:0.5px;">Venue Location:</strong><br>
-                    Alam Indah Banquet Hall<br>414, Jalan Hutton, George Town,<br>10050 George Town, Pulau Pinang
-                </p>
-
-                <div class="map-action-grid">
-                    <a href="https://maps.google.com/?q=414,+Jalan+Hutton,+George+Town,+10050+George+Town,+Pulau+Pinang" target="_blank" class="btn">🗺️ Google Maps</a>
-                    <a href="https://waze.com/ul?q=414+Jalan+Hutton+George+Town+Penang" target="_blank" class="btn">🚗 Waze Drive</a>
-                </div>
-
-                <div class="map-frame-box">
-                    <iframe src="https://maps.google.com/maps?q=414,%20Jalan%20Hutton,%20George%20Town,%2010050%20George%20Town,%20Pulau%20Pinang&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </section>
-
-        <section class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>Contact Family</h2>
-                <p style="font-size: 0.9rem; color: var(--gold-bright); letter-spacing: 0.5px;">Connect with our lines directly via mobile WhatsApp:</p>
-                <div class="divider">✦</div>
-                
-                <div class="contact-row">
-                    <div>
-                        <p style="color: #fff; font-family:'Cinzel'; font-size:1.05rem; font-weight:600;">Mr. Idris</p>
-                        <p style="font-size:0.75rem; color:rgba(247, 231, 212, 0.55); font-weight: 400; margin-top:2px;">Father of the Groom</p>
+                    <div class="contact-row">
+                        <div>
+                            <p style="color: #fff; font-family:'Cinzel'; font-size:1.05rem; font-weight:400; letter-spacing: 1px;">Mr. Idris</p>
+                            <p style="font-size:0.75rem; color:rgba(242, 227, 208, 0.55); font-weight: 400; margin-top:3px; font-family: 'Montserrat';">Father of the Groom</p>
+                        </div>
+                        <a href="https://wa.me/60183891696" target="_blank">📲 Connect</a>
                     </div>
-                    <a href="https://wa.me/60183891696" target="_blank">📲 Connect</a>
-                </div>
-                
-                <div class="contact-row">
-                    <div>
-                        <p style="color: #fff; font-family:'Cinzel'; font-size:1.05rem; font-weight:600;">Mr. Naina</p>
-                        <p style="font-size:0.75rem; color:rgba(247, 231, 212, 0.55); font-weight: 400; margin-top:2px;">Uncle of the Groom</p>
-                    </div>
-                    <a href="https://wa.me/60164402003" target="_blank">📲 Connect</a>
-                </div>
-                
-                <div class="contact-row">
-                    <div>
-                        <p style="color: #fff; font-family:'Cinzel'; font-size:1.05rem; font-weight:600;">Azhar</p>
-                        <p style="font-size:0.75rem; color:rgba(247, 231, 212, 0.55); font-weight: 400; margin-top:2px;">Brother of the Groom</p>
-                    </div>
-                    <a href="https://wa.me/60182369616" target="_blank">📲 Connect</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>Event Backdrop</h2>
-                <p style="font-size: 0.9rem; color: var(--gold-bright);">Inspect the artistic assets rendering this page experience:</p>
-                <div class="divider">✦</div>
-                <a href="./background.png" target="_blank" class="btn">View Backdrop Asset</a>
-            </div>
-        </section>
-
-        <section class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>Leave Your Blessings</h2>
-                <p style="font-size: 0.85rem; font-weight: 400; color: var(--gold-bright); letter-spacing: 0.5px;">Send your prayers and congratulations directly to our digital registry:</p>
-                <div class="divider">✦</div>
-
-                <form id="wish-input-form" onsubmit="handleNewWishPosting(event)">
-                    <div class="input-group">
-                        <label for="input-author">Guest Name:</label>
-                        <input type="text" id="input-author" required placeholder="e.g., Uncle Zainal & Family">
-                    </div>
-                    <div class="input-group">
-                        <label for="input-msg">Wedding Blessing:</label>
-                        <textarea id="input-msg" rows="3" required placeholder="May Allah bless your marriage journey..."></textarea>
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%; margin: 0;">Transmit Wish ✨</button>
-                </form>
-            </div>
-        </section>
-
-        <section id="wishes-view" class="animate-on-scroll">
-            <div class="content-accessible-box">
-                <h2>Guestbook Board</h2>
-                <p style="font-size: 0.85rem; color: var(--gold-bright);">Live real-time transmissions from our website visitors:</p>
-                <div class="divider">⚜</div>
-                
-                <div id="wishes-scroll-box"></div>
-            </div>
-        </section>
-
-        <!-- Main Premium Structural Footer Layout -->
-        <footer class="site-footer">
-            <div class="footer-container">
-                <p class="hashtag-text">#TwoAsBecomeOne • 12.09.2026</p>
-                
-                <div class="creator-credit">
-                    <span>Engineered By:</span>
-                    <strong>Azhar Idris Dev</strong>
                     
-                    <div class="credit-links">
-                        <a href="https://wa.me/60182369616" target="_blank">📲 WhatsApp</a>
-                        <a href="mailto:azharidrisdeveloper@gmail.com">✉️ Email</a>
+                    <div class="contact-row">
+                        <div>
+                            <p style="color: #fff; font-family:'Cinzel'; font-size:1.05rem; font-weight:400; letter-spacing: 1px;">Mr. Naina</p>
+                            <p style="font-size:0.75rem; color:rgba(242, 227, 208, 0.55); font-weight: 400; margin-top:3px; font-family: 'Montserrat';">Uncle of the Groom</p>
+                        </div>
+                        <a href="https://wa.me/60164402003" target="_blank">📲 Connect</a>
+                    </div>
+                    
+                    <div class="contact-row">
+                        <div>
+                            <p style="color: #fff; font-family:'Cinzel'; font-size:1.05rem; font-weight:400; letter-spacing: 1px;">Azhar</p>
+                            <p style="font-size:0.75rem; color:rgba(242, 227, 208, 0.55); font-weight: 400; margin-top:3px; font-family: 'Montserrat';">Brother of the Groom</p>
+                        </div>
+                        <a href="https://wa.me/60182369616" target="_blank">📲 Connect</a>
                     </div>
                 </div>
-                
-                <p class="copyright-disclaimer">
-                    © 2026 Azmin Weds Ameera. All Rights Reserved.
-                </p>
-            </div>
-        </footer>
+            </section>
 
-        <!-- Translucent Gilded RSVP Modal Container -->
-        <div id="rsvp-modal-element" class="modal-overlay">
-            <div class="modal-content-card">
+            <section class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>Leave Your Blessings</h2>
+                    <p style="font-size: 0.85rem; font-weight: 400; color: var(--gold-bright); letter-spacing: 0.8px;">Send your prayers and congratulations directly to our digital registry:</p>
+                    <div class="divider">✦</div>
+
+                    <form id="wish-input-form" onsubmit="handleNewWishPosting(event)">
+                        <div class="input-group">
+                            <label for="input-author">Guest Name:</label>
+                            <input type="text" id="input-author" required placeholder="e.g., Uncle Zainal & Family">
+                        </div>
+                        <div class="input-group">
+                            <label for="input-msg">Wedding Blessing:</label>
+                            <textarea id="input-msg" rows="3" required placeholder="May Allah bless your marriage journey..."></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; margin: 0;">Transmit Wish ✨</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="wishes-view" class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>Guestbook Board</h2>
+                    <p style="font-size: 0.85rem; color: var(--gold-bright); letter-spacing: 0.5px;">Live real-time transmissions from our website visitors:</p>
+                    <div class="divider">⚜</div>
+                    <div id="wishes-scroll-box"></div>
+                </div>
+            </section>
+
+            <footer class="site-footer">
+                <div class="premium-developer-showcase">
+                    <div class="creator-profile-card">
+                        <p class="hashtag-text" style="margin-bottom: 2rem;">#TwoAsBecomeOne • 12.09.2026</p>
+                        <span class="creator-title-sub">Engineered & Developed By</span>
+                        <h4 class="creator-title-main">Azhar Idris</h4>
+                        <p style="font-size: 0.85rem; color: rgba(242, 227, 208, 0.7); line-height: 1.8; font-weight: 300; max-width: 380px; margin: 0 auto;">
+                            Crafting elite architectural web applications, bespoke real-time systems, and ultra-high performance premium digital deployment frameworks.
+                        </p>
+                        <div class="credit-links-row">
+                            <a href="https://wa.me/60182369616" target="_blank">📲 WhatsApp Direct</a>
+                            <a href="mailto:azharidrisdeveloper@gmail.com">✉️ Email Channel</a>
+                        </div>
+                    </div>
+                    <p class="copyright-disclaimer">
+                        © 2026 Azmin Weds Ameera. All Architectural Rights Reserved.
+                    </p>
+                </div>
+            </footer>
+
+        </div>
+
+        <!-- MODAL ACCESS INTERACTIVE FRAMEWORK -->
+        <div id="rsvp-modal-element" class="modal-overlay" onclick="toggleModal('rsvp-modal-element', false)">
+            <div class="modal-content-card" onclick="event.stopPropagation()">
                 <span class="close-modal-btn" onclick="toggleModal('rsvp-modal-element', false)">×</span>
-                <h3 style="font-family:'Cinzel'; color:var(--gold-pure); margin-bottom:1.5rem; font-weight: 600; letter-spacing: 2px;">RSVP Attendance</h3>
+                <h3 style="font-family:'Cinzel'; color:var(--gold-pure); margin-bottom:2rem; font-weight: 500; letter-spacing: 3px; font-size: 1.4rem; text-transform: uppercase;">RSVP Attendance</h3>
                 <form onsubmit="processRsvpForm(event)">
                     <div class="input-group">
                         <label>Full Name:</label>
-                        <input type="text" id="rsvp-name" required placeholder="Your Identity">
+                        <input type="text" id="rsvp-name" required placeholder="Your Identity Name">
                     </div>
                     <div class="input-group">
                         <label>Attendance Matrix:</label>
@@ -1076,25 +1165,24 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        document.documentElement.classList.add("lock-scroll");
-
         // WELCOME SCREEN GATEKEEPER MECHANISM
         function grantEntranceToInvitationSite() {
             const entryScreen = document.getElementById("welcome-overlay");
             const structuralSite = document.getElementById("main-content-site");
-            const backdropImg = document.getElementById("global-backdrop");
-            const backdropTint = document.getElementById("global-tint");
             const triggerBtn = document.getElementById("sidebar-open-btn");
             
-            structuralSite.style.display = "block";
+            structuralSite.style.display = "flex";
             
             setTimeout(() => {
-                backdropImg.classList.add("visible");
-                backdropTint.classList.add("visible");
                 entryScreen.classList.add("fade-out");
+                
+                document.documentElement.classList.add("allow-scroll");
+                document.body.classList.add("allow-scroll");
+                document.documentElement.classList.remove("lock-scroll");
                 document.body.classList.remove("lock-scroll");
+                
                 document.getElementById("home-view").scrollIntoView();
-            }, 40);
+            }, 50);
 
             setTimeout(() => {
                 entryScreen.remove();
@@ -1104,7 +1192,7 @@
                 renderGuestbookBoard();
                 initScrollAnimationsTracker(); 
                 handleGlitterLoop(); 
-            }, 1400);
+            }, 1450);
         }
 
         // SIDEBAR NAVIGATION SYSTEMS
@@ -1121,30 +1209,24 @@
             toggleSidebarDrawer(false);
             setTimeout(() => {
                 toggleModal(targetModalId, true);
-            }, 400);
+            }, 450);
         }
 
-        // CURSOR COMPONENT VECTOR LOGIC
-        const dotNode = document.getElementById("cursor-dot");
-        const ringNode = document.getElementById("cursor-ring");
-        let currentMouseX = 0, currentMouseY = 0;
-
-        window.addEventListener("mousemove", function(e) {
-            currentMouseX = e.clientX;
-            currentMouseY = e.clientY;
-            
-            if (dotNode && ringNode) {
-                dotNode.style.left = currentMouseX + "px";
-                dotNode.style.top = currentMouseY + "px";
-                
-                setTimeout(() => {
-                    ringNode.style.left = currentMouseX + "px";
-                    ringNode.style.top = currentMouseY + "px";
-                }, 30);
+        // MODAL MANAGEMENT CONTROLLERS
+        function toggleModal(modalId, displayState) {
+            const modalTarget = document.getElementById(modalId);
+            if (displayState) {
+                modalTarget.classList.add('active');
+                document.documentElement.classList.add('lock-scroll');
+                document.body.classList.add('lock-scroll');
+            } else {
+                modalTarget.classList.remove('active');
+                document.documentElement.classList.remove('lock-scroll');
+                document.body.classList.remove('lock-scroll');
             }
-        });
+        }
 
-        // SHIMMER GLITTER EMISSION MATRIX Engine
+        // AMBIENT GLITTER STARDUST ENGINE
         const canvas = document.getElementById("glitter-canvas");
         const ctx = canvas.getContext("2d");
         let particleArray = [];
@@ -1157,37 +1239,54 @@
         resizeCanvas();
 
         class GlitterParticle {
-            constructor(x, y, isClickSplash) {
+            constructor(x, y, isClickSplash, isAmbient = false) {
                 this.x = x;
                 this.y = y;
-                this.size = Math.random() * 3 + 1.2;
+                this.isAmbient = isAmbient;
                 
-                if (isClickSplash) {
+                if (this.isAmbient) {
+                    this.size = Math.random() * 1.8 + 0.4;
+                    this.speedX = (Math.random() * 0.4 - 0.2);
+                    this.speedY = -(Math.random() * 0.5 + 0.1);
+                    this.decay = Math.random() * 0.003 + 0.001;
+                    this.alpha = Math.random() * 0.5 + 0.2;
+                } else if (isClickSplash) {
                     const randomAngle = Math.random() * Math.PI * 2;
-                    const blastVelocity = Math.random() * 5.5 + 2.5;
+                    const blastVelocity = Math.random() * 6.0 + 3.0;
+                    this.size = Math.random() * 3.5 + 1.5;
                     this.speedX = Math.cos(randomAngle) * blastVelocity;
                     this.speedY = Math.sin(randomAngle) * blastVelocity;
+                    this.decay = Math.random() * 0.02 + 0.01;
+                    this.alpha = 1;
                 } else {
-                    this.speedX = (Math.random() * 2 - 1);
-                    this.speedY = (Math.random() * 1.3 + 0.3);
+                    this.size = Math.random() * 2.8 + 1.0;
+                    this.speedX = (Math.random() * 2.0 - 1.0);
+                    this.speedY = (Math.random() * 1.5 + 0.5);
+                    this.decay = Math.random() * 0.015 + 0.008;
+                    this.alpha = 1;
                 }
                 
-                const colors = ["#D4AF37", "#F7E7D4", "#5C1324", "#FFF3A8", "#FFFFFF"];
+                const colors = ["#C5A059", "#F2E3D0", "#FFF2D4", "#FFFFFF", "#E9C46A"];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.alpha = 1;
-                this.decay = Math.random() * 0.014 + 0.007;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-                this.alpha -= this.decay;
+                if (!this.isAmbient) {
+                    this.alpha -= this.decay;
+                } else {
+                    this.alpha -= this.decay;
+                    if (this.alpha <= 0.05) this.alpha = 0;
+                }
             }
             draw() {
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 6;
-                ctx.shadowColor = this.color;
+                if (this.size > 2) {
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = this.color;
+                }
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -1195,46 +1294,56 @@
             }
         }
 
-        // DELTA TRACKING RUNTIME
+        function injectAmbientSparks() {
+            if (particleArray.length < 120 && Math.random() < 0.4) {
+                let spawnX = Math.random() * canvas.width;
+                let spawnY = canvas.height + 10;
+                particleArray.push(new GlitterParticle(spawnX, spawnY, false, true));
+            }
+        }
+
+        let currentMouseX = 0, currentMouseY = 0;
         let lastScrollTop = window.scrollY;
+        
+        window.addEventListener("mousemove", function(e) {
+            currentMouseX = e.clientX;
+            currentMouseY = e.clientY;
+        });
+
         window.addEventListener("scroll", function() {
             let scrollTop = window.scrollY;
+            
+            const menuBtn = document.getElementById("sidebar-open-btn");
+            if (menuBtn) {
+                menuBtn.style.top = (scrollTop + 25) + "px";
+            }
+
             let delta = Math.abs(scrollTop - lastScrollTop);
             if (delta > 2) {
-                for (let i = 0; i < Math.min(delta / 2, 6); i++) {
-                    let spawnX = currentMouseX + (Math.random() * 24 - 12);
-                    let spawnY = currentMouseY + (Math.random() * 24 - 12);
+                for (let i = 0; i < Math.min(delta / 1.5, 8); i++) {
+                    let spawnX = currentMouseX + (Math.random() * 40 - 20);
+                    let spawnY = currentMouseY + (Math.random() * 40 - 20);
                     particleArray.push(new GlitterParticle(spawnX, spawnY, false));
                 }
             }
             lastScrollTop = scrollTop;
         });
 
-        // CLICKS RADIAL EMISSIONS
         window.addEventListener("pointerdown", function(e) {
-            if (document.getElementById("main-content-site").style.display === "block") {
-                for (let i = 0; i < 24; i++) {
+            if (document.getElementById("main-content-site").style.display === "flex") {
+                for (let i = 0; i < 25; i++) {
                     particleArray.push(new GlitterParticle(e.clientX, e.clientY, true));
                 }
-            }
-            if (ringNode && dotNode) {
-                ringNode.style.transform = "translate(-50%, -50%) scale(0.4)";
-                dotNode.style.transform = "translate(-50%, -50%) scale(2)";
-            }
-        });
-        window.addEventListener("pointerup", () => {
-            if (ringNode && dotNode) {
-                ringNode.style.transform = "translate(-50%, -50%) scale(1)";
-                dotNode.style.transform = "translate(-50%, -50%) scale(1)";
             }
         });
 
         function handleGlitterLoop() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            injectAmbientSparks();
             for (let i = 0; i < particleArray.length; i++) {
                 particleArray[i].update();
                 particleArray[i].draw();
-                if (particleArray[i].alpha <= 0) {
+                if (particleArray[i].alpha <= 0 || particleArray[i].y < -10 || particleArray[i].x < -10 || particleArray[i].x > canvas.width + 10) {
                     particleArray.splice(i, 1);
                     i--;
                 }
@@ -1242,7 +1351,7 @@
             requestAnimationFrame(handleGlitterLoop);
         }
 
-        // INFINITE 3D TRANSFORMS SCROLL OBSERVER
+        // SCROLL INTERSECTION OBSERVER
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1252,7 +1361,7 @@
                 }
             });
         }, {
-            threshold: 0.06
+            threshold: 0.05
         });
 
         function initScrollAnimationsTracker() {
@@ -1261,7 +1370,7 @@
             });
         }
 
-        // Countdown Calculations Engine
+        // COUNTDOWN SYSTEM ENGINE
         const weddingTimestamp = new Date("Sept 12, 2026 18:00:00").getTime();
 
         function runClockTicker() {
@@ -1269,7 +1378,7 @@
             const remainder = weddingTimestamp - now;
 
             if (remainder < 0) {
-                document.getElementById("countdown").innerHTML = "<p style='color:var(--gold-pure); font-weight:700; grid-column: span 4; font-size:1.25rem; font-family:Cinzel; letter-spacing:1px;'>The Event Has Begun 🎉</p>";
+                document.getElementById("countdown").innerHTML = "<p style='color:var(--gold-pure); font-weight:600; grid-column: span 4; font-size:1.25rem; font-family:Cinzel; letter-spacing:2px;'>The Event Has Begun 🎉</p>";
                 return;
             }
 
@@ -1295,21 +1404,13 @@
             window.open(gCalEndpoint, '_blank');
         }
 
-        function toggleModal(modalId, displayState) {
-            const modalTarget = document.getElementById(modalId);
-            if (displayState) {
-                modalTarget.classList.add('active');
-            } else {
-                modalTarget.classList.remove('active');
-            }
-        }
-
+        // RSVP FORM PROCESSING CORE
         function processRsvpForm(e) {
             e.preventDefault();
             const submitBtn = e.target.querySelector('button[type="submit"]');
             submitBtn.innerText = "Transmitting...";
             submitBtn.disabled = true;
-            submitBtn.style.opacity = "0.7";
+            submitBtn.style.opacity = "0.6";
 
             const payload = {
                 Name: document.getElementById("rsvp-name").value,
@@ -1326,7 +1427,7 @@
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' }
             })
             .then(() => {
-                alert(`Salutations ${payload.Name}! Your RSVP transmission has been safely logged.`);
+                alert(`Salutations ${payload.Name}! Your RSVP data string has been safely logged.`);
                 toggleModal('rsvp-modal-element', false);
                 document.getElementById("rsvp-name").value = "";
                 submitBtn.innerText = "Confirm Transmission";
@@ -1334,7 +1435,7 @@
                 submitBtn.style.opacity = "1";
             })
             .catch(error => {
-                alert("Transmission fault. Please verify your connection status and try again.");
+                alert("Transmission fault encountered. Verify link connectivity profile parameters.");
                 submitBtn.innerText = "Confirm Transmission";
                 submitBtn.disabled = false;
                 submitBtn.style.opacity = "1";
@@ -1342,9 +1443,7 @@
             });
         }
 
-        // ==========================================
-        // REAL-TIME CLOUD WISH MANAGER (FIREBASE)
-        // ==========================================
+        // INSTANCE CONFIGURATION (FIREBASE MODULES)
         const firebaseConfig = {
             apiKey: "AIzaSyC6976b_EFI99HPrT9XqYJt4ndDd9G3-Tw",
             authDomain: "azmin-wedding.firebaseapp.com",
@@ -1366,7 +1465,7 @@
                 const data = snapshot.val();
 
                 if (!data) {
-                    wallViewport.innerHTML = `<div class="empty-wishes-placeholder">No messages transmitted yet. Issue the primary blessing string!</div>`;
+                    wallViewport.innerHTML = `<div class="empty-wishes-placeholder">No blessing data logged yet. Issue the primary greeting!</div>`;
                     return;
                 }
 
@@ -1376,7 +1475,7 @@
                 dataset.forEach(item => {
                     const bubble = document.createElement("div");
                     bubble.className = "wish-bubble";
-                    bubble.innerHTML = `<div class="wish-author">${sanitizeInput(item.author)}</div><div style="font-size:0.85rem; color:#fff; margin-top:6px; line-height:1.6; font-weight:300;">${sanitizeInput(item.message)}</div>`;
+                    bubble.innerHTML = `<div class="wish-author">${sanitizeInput(item.author)}</div><div style="font-size:0.85rem; color:#fff; margin-top:6px; line-height:1.7; font-weight:300;">${sanitizeInput(item.message)}</div>`;
                     wallViewport.appendChild(bubble);
                 });
             });
@@ -1405,7 +1504,7 @@
                     submitBtn.disabled = false;
                 })
                 .catch((error) => {
-                    alert("Database fault. Transmission failed.");
+                    alert("Database reference synchronization runtime error fault.");
                     console.error(error);
                     submitBtn.innerText = "Transmit Wish ✨";
                     submitBtn.disabled = false;
