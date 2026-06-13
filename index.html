@@ -38,14 +38,18 @@
 
         html, body {
             width: 100%;
-            height: 100vh; 
+            min-height: 100vh;
             background-color: var(--maroon-dark);
             background-image: url('./background.png');
             background-size: cover;          
             background-repeat: no-repeat;
             background-position: center top;
             background-attachment: fixed;    
-            overflow: hidden; 
+        }
+
+        html.lock-scroll, body.lock-scroll {
+            height: 100vh !important;
+            overflow: hidden !important;
         }
 
         body {
@@ -67,17 +71,6 @@
             background: linear-gradient(to bottom, rgba(13, 2, 4, 0.6), rgba(13, 2, 4, 0.2), rgba(13, 2, 4, 0.75));
             z-index: 0;
             pointer-events: none;
-        }
-
-        body.allow-scroll, html.allow-scroll {
-            height: auto;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        body.lock-scroll, html.lock-scroll {
-            height: 100vh;
-            overflow: hidden !important;
         }
 
         #main-content-site {
@@ -109,7 +102,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 8rem 1.5rem 4.5rem 1.5rem;
+            padding: 4rem 1.5rem;
             position: relative;
             gap: 1.5rem;
             z-index: 10;
@@ -204,13 +197,13 @@
             justify-content: center;
             align-items: center;
             padding: 1.5rem;
-            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         #welcome-overlay.fade-out {
             opacity: 0;
             pointer-events: none;
-            transform: scale(1.05) translateZ(100px);
+            transform: scale(1.05);
         }
 
         .welcome-card {
@@ -240,36 +233,47 @@
             100% { border-color: rgba(255, 242, 212, 0.6); box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 25px rgba(197, 160, 89, 0.2); }
         }
 
-        /* NAVIGATION TRIGGER BUTTON */
+        /* NAVIGATION TRIGGER BUTTON (Top Left Viewport Pin) */
         .floating-menu-trigger {
-            position: absolute;
+            position: fixed;
             top: 25px;
             left: 25px;
-            right: auto;
-            z-index: 2000001;
+            width: 60px;
+            height: 60px;
+            display: none; /* Initial hidden profile setup */
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
             background: rgba(13, 2, 4, 0.95);
             color: var(--gold-bright);
             border: 1px solid var(--gold-pure);
-            padding: 0.8rem 1.6rem;
-            border-radius: var(--curvy-radius-btn);
+            z-index: 999999; 
+            font-size: 1.3rem;
             font-family: 'Cinzel', serif;
-            font-weight: 500;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 15px rgba(197, 160, 89, 0.2);
-            display: none;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
             cursor: pointer;
-            transition: background-color 0.4s, color 0.4s, border-color 0.4s, opacity 0.4s, box-shadow 0.4s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 20px rgba(197,160,89,0.35);
+            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .floating-menu-trigger:hover {
-            background-color: var(--gold-pure);
+            background: var(--gold-pure);
             color: var(--maroon-dark);
             border-color: var(--gold-bright);
+            transform: scale(1.08);
             box-shadow: 0 10px 35px rgba(197, 160, 89, 0.5);
+        }
+
+        .floating-menu-trigger:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 768px) {
+            .floating-menu-trigger {
+                top: calc(20px + env(safe-area-inset-top));
+                left: 20px;
+                width: 58px;
+                height: 58px;
+            }
         }
 
         /* SLIDING NAVIGATION DRAWER */
@@ -515,7 +519,6 @@
             transition: border-color 0.5s, box-shadow 0.5s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* NEW WOW UPGRADE: 2.5s Intermittent Metallic Reflection Beam */
         .content-accessible-box::after {
             content: '';
             position: absolute;
@@ -538,7 +541,7 @@
 
         @keyframes periodicShineLoop {
             0% { left: -150%; }
-            50%, 100% { left: 200%; } /* Shines smoothly across frame then rests/disappears temporarily */
+            50%, 100% { left: 200%; } 
         }
 
         .content-accessible-box:hover {
@@ -921,27 +924,25 @@
 
     <canvas id="glitter-canvas"></canvas>
 
-    <!-- Fixed Sticky Top-Left Menu Component Framework -->
+    <!-- Menu Trigger Button - Will follow cleanly on window tracking scroll hooks -->
     <button class="floating-menu-trigger" id="sidebar-open-btn" onclick="toggleSidebarDrawer(true)">
-        Menu ☰
+        ☰
     </button>
 
-    <!-- Side Navigation Bar Menu System Component Overlay -->
     <div class="sidebar-modal-overlay" id="sidebar-navigation-drawer" onclick="toggleSidebarDrawer(false)">
         <div class="sidebar-drawer-card" onclick="event.stopPropagation()">
             <span class="close-sidebar-x" onclick="toggleSidebarDrawer(false)">×</span>
             <h3>Navigation</h3>
             <div class="sidebar-links-stack">
-                <a href="#home-view" onclick="toggleSidebarDrawer(false)">🏠 Main Frame</a>
-                <a href="#details-view" onclick="toggleSidebarDrawer(false)">📅 Event Architecture</a>
-                <a href="#contact-view" onclick="toggleSidebarDrawer(false)">📲 Contact Channels</a>
-                <a href="#wishes-view" onclick="toggleSidebarDrawer(false)">✨ Guestbook Scroll</a>
+                <a href="#home-view" onclick="smoothScrollToTarget(event, 'home-view')">🏠 Main Frame</a>
+                <a href="#details-view" onclick="smoothScrollToTarget(event, 'details-view')">📅 Event Architecture</a>
+                <a href="#contact-view" onclick="smoothScrollToTarget(event, 'contact-view')">📲 Contact Channels</a>
+                <a href="#wishes-view" onclick="smoothScrollToTarget(event, 'wishes-view')">✨ Guestbook Scroll</a>
                 <a href="javascript:void(0)" onclick="handleSidebarModalBridging('rsvp-modal-element')" style="color: var(--gold-pure); font-weight: 600;">💌 Transmit RSVP</a>
             </div>
         </div>
     </div>
 
-    <!-- Entrance Screening Gatekeeper Interface Overlay -->
     <div id="welcome-overlay">
         <div class="welcome-card">
             <div class="logo-container">
@@ -958,7 +959,6 @@
         </div>
     </div>
 
-    <!-- Main Live Dynamic Architecture Container Canvas -->
     <div id="main-content-site">
         <div class="page-content-container">
 
@@ -1105,7 +1105,7 @@
                     <div class="creator-profile-card">
                         <p class="hashtag-text" style="margin-bottom: 2rem;">#TwoAsBecomeOne • 12.09.2026</p>
                         <span class="creator-title-sub">Engineered & Developed By</span>
-                        <h4 class="creator-title-main">Azhar Idris</h4>
+                        <h4 class="creator-title-main">Azhar Idris Dev</h4>
                         <p style="font-size: 0.85rem; color: rgba(242, 227, 208, 0.7); line-height: 1.8; font-weight: 300; max-width: 380px; margin: 0 auto;">
                             Crafting elite architectural web applications, bespoke real-time systems, and ultra-high performance premium digital deployment frameworks.
                         </p>
@@ -1122,7 +1122,6 @@
 
         </div>
 
-        <!-- MODAL ACCESS INTERACTIVE FRAMEWORK -->
         <div id="rsvp-modal-element" class="modal-overlay" onclick="toggleModal('rsvp-modal-element', false)">
             <div class="modal-content-card" onclick="event.stopPropagation()">
                 <span class="close-modal-btn" onclick="toggleModal('rsvp-modal-element', false)">×</span>
@@ -1169,30 +1168,31 @@
         function grantEntranceToInvitationSite() {
             const entryScreen = document.getElementById("welcome-overlay");
             const structuralSite = document.getElementById("main-content-site");
-            const triggerBtn = document.getElementById("sidebar-open-btn");
+            const menuBtn = document.getElementById("sidebar-open-btn");
             
+            // 1. Reveal main canvas background immediately
             structuralSite.style.display = "flex";
             
-            setTimeout(() => {
-                entryScreen.classList.add("fade-out");
-                
-                document.documentElement.classList.add("allow-scroll");
-                document.body.classList.add("allow-scroll");
-                document.documentElement.classList.remove("lock-scroll");
-                document.body.classList.remove("lock-scroll");
-                
-                document.getElementById("home-view").scrollIntoView();
-            }, 50);
+            // 2. Clear height restrictions to allow normal viewport tracking
+            document.documentElement.classList.remove("lock-scroll");
+            document.body.classList.remove("lock-scroll");
+            
+            // 3. Initiate structural overlay clean removal cycle
+            entryScreen.classList.add("fade-out");
 
-            setTimeout(() => {
+            // Event listener setup ensuring complete element teardown to clear screen blocking artifacts
+            entryScreen.addEventListener('transitionend', function handler() {
                 entryScreen.remove();
-                triggerBtn.style.display = "inline-flex"; 
+                entryScreen.removeEventListener('transitionend', handler);
+                
+                // 4. Mount floating menu elements cleanly into global layout scope
+                menuBtn.style.display = "flex";
                 
                 runClockTicker();
                 renderGuestbookBoard();
                 initScrollAnimationsTracker(); 
                 handleGlitterLoop(); 
-            }, 1450);
+            });
         }
 
         // SIDEBAR NAVIGATION SYSTEMS
@@ -1202,6 +1202,19 @@
                 drawerContainer.classList.add("active");
             } else {
                 drawerContainer.classList.remove("active");
+            }
+        }
+
+        // DYNAMIC SMOOTH NAVIGATION CALCULATOR
+        function smoothScrollToTarget(event, targetElementId) {
+            event.preventDefault();
+            toggleSidebarDrawer(false);
+            
+            const destinationNode = document.getElementById(targetElementId);
+            if (destinationNode) {
+                setTimeout(() => {
+                    destinationNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300); // Cushion for side drawer collapse animation
             }
         }
 
@@ -1303,30 +1316,10 @@
         }
 
         let currentMouseX = 0, currentMouseY = 0;
-        let lastScrollTop = window.scrollY;
         
         window.addEventListener("mousemove", function(e) {
             currentMouseX = e.clientX;
             currentMouseY = e.clientY;
-        });
-
-        window.addEventListener("scroll", function() {
-            let scrollTop = window.scrollY;
-            
-            const menuBtn = document.getElementById("sidebar-open-btn");
-            if (menuBtn) {
-                menuBtn.style.top = (scrollTop + 25) + "px";
-            }
-
-            let delta = Math.abs(scrollTop - lastScrollTop);
-            if (delta > 2) {
-                for (let i = 0; i < Math.min(delta / 1.5, 8); i++) {
-                    let spawnX = currentMouseX + (Math.random() * 40 - 20);
-                    let spawnY = currentMouseY + (Math.random() * 40 - 20);
-                    particleArray.push(new GlitterParticle(spawnX, spawnY, false));
-                }
-            }
-            lastScrollTop = scrollTop;
         });
 
         window.addEventListener("pointerdown", function(e) {
@@ -1511,6 +1504,7 @@
                 });
         }
 
+        // Cleaned up syntax entities logic execution loop profile
         function sanitizeInput(str) {
             var chars = ["&", "<", ">", "'", '"'];
             var entities = ["&amp;", "&lt;", "&gt;", "&#39;", "&quot;"];
