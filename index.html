@@ -39,13 +39,11 @@
         html, body {
             width: 100%;
             min-height: 100vh;
-            min-height: 100dvh;
             background-color: transparent; 
         }
 
         html.lock-scroll, body.lock-scroll {
             height: 100vh !important;
-            height: 100dvh !important;
             overflow: hidden !important;
         }
 
@@ -56,15 +54,17 @@
             font-weight: 300; 
             position: relative;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         /* Fixed Hardware-Accelerated background canvas structure */
-        #fixed-bg {
+        body::after {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
             background-color: var(--maroon-dark); 
             background-image: url('./background.png');
             background-size: cover;          
@@ -76,9 +76,10 @@
         }
 
         /* Ambient shading layer covering the entire page canvas smoothly */
-        #fixed-bg-overlay {
+        body::before {
+            content: '';
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(13, 2, 4, 0.6), rgba(13, 2, 4, 0.2), rgba(13, 2, 4, 0.75));
             z-index: -1;
             pointer-events: none;
@@ -87,14 +88,12 @@
         #main-content-site {
             width: 100%;
             min-height: 100vh;
-            min-height: 100dvh;
             display: none; 
             flex-direction: column;
             align-items: center;
             position: relative;
             background: transparent;
             z-index: 1;
-            overflow-x: hidden;
         }
 
         .page-content-container {
@@ -112,12 +111,11 @@
         header {
             width: 100%;
             min-height: 85vh;
-            min-height: 85dvh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 8rem 1.5rem 4rem 1.5rem;
+            padding: 4rem 1.5rem;
             position: relative;
             gap: 1.5rem;
             z-index: 10;
@@ -160,7 +158,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
         }
 
         .logo-container img {
@@ -187,6 +184,7 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Interactive 3D Perspective Reveal Arrays */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(60px) translateZ(-40px) rotateX(8deg);
@@ -204,15 +202,16 @@
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            height: 100dvh; 
+            background-color: var(--maroon-dark);
+            color: var(--sandalwood);
             z-index: 200000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
+            padding: 1.5rem;
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1s;
-            overflow-y: auto;
+            overflow: hidden;
             background: radial-gradient(circle at center, var(--maroon-bright) 0%, var(--maroon-dark) 100%);
         }
 
@@ -223,40 +222,58 @@
             pointer-events: none;
         }
 
+        /* Glassmorphism Frosted Welcome Card */
         .welcome-card {
             background: linear-gradient(180deg, rgba(25, 4, 8, 0.70) 0%, rgba(10, 2, 3, 0.92) 100%);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(197, 160, 89, 0.4);
-            padding: 3rem 2rem;
+            padding: 4.5rem 2.5rem;
             border-radius: var(--curvy-radius-lg);
             width: 100%;
-            max-width: 440px;
+            max-width: 480px;
             box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 30px rgba(197, 160, 89, 0.15);
-            margin: auto;
+            margin: 0 auto;
             position: relative;
             animation: cardEntranceGlow 8s ease-in-out infinite alternate;
             z-index: 10;
         }
         
+        .welcome-card::before {
+            content: '';
+            position: absolute;
+            top: 12px; left: 12px; right: 12px; bottom: 12px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: calc(var(--curvy-radius-lg) - 8px);
+            pointer-events: none;
+        }
+
         @keyframes cardEntranceGlow {
             0% { border-color: rgba(197, 160, 89, 0.3); box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 10px rgba(197, 160, 89, 0.1); }
             100% { border-color: rgba(255, 242, 212, 0.6); box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 35px rgba(197, 160, 89, 0.25); }
         }
 
+        /* Staggered Orchestration Setup for Welcome Screen Elements */
         .stagger-anim {
             opacity: 0;
             transform: translateY(30px);
             animation: staggerFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
         .delay-1 { animation-delay: 0.3s; }
-        .delay-2 { animation-delay: 0.6s; }
-        .delay-3 { animation-delay: 0.9s; }
-        .delay-4 { animation-delay: 1.2s; }
+        .delay-2 { animation-delay: 0.7s; }
+        .delay-3 { animation-delay: 1.1s; }
+        .delay-4 { animation-delay: 1.5s; }
+        .delay-5 { animation-delay: 1.9s; }
 
-        @keyframes staggerFadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes staggerFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-        /* NAVIGATION BUTTON */
+        /* NAVIGATION TRIGGER BUTTON - COMPLETELY FIXED AND FORCED TO FOREGROUND */
         .floating-menu-trigger {
             position: fixed !important;
             top: 25px !important;
@@ -275,8 +292,35 @@
             font-family: 'Cinzel', serif;
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 20px rgba(197,160,89,0.35);
+            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transform: translateZ(1000px); 
+            -webkit-transform: translateZ(1000px);
         }
 
+        .floating-menu-trigger:hover {
+            background: var(--gold-pure);
+            color: var(--maroon-dark);
+            border-color: var(--gold-bright);
+            transform: scale(1.08) translateZ(1000px);
+            -webkit-transform: scale(1.08) translateZ(1000px);
+            box-shadow: 0 10px 35px rgba(197, 160, 89, 0.5);
+        }
+
+        .floating-menu-trigger:active {
+            transform: scale(0.95) translateZ(1000px);
+            -webkit-transform: scale(0.95) translateZ(1000px);
+        }
+
+        @media (max-width: 768px) {
+            .floating-menu-trigger {
+                top: calc(20px + env(safe-area-inset-top)) !important;
+                left: calc(20px + env(safe-area-inset-left)) !important;
+                width: 58px;
+                height: 58px;
+            }
+        }
+
+        /* SLIDING NAVIGATION DRAWER */
         .sidebar-modal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -285,35 +329,464 @@
             z-index: 2100001; 
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.5s;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
+            justify-content: flex-start;
         }
 
-        .sidebar-modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .sidebar-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
         .sidebar-drawer-card {
             width: 320px;
             height: 100%;
             background: linear-gradient(185deg, #120205, #070102);
+            border-right: 1px solid rgba(197, 160, 89, 0.4);
             padding: 5rem 2.5rem;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 3rem;
             transform: translateX(-100%);
-            transition: transform 0.4s;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 20px 0 60px rgba(0,0,0,0.9);
+            text-align: left;
         }
 
-        .sidebar-modal-overlay.active .sidebar-drawer-card { transform: translateX(0); }
+        .sidebar-modal-overlay.active .sidebar-drawer-card {
+            transform: translateX(0);
+        }
+
+        .sidebar-drawer-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-pure);
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding-bottom: 0.8rem;
+            letter-spacing: 3px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .sidebar-links-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
 
         .sidebar-links-stack a {
             color: var(--sandalwood);
             text-decoration: none;
-            display: block;
-            padding: 1rem;
+            font-size: 0.85rem;
+            font-weight: 400;
             font-family: 'Marcellus', serif;
+            display: block;
+            padding: 0.6rem 1rem;
+            border-radius: var(--curvy-radius-btn);
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
+            border: 1px solid transparent;
         }
 
-        /* PREMIUM BUTTONS */
+        .sidebar-links-stack a:hover {
+            color: var(--gold-bright);
+            background: rgba(197, 160, 89, 0.15);
+            border-color: rgba(197, 160, 89, 0.25);
+            transform: translateX(10px);
+        }
+
+        .close-sidebar-x {
+            align-self: flex-end;
+            font-size: 2.2rem;
+            color: var(--gold-pure);
+            cursor: pointer;
+            margin-top: -2rem;
+            font-weight: 200;
+            transition: transform 0.5s;
+        }
+        .close-sidebar-x:hover { transform: rotate(90deg); }
+
+        /* INTERACTIVE MODAL COMPONENT */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: rgba(7, 1, 2, 0.92);
+            z-index: 2500000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            padding: 1.5rem;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .modal-content-card {
+            background: linear-gradient(180deg, #1A0408 0%, #0D0204 100%);
+            border: 1px solid var(--gold-pure);
+            padding: 3.5rem 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.9);
+            position: relative;
+            border-radius: var(--curvy-radius-lg);
+            transform: scale(0.85) translateY(30px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .modal-overlay.active .modal-content-card {
+            transform: scale(1) translateY(0);
+        }
+        
+        .close-modal-btn {
+            position: absolute;
+            top: 20px; right: 25px;
+            font-size: 2.5rem;
+            color: var(--gold-pure);
+            cursor: pointer;
+            font-weight: 200;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .close-modal-btn:hover { color: #fff; transform: scale(1.1); }
+
+        /* TYPOGRAPHY STRUCTURES */
+        h1, h2 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            letter-spacing: 4px;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 400;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+        }
+
+        .hero-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.4rem; 
+            color: #6B4E16; 
+            letter-spacing: 8px;
+            font-weight: 900; 
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5); 
+            animation: lightPulse 4s ease-in-out infinite;
+        }
+
+        .couple-header-names {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            margin: 2rem 0;
+            line-height: 1.3;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, #fff 0%, var(--gold-bright) 25%, var(--gold-pure) 50%, var(--gold-bright) 75%, #fff 100%);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.75));
+            animation: goldShimmerFlow 6s linear infinite;
+        }
+
+        @keyframes goldShimmerFlow {
+            0% { background-position: 0% center; }
+            100% { background-position: -200% center; }
+        }
+
+        @keyframes lightPulse {
+            0%, 100% { opacity: 0.9; text-shadow: 0 0 5px rgba(107, 78, 22, 0.4); }
+            50% { opacity: 1; text-shadow: 0 0 20px rgba(255,242,212,0.6); }
+        }
+        
+        .script-connective {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 3.5rem;
+            color: var(--gold-pure);
+            text-transform: lowercase;
+            display: block;
+            margin: 0.3rem 0;
+            -webkit-text-fill-color: initial;
+            background: none;
+            filter: none;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .arabic-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--gold-bright);
+            margin: 1.8rem 0;
+            letter-spacing: 2px;
+            line-height: 1.9;
+            font-weight: 400;
+            text-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
+        }
+
+        .divider {
+            font-size: 1rem;
+            color: var(--gold-pure);
+            margin: 1rem 0;
+            letter-spacing: 6px;
+            opacity: 0.8;
+            transition: transform 0.6s ease;
+        }
+
+        section p {
+            color: var(--sandalwood);
+            line-height: 1.9;
+            font-weight: 300;
+            font-size: 0.95rem;
+            letter-spacing: 0.8px;
+        }
+
+        /* SECTION LUXURY CONTAINER BOXES WITH SHINE LOOP EFFECT */
+        .content-accessible-box {
+            background: var(--liquid-glass);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            position: relative;
+            border-radius: var(--curvy-radius-lg);
+            padding: 4.2rem 2.8rem;
+            width: 100%;
+            max-width: 560px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.65);
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            z-index: 1;
+            overflow: hidden;
+            transition: border-color 0.5s, box-shadow 0.5s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .content-accessible-box::after {
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: -150%;
+            width: 60%; 
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent 0%, 
+                rgba(255, 242, 212, 0.0) 20%, 
+                rgba(255, 242, 212, 0.25) 50%, 
+                rgba(255, 242, 212, 0.0) 80%, 
+                transparent 100%
+            );
+            transform: skewX(-30deg);
+            pointer-events: none;
+            animation: periodicShineLoop 2.5s cubic-bezier(0.43, 0.03, 0.21, 1) infinite;
+        }
+
+        @keyframes periodicShineLoop {
+            0% { left: -150%; }
+            50%, 100% { left: 200%; } 
+        }
+
+        .content-accessible-box:hover {
+            border-color: rgba(255, 242, 212, 0.45);
+            box-shadow: 0 35px 80px rgba(0,0,0,0.85), 0 0 25px rgba(197, 160, 89, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .content-accessible-box:hover .divider {
+            transform: scale(1.25) rotate(180deg);
+            color: var(--gold-bright);
+        }
+        
+        .content-accessible-box::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            border-radius: calc(var(--curvy-radius-lg) - 10px);
+            pointer-events: none;
+            transition: border-color 0.5s;
+        }
+
+        .content-accessible-box:hover::before {
+            border-color: rgba(197, 160, 89, 0.25);
+        }
+
+        /* COUNTDOWN COMPONENT */
+        #countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 2.5rem auto;
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .countdown-box {
+            background: linear-gradient(180deg, rgba(37, 5, 12, 0.8) 0%, rgba(13, 2, 4, 0.99) 100%);
+            color: var(--sandalwood);
+            padding: 1.5rem 0.2rem;
+            border-radius: var(--curvy-radius-md);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s;
+        }
+
+        .countdown-box:hover {
+            transform: translateY(-6px) scale(1.05);
+            border-color: var(--gold-pure);
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.2);
+        }
+
+        .countdown-num {
+            font-size: 2.2rem;
+            font-weight: 400;
+            font-family: 'Marcellus', serif;
+            display: block;
+            color: var(--gold-bright);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 242, 212, 0.2);
+        }
+
+        .countdown-lbl {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 400;
+            display: block;
+            margin-top: 8px;
+            color: rgba(242, 227, 208, 0.6);
+        }
+
+        /* Luxury Contact Matrix Cells */
+        .contact-row {
+            background: rgba(13, 2, 4, 0.65);
+            padding: 1.4rem 1.8rem;
+            margin: 0.3rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: var(--curvy-radius-md);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .contact-row:hover {
+            border-color: var(--gold-pure);
+            background: rgba(37, 5, 12, 0.6);
+            transform: translateX(6px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .contact-row p { text-shadow: none; text-align: left; }
+
+        .contact-row a {
+            color: var(--gold-bright);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.75rem;
+            border: 1px solid var(--gold-pure);
+            padding: 0.6rem 1.4rem;
+            border-radius: var(--curvy-radius-btn);
+            background: rgba(13, 2, 4, 0.85);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-row a:hover {
+            background: var(--gold-pure);
+            color: var(--maroon-dark);
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+        }
+
+        /* Inputs Options Box */
+        .input-group {
+            margin-bottom: 1.8rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: var(--gold-bright);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .input-group input, .input-group textarea, .modal-select {
+            width: 100%;
+            padding: 1.1rem;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: var(--curvy-radius-md);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            background-color: rgba(7, 1, 2, 0.9);
+            color: #fff;
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus, .input-group textarea:focus, .modal-select:focus {
+            outline: none;
+            border-color: var(--gold-pure);
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.35);
+            background-color: #0d0204;
+        }
+
+        /* Wishes Scroll Board */
+        #wishes-scroll-box {
+            width: 100%;
+            margin-top: 1.5rem;
+            max-height: 450px;
+            overflow-y: auto;
+            text-align: left;
+            padding-right: 10px;
+        }
+        #wishes-scroll-box::-webkit-scrollbar { width: 3px; }
+        #wishes-scroll-box::-webkit-scrollbar-thumb { background: var(--gold-pure); border-radius: var(--curvy-radius-btn); }
+
+        .wish-bubble {
+            background: rgba(7, 1, 2, 0.6);
+            padding: 1.5rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            border-radius: var(--curvy-radius-md);
+            border-left: 3px solid var(--gold-pure);
+            transition: border-color 0.3s, background-color 0.3s, transform 0.3s;
+        }
+
+        .wish-bubble:hover {
+            border-color: rgba(197, 160, 89, 0.4);
+            background: rgba(37, 5, 12, 0.45);
+            transform: translateX(4px);
+        }
+
+        .empty-wishes-placeholder {
+            text-align: center;
+            padding: 4rem 1rem;
+            color: var(--gold-pure);
+            font-style: italic;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .wish-author {
+            font-weight: 500;
+            color: var(--gold-bright);
+            font-size: 0.9rem;
+            font-family: 'Cinzel', serif;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* PREMIUM ACTION BUTTONS */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -324,6 +797,7 @@
             text-decoration: none;
             border-radius: var(--curvy-radius-btn); 
             font-family: 'Cinzel', serif;
+            font-weight: 500;
             font-size: 0.75rem;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -331,30 +805,35 @@
             cursor: pointer;
             margin: 0.5rem auto;
             width: 90%;
-            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            z-index: 1;
         }
-
-        /* NEW: Secondary button for image preview */
-        .btn-alt {
-            background: transparent;
-            border: 1px solid rgba(197, 160, 89, 0.5);
-            color: var(--gold-pure);
-            margin-top: 0.5rem;
-            font-size: 0.7rem;
-        }
-
-        .btn:hover { background: var(--gold-pure); color: var(--maroon-dark); }
         
-        .content-accessible-box {
-            background: var(--liquid-glass);
-            border: 1px solid rgba(197, 160, 89, 0.25);
-            padding: 4rem 2rem;
-            width: 100%;
-            max-width: 560px;
-            border-radius: var(--curvy-radius-lg);
-            margin-bottom: 2rem;
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,242,212,0.3), transparent);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            color: #fff;
+            border-color: var(--gold-bright);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.3);
+            background: linear-gradient(135deg, var(--maroon-bright) 0%, #25050C 100%);
         }
 
+        /* Hashtag Styling for the background image section */
         .hashtag-text {
             font-family: 'Cinzel', serif;
             font-size: 1.4rem;
@@ -363,50 +842,132 @@
             font-weight: 600;
         }
 
+        /* CREATOR PROFILE CONTAINER - Full Width Layout */
         .premium-developer-showcase {
             width: 100%;
             background: #050102; 
             padding: 2.5rem 5%; 
             border-top: 1px solid rgba(197, 160, 89, 0.2);
+            position: relative;
             text-align: center;
+        }
+        
+        .premium-developer-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 1px;
+            background: var(--gold-pure);
+        }
+
+        .creator-profile-card {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .creator-branding {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .creator-title-sub {
+            font-family: 'Marcellus', serif;
+            font-size: 0.9rem; 
+            color: var(--gold-pure);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
         }
 
         .creator-title-main {
             font-family: 'Cinzel', serif;
             color: #fff;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.7rem; 
+            letter-spacing: 2px;
+            font-weight: 500;
+            margin: 0; 
         }
 
         .creator-profile-card p {
-            font-size: 0.7rem;
-            line-height: 1.6;
-            color: rgba(242, 227, 208, 0.7);
+            font-size: 0.9rem !important; 
+            line-height: 1.8 !important;
+            color: rgba(242, 227, 208, 0.85) !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
         }
 
         .credit-links-row {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 1rem;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .credit-links-row a {
             color: var(--sandalwood);
-            font-size: 0.6rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            border-radius: 20px;
-            text-transform: uppercase;
             text-decoration: none;
+            font-weight: 500;
+            font-size: 0.8rem; 
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            border-radius: var(--curvy-radius-btn);
+            padding: 0.8rem 1.6rem; 
+            background: transparent;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .credit-links-row a:hover {
+            background: var(--gold-pure);
+            color: var(--maroon-dark);
+            border-color: var(--gold-bright);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2);
+        }
+
+        /* Desktop Wide Layout to stretch across the footer */
+        @media (min-width: 850px) {
+            .creator-profile-card {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+            .creator-branding {
+                align-items: flex-start;
+                flex: 0 0 auto;
+            }
+            .creator-profile-card p {
+                flex: 1;
+                padding: 0 3rem !important;
+                text-align: justify !important;
+                text-align-last: center !important;
+            }
+            .credit-links-row {
+                flex: 0 0 auto;
+                justify-content: flex-end;
+            }
         }
 
         .copyright-disclaimer {
-            font-size: 0.6rem;
-            color: rgba(242, 227, 208, 0.3);
-            margin-top: 2rem;
+            font-size: 0.8rem; 
+            color: rgba(242, 227, 208, 0.4);
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-top: 3.5rem; 
+            text-transform: uppercase;
         }
 
+        /* GLITTER ENGINE TOP-LEVEL OVERLAY */
         #glitter-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -414,18 +975,45 @@
             pointer-events: none; 
             z-index: 1000000; 
         }
-
-        .map-frame-box { width: 100%; height: 250px; border: 2px solid rgba(197, 160, 89, 0.35); border-radius: 20px; overflow: hidden; margin-top: 1rem; }
-        .map-frame-box iframe { width: 100%; height: 100%; border: none; }
+        
+        /* Map Setup Frame */
+        .map-frame-box {
+            width: 100%;
+            height: 250px;
+            margin-top: 1.5rem;
+            border: 2px solid rgba(197, 160, 89, 0.35);
+            border-radius: var(--curvy-radius-md);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .map-frame-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: none !important;
+        }
+        .map-action-grid {
+            display: flex;
+            width: 100%;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+        .map-action-grid .btn {
+            width: 50%;
+            padding: 0.9rem 1rem;
+            font-size: 0.7rem;
+        }
     </style>
 </head>
 <body class="lock-scroll">
 
-    <div id="fixed-bg"></div>
-    <div id="fixed-bg-overlay"></div>
+    <!-- Stardust Engine initially visible globally -->
     <canvas id="glitter-canvas"></canvas>
 
-    <button class="floating-menu-trigger" id="sidebar-open-btn" onclick="toggleSidebarDrawer(true)">☰</button>
+    <!-- Menu Trigger Button -->
+    <button class="floating-menu-trigger" id="sidebar-open-btn" onclick="toggleSidebarDrawer(true)">
+        ☰
+    </button>
 
     <div class="sidebar-modal-overlay" id="sidebar-navigation-drawer" onclick="toggleSidebarDrawer(false)">
         <div class="sidebar-drawer-card" onclick="event.stopPropagation()">
@@ -441,135 +1029,620 @@
         </div>
     </div>
 
+    <!-- UPGRADED CINEMATIC WELCOME OVERLAY (No background image here) -->
     <div id="welcome-overlay">
+        
+        <!-- Frosted Glass Welcome Card with Staggered entrance hooks -->
         <div class="welcome-card stagger-anim delay-5">
-            <div class="logo-container">
+            <div class="logo-container stagger-anim delay-1">
                 <img src="./background.png" alt="Wedding Emblem">
             </div>
-            <p style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold-pure); margin-bottom: 0.6rem;">Walimatul Ursy</p>
-            <h2 style="color: white; font-size: 2.5rem; margin-bottom: 1.5rem;">Azmin <br><span class="script-connective" style="font-size: 3rem; margin: -10px 0;">weds</span> Ameera</h2>
-            <button class="btn" onclick="grantEntranceToInvitationSite()">✨ Enter Experience</button>
-            <a href="./background.png" target="_blank" class="btn btn-alt">View Backdrop Image</a>
+            
+            <p class="stagger-anim delay-2" style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold-pure); letter-spacing: 4px; margin-bottom: 0.6rem;">Walimatul Ursy</p>
+            
+            <h2 class="stagger-anim delay-3" style="color: white; font-size: 2.8rem; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin-bottom: 1.5rem; font-weight: 400; letter-spacing: 2px;">
+                Azmin
+                <br>
+                <span class="script-connective" style="font-size: 3.5rem; margin: -10px 0;">weds</span>
+                Ameera
+            </h2>
+            
+            <div class="divider stagger-anim delay-3" style="color: var(--gold-pure);">✦ ⚜ ✦</div>
+            
+            <p class="stagger-anim delay-4" style="font-size: 0.9rem; line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300; font-style: italic; color: var(--sandalwood); padding: 0 1rem; letter-spacing: 0.5px;">
+                Assalamu alaikum Wr. Wb.<br><br>
+                We cordially invite you to share in our joy and receive blessings on the auspicious occasion of the wedding reception of our beloved brother and sister.
+            </p>
+            
+            <button class="btn stagger-anim delay-5" onclick="grantEntranceToInvitationSite()">✨ Enter Experience</button>
         </div>
     </div>
 
     <div id="main-content-site">
         <div class="page-content-container">
+
             <header id="home-view">
-                <div class="logo-container"><img src="./background.png" alt="Wedding Emblem"></div>
+                <div class="logo-container" style="margin-bottom: 0.5rem; width: 110px; height: 110px;">
+                    <img src="./background.png" alt="Wedding Emblem">
+                </div>
                 <div class="hero-title">Walimatul Ursy</div>
+                <div class="divider">✦ ⚜ ✦</div>
                 <div class="couple-header-names">Mohamed Azmin<span class="script-connective">weds</span>Ameera</div>
-                <p style="font-weight: 600; font-size: 1.3rem; color: #fff;">SATURDAY • 12.09.2026</p>
+                <p style="font-weight: 600; font-size: 1.3rem; letter-spacing: 5px; color: #fff; margin-bottom: 0.5rem; font-family: 'Marcellus';">SATURDAY • 12.09.2026</p>
             </header>
 
-            <section class="animate-on-scroll">
+            <section>
                 <div id="countdown">
                     <div class="countdown-box"><span id="lbl-days" class="countdown-num">00</span><span class="countdown-lbl">Days</span></div>
                     <div class="countdown-box"><span id="lbl-hours" class="countdown-num">00</span><span class="countdown-lbl">Hrs</span></div>
                     <div class="countdown-box"><span id="lbl-minutes" class="countdown-num">00</span><span class="countdown-lbl">Min</span></div>
                     <div class="countdown-box"><span id="lbl-seconds" class="countdown-num">00</span><span class="countdown-lbl">Sec</span></div>
                 </div>
+                <button class="btn" style="margin-top: 0.5rem;" onclick="triggerCalendarIntent()">📅 Set Event Reminder</button>
             </section>
 
-            <section id="details-view" class="animate-on-scroll"><div class="content-accessible-box"><h2>Event Details</h2></div></section>
-            <section id="contact-view" class="animate-on-scroll"><div class="content-accessible-box"><h2>Contact</h2></div></section>
-            <section id="wishes-view" class="animate-on-scroll"><div class="content-accessible-box"><h2>Guestbook</h2></div></section>
+            <section class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <div class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                    <p style="font-size: 0.9rem; font-weight: 400; color: var(--gold-bright); margin-bottom: 0.5rem; letter-spacing: 1px; font-family: 'Marcellus';">In the name of Allah, the Most Gracious, the Most Merciful</p>
+                    <div class="arabic-text" style="line-height: 1.8; text-transform: none;">بَارَكَ اللهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
+                    <p style="font-style: italic; font-size: 0.9rem; line-height: 1.8; padding: 0 0.8rem; color: rgba(242, 227, 208, 0.85);">
+                        "May Allah bless for you your spouse, and bless you, and may He unite both of you in goodness." <br><span style="font-size: 0.8rem; color: var(--gold-pure); font-weight: 400; letter-spacing: 0.5px; font-family: 'Marcellus';">(Sunan Abi Dawud)</span>
+                    </p>
+                </div>
+            </section>
+
+            <section class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>With Great Pleasure We Invite You</h2>
+                    <div class="divider">⚜</div>
+                    <p style="font-size: 0.75rem; color: var(--gold-pure); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.2rem; font-weight: 500; font-family: 'Marcellus';">Parents of the Groom</p>
+                    <p style="font-family:'Cinzel'; color:#fff; font-weight:400; font-size: 1.35rem; margin-bottom: 1.5rem; letter-spacing: 1px;">Mohamed Idris & Hajira Ammal</p>
+                    <div class="divider" style="font-size: 1.1rem; margin: 0.2rem 0;">&</div>
+                    <p style="font-size: 0.75rem; color: var(--gold-pure); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.2rem; font-weight: 500; font-family: 'Marcellus';">Parents of the Bride</p>
+                    <p style="font-family:'Cinzel'; color:#fff; font-weight:400; font-size: 1.35rem; letter-spacing: 1px;">Abdul Rahubu & Yasmin</p>
+                    <div class="divider">✦</div>
+                    <p style="font-size: 0.95rem; font-style: italic; padding: 0 1rem; color: rgba(242, 227, 208, 0.855);">To the wedding reception celebrating the union of their beloved children:</p>
+                </div>
+            </section>
+
+            <section id="details-view" class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>The Happy Couple</h2>
+                    <div class="divider">⚜</div>
+                    <div style="font-size: 1rem; line-height: 1.6; gap:0.5rem; display:flex; flex-direction:column;">
+                        <p style="font-size:0.75rem; text-transform:uppercase; font-weight:500; letter-spacing:3px; color: var(--gold-pure); font-family: 'Marcellus';">Groom</p>
+                        <p style="font-family:'Cinzel'; color:#fff; font-weight:400; font-size: 1.3rem; letter-spacing: 1px;">Mohamed Azmin Bin Mohamed Idris</p>
+                        <div class="divider" style="font-size:1rem; margin: 0.5rem 0;">&</div>
+                        <p style="font-size:0.75rem; text-transform:uppercase; font-weight:500; letter-spacing:3px; color: var(--gold-pure); font-family: 'Marcellus';">Bride</p>
+                        <p style="font-family:'Cinzel'; color:#fff; font-weight:400; font-size: 1.3rem; letter-spacing: 1px;">Ameera Binti Abdul Rahubu</p>
+                    </div>
+
+                    <h2 style="margin-top: 2.5rem;">Event Details</h2>
+                    <div class="divider">✦</div>
+                    <p style="font-size: 1.05rem; font-weight: 400; letter-spacing: 2px; font-family: 'Marcellus';">Saturday, 12 September 2026</p>
+                    <p style="font-size: 1.35rem; color: var(--gold-bright); font-weight: 400; letter-spacing: 2px; font-family: 'Marcellus';">6:00 PM - 10:00 PM</p>
+                    <p style="margin-top: 0.6rem; font-size: 0.95rem; line-height: 1.7; color: rgba(242, 227, 208, 0.95);">
+                        📍 <strong style="color:#fff; font-family:'Cinzel'; letter-spacing:1px; font-size: 0.85rem;">Venue Location:</strong><br>
+                        Alam Indah Banquet Hall<br>414, Jalan Hutton, George Town,<br>10050 George Town, Pulau Pinang
+                    </p>
+
+                    <div class="map-action-grid">
+                        <a href="https://maps.google.com/?q=Alam+Indah+Banquet+Hall+Penang" target="_blank" class="btn">🗺️ Google Maps</a>
+                        <a href="https://waze.com/ul?q=414+Jalan+Hutton+George+Town+Penang" target="_blank" class="btn">🚗 Waze Drive</a>
+                    </div>
+                    
+                    <div class="map-frame-box">
+                        <iframe src="https://maps.google.com/maps?q=Alam%20Indah%20Banquet%20Hall%20Jalan%20Hutton%20Penang&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact-view" class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>Contact Family</h2>
+                    <p style="font-size: 0.9rem; color: var(--gold-bright); letter-spacing: 0.8px;">Connect with our lines directly via mobile WhatsApp:</p>
+                    <div class="divider">✦</div>
+                    
+                    <div class="contact-row">
+                        <div>
+                            <p style="color: #fff; font-family:'Cinzel'; font-size:1.05rem; font-weight:400; letter-spacing: 1px;">Mr. Idris</p>
+                            <p style="font-size:0.75rem; color:rgba(242, 227, 208, 0.55); font-weight: 400; margin-top:3px; font-family: 'Montserrat';">Father of the Groom</p>
+                        </div>
+                        <a href="https://wa.me/60183891696" target="_blank">📲 Connect</a>
+                    </div>
+                    
+                    <div class="contact-row">
+                        <div>
+                            <p style="color: #fff; font-family:'Cinzel'; font-size:1.05rem; font-weight:400; letter-spacing: 1px;">Mr. Naina</p>
+                            <p style="font-size:0.75rem; color:rgba(242, 227, 208, 0.55); font-weight: 400; margin-top:3px; font-family: 'Montserrat';">Uncle of the Groom</p>
+                        </div>
+                        <a href="https://wa.me/60164402003" target="_blank">📲 Connect</a>
+                    </div>
+                    
+                    <div class="contact-row">
+                        <div>
+                            <p style="color: #fff; font-family:'Cinzel'; font-size:1.05rem; font-weight:400; letter-spacing: 1px;">Azhar</p>
+                            <p style="font-size:0.75rem; color:rgba(242, 227, 208, 0.55); font-weight: 400; margin-top:3px; font-family: 'Montserrat';">Brother of the Groom</p>
+                        </div>
+                        <a href="https://wa.me/60182369616" target="_blank">📲 Connect</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>Leave Your Blessings</h2>
+                    <p style="font-size: 0.85rem; font-weight: 400; color: var(--gold-bright); letter-spacing: 0.8px;">Send your prayers and congratulations directly to our digital registry:</p>
+                    <div class="divider">✦</div>
+
+                    <form id="wish-input-form" onsubmit="handleNewWishPosting(event)">
+                        <div class="input-group">
+                            <label for="input-author">Guest Name:</label>
+                            <input type="text" id="input-author" required placeholder="e.g., Uncle Zainal & Family">
+                        </div>
+                        <div class="input-group">
+                            <label for="input-msg">Wedding Blessing:</label>
+                            <textarea id="input-msg" rows="3" required placeholder="May Allah bless your marriage journey..."></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; margin: 0;">Transmit Wish ✨</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="wishes-view" class="animate-on-scroll">
+                <div class="content-accessible-box">
+                    <h2>Guestbook Board</h2>
+                    <p style="font-size: 0.85rem; color: var(--gold-bright); letter-spacing: 0.5px;">Live real-time transmissions from our website visitors:</p>
+                    <div class="divider">⚜</div>
+                    <div id="wishes-scroll-box"></div>
+                </div>
+            </section>
+
+            <!-- Hashtag block moved outside into the image background -->
+            <section class="animate-on-scroll" style="padding-top: 0; padding-bottom: 4rem;">
+                <div class="hashtag-text" style="text-shadow: 0 4px 15px rgba(0,0,0,0.8);">#TwoAsBecomeOne • 12.09.2026</div>
+            </section>
 
             <footer class="site-footer">
                 <div class="premium-developer-showcase">
-                    <div class="hashtag-text" style="margin-bottom: 2rem;">#TwoAsBecomeOne • 12.09.2026</div>
+                    
                     <div class="creator-profile-card">
+                        
                         <div class="creator-branding">
+                            <span class="creator-title-sub">Engineered & Developed By</span>
                             <h4 class="creator-title-main">Azhar Idris Dev</h4>
                         </div>
-                        <p>Crafting elite architectural web applications and ultra-high performance digital deployment frameworks.</p>
+                        
+                        <p>
+                            Crafting elite architectural web applications, bespoke real-time systems, and ultra-high performance premium digital deployment frameworks. Dedicated to transforming visionary concepts into flawless digital realities with precision engineering, timeless design, and seamless user experiences.
+                        </p>
+                        
                         <div class="credit-links-row">
-                            <a href="https://wa.me/60182369616" target="_blank">WhatsApp</a>
-                            <a href="mailto:azharidrisdeveloper@gmail.com">Email</a>
+                            <a href="https://wa.me/60182369616" target="_blank">📲 WhatsApp Direct</a>
+                            <a href="mailto:azharidrisdeveloper@gmail.com">✉️ Email Channel</a>
                         </div>
+                        
                     </div>
-                    <p class="copyright-disclaimer">© 2026 Azmin Weds Ameera. All Rights Reserved.</p>
+                    
+                    <p class="copyright-disclaimer">
+                        © 2026 Azmin Weds Ameera. All Architectural Rights Reserved.
+                    </p>
                 </div>
             </footer>
+
         </div>
+
+        <div id="rsvp-modal-element" class="modal-overlay" onclick="toggleModal('rsvp-modal-element', false)">
+            <div class="modal-content-card" onclick="event.stopPropagation()">
+                <span class="close-modal-btn" onclick="toggleModal('rsvp-modal-element', false)">×</span>
+                <h3 style="font-family:'Cinzel'; color:var(--gold-pure); margin-bottom:2rem; font-weight: 500; letter-spacing: 3px; font-size: 1.4rem; text-transform: uppercase;">RSVP Attendance</h3>
+                <form onsubmit="processRsvpForm(event)">
+                    <div class="input-group">
+                        <label>Full Name:</label>
+                        <input type="text" id="rsvp-name" required placeholder="Your Identity Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Attendance Matrix:</label>
+                        <select id="rsvp-status" class="modal-select">
+                            <option value="Hadir">Attending with Joy</option>
+                            <option value="Tidak Hadir">Declining with Regret</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Allocated Guests (Pax):</label>
+                        <select id="rsvp-pax" class="modal-select">
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                            <option value="6">6 People</option>
+                            <option value="7">7 People</option>
+                            <option value="8">8 People</option>
+                            <option value="9">9 People</option>
+                            <option value="10">10 People</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%; margin-top: 1rem;">Confirm Transmission</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
-        // INIT ENGINE
-        handleGlitterLoop(); 
+        // VARIABLES INITIALIZED FIRST TO PREVENT REFERENCE ERRORS
+        const canvas = document.getElementById("glitter-canvas");
+        const ctx = canvas.getContext("2d");
+        let particleArray = [];
+        const weddingTimestamp = new Date("Sept 12, 2026 18:00:00").getTime();
 
+        // ----------------------------------------------------
+        // GLITTER ENGINE
+        // ----------------------------------------------------
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        class GlitterParticle {
+            constructor(x, y, isClickSplash, isAmbient = false) {
+                this.x = x;
+                this.y = y;
+                this.isAmbient = isAmbient;
+                
+                if (this.isAmbient) {
+                    this.size = Math.random() * 1.8 + 0.4;
+                    this.speedX = (Math.random() * 0.4 - 0.2);
+                    this.speedY = -(Math.random() * 0.5 + 0.1);
+                    this.decay = Math.random() * 0.003 + 0.001;
+                    this.alpha = Math.random() * 0.5 + 0.2;
+                } else if (isClickSplash) {
+                    const randomAngle = Math.random() * Math.PI * 2;
+                    const blastVelocity = Math.random() * 6.0 + 3.0;
+                    this.size = Math.random() * 3.5 + 1.5;
+                    this.speedX = Math.cos(randomAngle) * blastVelocity;
+                    this.speedY = Math.sin(randomAngle) * blastVelocity;
+                    this.decay = Math.random() * 0.02 + 0.01;
+                    this.alpha = 1;
+                } else {
+                    this.size = Math.random() * 2.8 + 1.0;
+                    this.speedX = (Math.random() * 2.0 - 1.0);
+                    this.speedY = (Math.random() * 1.5 + 0.5);
+                    this.decay = Math.random() * 0.015 + 0.008;
+                    this.alpha = 1;
+                }
+                
+                const colors = ["#C5A059", "#F2E3D0", "#FFF2D4", "#FFFFFF", "#E9C46A"];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (!this.isAmbient) {
+                    this.alpha -= this.decay;
+                } else {
+                    this.alpha -= this.decay;
+                    if (this.alpha <= 0.05) this.alpha = 0;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                if (this.size > 2) {
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = this.color;
+                }
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function injectAmbientSparks() {
+            if (particleArray.length < 700) { 
+                if (Math.random() < 0.9) { 
+                    let spawnX = Math.random() * canvas.width;
+                    let spawnY = canvas.height + 10;
+                    particleArray.push(new GlitterParticle(spawnX, spawnY, false, true));
+                }
+                if (Math.random() < 0.8) { 
+                    let spawnX = Math.random() * canvas.width;
+                    let spawnY = canvas.height + 10;
+                    particleArray.push(new GlitterParticle(spawnX, spawnY, false, true));
+                }
+                if (Math.random() < 0.7) { 
+                    let spawnX = Math.random() * canvas.width;
+                    let spawnY = canvas.height + 10;
+                    particleArray.push(new GlitterParticle(spawnX, spawnY, false, true));
+                }
+                if (Math.random() < 0.6) { 
+                    let spawnX = Math.random() * canvas.width;
+                    let spawnY = canvas.height + 10;
+                    particleArray.push(new GlitterParticle(spawnX, spawnY, false, true));
+                }
+            }
+        }
+
+        function handleGlitterLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            injectAmbientSparks();
+            for (let i = 0; i < particleArray.length; i++) {
+                particleArray[i].update();
+                particleArray[i].draw();
+                if (particleArray[i].alpha <= 0 || particleArray[i].y < -10 || particleArray[i].x < -10 || particleArray[i].x > canvas.width + 10) {
+                    particleArray.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(handleGlitterLoop);
+        }
+
+        // ----------------------------------------------------
+        // UI AND NAVIGATION CONTROLS
+        // ----------------------------------------------------
         function grantEntranceToInvitationSite() {
             const entryScreen = document.getElementById("welcome-overlay");
             const structuralSite = document.getElementById("main-content-site");
             const menuBtn = document.getElementById("sidebar-open-btn");
+            
             structuralSite.style.display = "flex";
             document.documentElement.classList.remove("lock-scroll");
             document.body.classList.remove("lock-scroll");
             menuBtn.style.display = "flex";
             entryScreen.classList.add("fade-out");
-            setTimeout(() => { if(entryScreen) entryScreen.remove(); }, 1500);
+
+            entryScreen.addEventListener('transitionend', function handler() {
+                entryScreen.remove();
+                entryScreen.removeEventListener('transitionend', handler);
+                runClockTicker();
+                renderGuestbookBoard();
+                initScrollAnimationsTracker(); 
+            });
+
+            setTimeout(() => {
+                if(entryScreen && entryScreen.parentNode) {
+                    entryScreen.parentNode.removeChild(entryScreen);
+                }
+            }, 1500);
         }
 
         function toggleSidebarDrawer(openState) {
-            document.getElementById("sidebar-navigation-drawer").classList.toggle("active", openState);
+            const drawerContainer = document.getElementById("sidebar-navigation-drawer");
+            if (openState) {
+                drawerContainer.classList.add("active");
+            } else {
+                drawerContainer.classList.remove("active");
+            }
         }
 
-        function smoothScrollToTarget(e, id) {
-            e.preventDefault();
+        function smoothScrollToTarget(event, targetElementId) {
+            event.preventDefault();
             toggleSidebarDrawer(false);
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            const destinationNode = document.getElementById(targetElementId);
+            if (destinationNode) {
+                setTimeout(() => {
+                    destinationNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
         }
 
-        function toggleModal(id, state) { document.getElementById(id).classList.toggle("active", state); }
-
-        // GLITTER
-        class GlitterParticle {
-            constructor(x, y, isSplash, isAmb = false) {
-                this.x = x; this.y = y; this.amb = isAmb;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() * 0.4 - 0.2);
-                this.speedY = -(Math.random() * 0.5 + 0.1);
-                this.decay = Math.random() * 0.005 + 0.002;
-                this.alpha = 1;
-                this.color = "#C5A059";
-            }
-            update() { this.x += this.speedX; this.y += this.speedY; this.alpha -= this.decay; }
-            draw() { ctx.globalAlpha = this.alpha; ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+        function handleSidebarModalBridging(targetModalId) {
+            toggleSidebarDrawer(false);
+            setTimeout(() => {
+                toggleModal(targetModalId, true);
+            }, 450);
         }
 
-        function handleGlitterLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (particleArray.length < 700) {
-                for(let i=0; i<4; i++) particleArray.push(new GlitterParticle(Math.random()*canvas.width, canvas.height+10, false, true));
+        function toggleModal(modalId, displayState) {
+            const modalTarget = document.getElementById(modalId);
+            if (displayState) {
+                modalTarget.classList.add('active');
+                document.documentElement.classList.add('lock-scroll');
+                document.body.classList.add('lock-scroll');
+            } else {
+                modalTarget.classList.remove('active');
+                document.documentElement.classList.remove('lock-scroll');
+                document.body.classList.remove('lock-scroll');
             }
-            for (let i = 0; i < particleArray.length; i++) {
-                particleArray[i].update(); particleArray[i].draw();
-                if (particleArray[i].alpha <= 0) { particleArray.splice(i, 1); i--; }
-            }
-            requestAnimationFrame(handleGlitterLoop);
         }
+
+        let currentMouseX = 0, currentMouseY = 0;
+        
+        window.addEventListener("mousemove", function(e) {
+            currentMouseX = e.clientX;
+            currentMouseY = e.clientY;
+        });
+
+        window.addEventListener("pointerdown", function(e) {
+            if (document.getElementById("main-content-site").style.display === "flex" || document.getElementById("welcome-overlay")) {
+                for (let i = 0; i < 25; i++) {
+                    particleArray.push(new GlitterParticle(e.clientX, e.clientY, true));
+                }
+            }
+        });
+
+        // ----------------------------------------------------
+        // SYSTEM ENGINE & OBSERVERS
+        // ----------------------------------------------------
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("revealed"); 
+                } else {
+                    entry.target.classList.remove("revealed"); 
+                }
+            });
+        }, {
+            threshold: 0.05
+        });
 
         function initScrollAnimationsTracker() {
-            const obs = new IntersectionObserver((es) => { es.forEach(e => { if(e.isIntersecting) e.target.classList.add("revealed"); }); }, { threshold: 0.1 });
-            document.querySelectorAll(".animate-on-scroll").forEach(el => obs.observe(el));
+            document.querySelectorAll(".animate-on-scroll").forEach(el => {
+                scrollObserver.observe(el);
+            });
+        }
+
+        function runClockTicker() {
+            const now = new Date().getTime();
+            const remainder = weddingTimestamp - now;
+
+            if (remainder < 0) {
+                document.getElementById("countdown").innerHTML = "<p style='color:var(--gold-pure); font-weight:600; grid-column: span 4; font-size:1.25rem; font-family:Cinzel; letter-spacing:2px;'>The Event Has Begun 🎉</p>";
+                return;
+            }
+
+            const d = Math.floor(remainder / (1000 * 60 * 60 * 24));
+            const h = Math.floor((remainder % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((remainder % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((remainder % (1000 * 60)) / 1000);
+
+            document.getElementById("lbl-days").innerText = d < 10 ? "0" + d : d;
+            document.getElementById("lbl-hours").innerText = h < 10 ? "0" + h : h;
+            document.getElementById("lbl-minutes").innerText = m < 10 ? "0" + m : m;
+            document.getElementById("lbl-seconds").innerText = s < 10 ? "0" + s : s;
+        }
+
+        function triggerCalendarIntent() {
+            const gCalEndpoint = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+                "&text=" + encodeURIComponent("Walimatul Ursy: Azmin Weds Ameera") +
+                "&dates=20260912T100000Z/20260912T140000Z" + 
+                "&details=" + encodeURIComponent("Wedding reception of Azmin & Ameera at Alam Indah Banquet Hall, Penang.") +
+                "&location=" + encodeURIComponent("414, Jalan Hutton, George Town, 10050 George Town, Pulau Pinang") +
+                "&sf=true&output=xml";
+            window.open(gCalEndpoint, '_blank');
+        }
+
+        function processRsvpForm(e) {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.innerText = "Transmitting...";
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.6";
+
+            const payload = {
+                Name: document.getElementById("rsvp-name").value,
+                Status: document.getElementById("rsvp-status").value,
+                Pax: document.getElementById("rsvp-pax").value
+            };
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycby-VNTsfSIzTTC9O8wG0T8V0psu_flAZBoNFiOMyBlVa0db2SWS9YjdFKMQH4o0WwnQ/exec';
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(payload),
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+            })
+            .then(() => {
+                alert(`Salutations ${payload.Name}! Your RSVP data string has been safely logged.`);
+                toggleModal('rsvp-modal-element', false);
+                document.getElementById("rsvp-name").value = "";
+                submitBtn.innerText = "Confirm Transmission";
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+            })
+            .catch(error => {
+                alert("Transmission fault encountered. Verify link connectivity profile parameters.");
+                submitBtn.innerText = "Confirm Transmission";
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+                console.error('Error!', error.message);
+            });
+        }
+
+        // ----------------------------------------------------
+        // FIREBASE & UTILITIES
+        // ----------------------------------------------------
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6976b_EFI99HPrT9XqYJt4ndDd9G3-Tw",
+            authDomain: "azmin-wedding.firebaseapp.com",
+            projectId: "azmin-wedding",
+            storageBucket: "azmin-wedding.firebasestorage.app",
+            messagingSenderId: "432906898873",
+            appId: "1:432906898873:web:bb948ded85ca641e257a68",
+            databaseURL: "https://azmin-wedding-default-rtdb.asia-southeast1.firebasedatabase.app",
+            measurementId: "G-TBYZB9FLKS"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const wishesRef = database.ref('guestbook_wishes');
+
+        function renderGuestbookBoard() {
+            wishesRef.on('value', (snapshot) => {
+                const wallViewport = document.getElementById("wishes-scroll-box");
+                const data = snapshot.val();
+
+                if (!data) {
+                    wallViewport.innerHTML = `<div class="empty-wishes-placeholder">No blessing data logged yet. Issue the primary greeting!</div>`;
+                    return;
+                }
+
+                wallViewport.innerHTML = "";
+                const dataset = Object.values(data).reverse();
+                
+                dataset.forEach(item => {
+                    const bubble = document.createElement("div");
+                    bubble.className = "wish-bubble";
+                    bubble.innerHTML = `<div class="wish-author">${sanitizeInput(item.author)}</div><div style="font-size:0.85rem; color:#fff; margin-top:6px; line-height:1.7; font-weight:300;">${sanitizeInput(item.message)}</div>`;
+                    wallViewport.appendChild(bubble);
+                });
+            });
+        }
+
+        function handleNewWishPosting(e) {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.innerText = "Transmitting...";
+            submitBtn.disabled = true;
+
+            const authorBox = document.getElementById("input-author");
+            const messageBox = document.getElementById("input-msg");
+
+            const payload = {
+                author: authorBox.value.trim(),
+                message: messageBox.value.trim(),
+                timestamp: Date.now()
+            };
+
+            wishesRef.push(payload)
+                .then(() => {
+                    authorBox.value = "";
+                    messageBox.value = "";
+                    submitBtn.innerText = "Transmit Wish ✨";
+                    submitBtn.disabled = false;
+                })
+                .catch((error) => {
+                    alert("Database reference synchronization runtime error fault.");
+                    console.error(error);
+                    submitBtn.innerText = "Transmit Wish ✨";
+                    submitBtn.disabled = false;
+                });
         }
 
         function sanitizeInput(str) {
             if (!str) return '';
             var chars = ['&', '<', '>', "'", '"'];
             var entities = ['&amp;', '&lt;', '&gt;', '&#39;', '&quot;'];
-            for (var i = 0; i < chars.length; i++) { str = str.split(chars[i]).join(entities[i]); }
+            for (var i = 0; i < chars.length; i++) {
+                str = str.split(chars[i]).join(entities[i]);
+            }
             return str;
         }
 
-        function runClockTicker() { /* Logic maintained */ }
-        function triggerCalendarIntent() { /* Logic maintained */ }
-        function processRsvpForm(e) { /* Logic maintained */ }
-        function renderGuestbookBoard() { /* Logic maintained */ }
-        function handleNewWishPosting(e) { /* Logic maintained */ }
+        // INIT CLOCK & ANIMATIONS AT THE END OF THE SCRIPT
+        setInterval(runClockTicker, 1000);
+        handleGlitterLoop();
     </script>
 </body>
 </html>
