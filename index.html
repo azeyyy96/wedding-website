@@ -39,11 +39,13 @@
         html, body {
             width: 100%;
             min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport safety anchor */
             background-color: transparent; 
         }
 
         html.lock-scroll, body.lock-scroll {
             height: 100vh !important;
+            height: 100dvh !important;
             overflow: hidden !important;
         }
 
@@ -88,6 +90,7 @@
         #main-content-site {
             width: 100%;
             min-height: 100vh;
+            min-height: 100dvh;
             display: none; 
             flex-direction: column;
             align-items: center;
@@ -111,11 +114,12 @@
         header {
             width: 100%;
             min-height: 85vh;
+            min-height: 85dvh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 4rem 1.5rem;
+            padding: 6rem 1.5rem 4rem 1.5rem; /* Enhanced top clearance to protect top components */
             position: relative;
             gap: 1.5rem;
             z-index: 10;
@@ -158,6 +162,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0; /* Freeze frame sizes against flex shrink scaling collapses */
         }
 
         .logo-container img {
@@ -201,7 +206,9 @@
         #welcome-overlay {
             position: fixed;
             top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            width: 100vw; 
+            height: 100vh;
+            height: 100dvh; /* Safe track responsive browser chrome bounds */
             background-color: var(--maroon-dark);
             color: var(--sandalwood);
             z-index: 200000;
@@ -209,9 +216,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 1.5rem;
+            padding: 1rem; /* Added compression safety padding values */
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1s;
-            overflow: hidden;
+            overflow-y: auto; /* Allow fallback scrolling inside micro display ratios */
             background: radial-gradient(circle at center, var(--maroon-bright) 0%, var(--maroon-dark) 100%);
         }
 
@@ -228,15 +235,16 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(197, 160, 89, 0.4);
-            padding: 4.5rem 2.5rem;
+            padding: 3rem 2rem; /* Streamlined mobile box-model layout values */
             border-radius: var(--curvy-radius-lg);
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
             box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 30px rgba(197, 160, 89, 0.15);
-            margin: 0 auto;
+            margin: auto; /* Soft tracking absolute alignment logic positioning anchor */
             position: relative;
             animation: cardEntranceGlow 8s ease-in-out infinite alternate;
             z-index: 10;
+            flex-shrink: 0;
         }
         
         .welcome-card::before {
@@ -276,8 +284,8 @@
         /* NAVIGATION TRIGGER BUTTON - COMPLETELY FIXED AND FORCED TO FOREGROUND */
         .floating-menu-trigger {
             position: fixed !important;
-            top: 25px !important;
-            left: 25px !important;
+            top: calc(25px + env(safe-area-inset-top)) !important; /* Integrated safe notch trackers */
+            left: calc(25px + env(safe-area-inset-left)) !important;
             width: 60px;
             height: 60px;
             display: none; 
@@ -313,10 +321,10 @@
 
         @media (max-width: 768px) {
             .floating-menu-trigger {
-                top: calc(20px + env(safe-area-inset-top)) !important;
-                left: calc(20px + env(safe-area-inset-left)) !important;
-                width: 58px;
-                height: 58px;
+                top: calc(15px + env(safe-area-inset-top)) !important;
+                left: calc(15px + env(safe-area-inset-left)) !important;
+                width: 54px;
+                height: 54px;
             }
         }
 
@@ -846,7 +854,7 @@
         .premium-developer-showcase {
             width: 100%;
             background: #050102; 
-            padding: 2.5rem 5%; 
+            padding: 3rem 5%; 
             border-top: 1px solid rgba(197, 160, 89, 0.2);
             position: relative;
             text-align: center;
@@ -1034,27 +1042,27 @@
         
         <!-- Frosted Glass Welcome Card with Staggered entrance hooks -->
         <div class="welcome-card stagger-anim delay-5">
-            <div class="logo-container stagger-anim delay-1">
+            <div class="logo-container">
                 <img src="./background.png" alt="Wedding Emblem">
             </div>
             
-            <p class="stagger-anim delay-2" style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold-pure); letter-spacing: 4px; margin-bottom: 0.6rem;">Walimatul Ursy</p>
+            <p style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold-pure); letter-spacing: 4px; margin-bottom: 0.6rem;">Walimatul Ursy</p>
             
-            <h2 class="stagger-anim delay-3" style="color: white; font-size: 2.8rem; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin-bottom: 1.5rem; font-weight: 400; letter-spacing: 2px;">
+            <h2 style="color: white; font-size: 2.8rem; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin-bottom: 1.5rem; font-weight: 400; letter-spacing: 2px;">
                 Azmin
                 <br>
                 <span class="script-connective" style="font-size: 3.5rem; margin: -10px 0;">weds</span>
                 Ameera
             </h2>
             
-            <div class="divider stagger-anim delay-3" style="color: var(--gold-pure);">✦ ⚜ ✦</div>
+            <div class="divider" style="color: var(--gold-pure);">✦ ⚜ ✦</div>
             
-            <p class="stagger-anim delay-4" style="font-size: 0.9rem; line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300; font-style: italic; color: var(--sandalwood); padding: 0 1rem; letter-spacing: 0.5px;">
+            <p style="font-size: 0.9rem; line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300; font-style: italic; color: var(--sandalwood); padding: 0 1rem; letter-spacing: 0.5px;">
                 Assalamu alaikum Wr. Wb.<br><br>
                 We cordially invite you to share in our joy and receive blessings on the auspicious occasion of the wedding reception of our beloved brother and sister.
             </p>
             
-            <button class="btn stagger-anim delay-5" onclick="grantEntranceToInvitationSite()">✨ Enter Experience</button>
+            <button class="btn" onclick="grantEntranceToInvitationSite()">✨ Enter Experience</button>
         </div>
     </div>
 
