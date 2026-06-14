@@ -39,7 +39,7 @@
         html, body {
             width: 100%;
             min-height: 100vh;
-            min-height: 100dvh; /* Dynamic viewport safety anchor */
+            min-height: 100dvh;
             background-color: transparent; 
         }
 
@@ -59,29 +59,31 @@
             overflow-x: hidden;
         }
 
-        /* Fixed Hardware-Accelerated background canvas structure */
-        body::after {
-            content: '';
+        /* Dedicated Fixed Background Layer (Fixes mobile scroll drag bug) */
+        #fixed-bg {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--maroon-dark); 
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh; /* Adapts cleanly to mobile URL bars */
+            background-color: var(--maroon-dark);
             background-image: url('./background.png');
             background-size: cover;          
             background-repeat: no-repeat;
             background-position: center top;
             z-index: -2;
-            transform: translateZ(0);
             pointer-events: none;
         }
 
-        /* Ambient shading layer covering the entire page canvas smoothly */
-        body::before {
-            content: '';
+        /* Dedicated Ambient Overlay */
+        #fixed-bg-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh;
+            height: 100dvh;
             background: linear-gradient(to bottom, rgba(13, 2, 4, 0.6), rgba(13, 2, 4, 0.2), rgba(13, 2, 4, 0.75));
             z-index: -1;
             pointer-events: none;
@@ -119,7 +121,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 6rem 1.5rem 4rem 1.5rem; /* Enhanced top clearance to protect top components */
+            padding: 6rem 1.5rem 4rem 1.5rem; 
             position: relative;
             gap: 1.5rem;
             z-index: 10;
@@ -162,7 +164,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0; /* Freeze frame sizes against flex shrink scaling collapses */
+            flex-shrink: 0;
         }
 
         .logo-container img {
@@ -208,7 +210,7 @@
             top: 0; left: 0;
             width: 100vw; 
             height: 100vh;
-            height: 100dvh; /* Safe track responsive browser chrome bounds */
+            height: 100dvh; 
             background-color: var(--maroon-dark);
             color: var(--sandalwood);
             z-index: 200000;
@@ -216,9 +218,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 1rem; /* Added compression safety padding values */
+            padding: 1rem; 
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1s;
-            overflow-y: auto; /* Allow fallback scrolling inside micro display ratios */
+            overflow-y: auto; 
             background: radial-gradient(circle at center, var(--maroon-bright) 0%, var(--maroon-dark) 100%);
         }
 
@@ -235,12 +237,12 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(197, 160, 89, 0.4);
-            padding: 3rem 2rem; /* Streamlined mobile box-model layout values */
+            padding: 3rem 2rem; 
             border-radius: var(--curvy-radius-lg);
             width: 100%;
             max-width: 440px;
             box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 30px rgba(197, 160, 89, 0.15);
-            margin: auto; /* Soft tracking absolute alignment logic positioning anchor */
+            margin: auto; 
             position: relative;
             animation: cardEntranceGlow 8s ease-in-out infinite alternate;
             z-index: 10;
@@ -284,7 +286,7 @@
         /* NAVIGATION TRIGGER BUTTON - COMPLETELY FIXED AND FORCED TO FOREGROUND */
         .floating-menu-trigger {
             position: fixed !important;
-            top: calc(25px + env(safe-area-inset-top)) !important; /* Integrated safe notch trackers */
+            top: calc(25px + env(safe-area-inset-top)) !important; 
             left: calc(25px + env(safe-area-inset-left)) !important;
             width: 60px;
             height: 60px;
@@ -854,7 +856,7 @@
         .premium-developer-showcase {
             width: 100%;
             background: #050102; 
-            padding: 3rem 5%; 
+            padding: 2.5rem 5%; 
             border-top: 1px solid rgba(197, 160, 89, 0.2);
             position: relative;
             text-align: center;
@@ -1015,10 +1017,11 @@
 </head>
 <body class="lock-scroll">
 
-    <!-- Stardust Engine initially visible globally -->
+    <div id="fixed-bg"></div>
+    <div id="fixed-bg-overlay"></div>
+
     <canvas id="glitter-canvas"></canvas>
 
-    <!-- Menu Trigger Button -->
     <button class="floating-menu-trigger" id="sidebar-open-btn" onclick="toggleSidebarDrawer(true)">
         ☰
     </button>
@@ -1037,32 +1040,30 @@
         </div>
     </div>
 
-    <!-- UPGRADED CINEMATIC WELCOME OVERLAY (No background image here) -->
     <div id="welcome-overlay">
         
-        <!-- Frosted Glass Welcome Card with Staggered entrance hooks -->
         <div class="welcome-card stagger-anim delay-5">
-            <div class="logo-container">
+            <div class="logo-container stagger-anim delay-1">
                 <img src="./background.png" alt="Wedding Emblem">
             </div>
             
-            <p style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold-pure); letter-spacing: 4px; margin-bottom: 0.6rem;">Walimatul Ursy</p>
+            <p class="stagger-anim delay-2" style="font-family: 'Cinzel'; font-size: 1.1rem; text-transform: uppercase; color: var(--gold-pure); letter-spacing: 4px; margin-bottom: 0.6rem;">Walimatul Ursy</p>
             
-            <h2 style="color: white; font-size: 2.8rem; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin-bottom: 1.5rem; font-weight: 400; letter-spacing: 2px;">
+            <h2 class="stagger-anim delay-3" style="color: white; font-size: 2.8rem; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin-bottom: 1.5rem; font-weight: 400; letter-spacing: 2px;">
                 Azmin
                 <br>
                 <span class="script-connective" style="font-size: 3.5rem; margin: -10px 0;">weds</span>
                 Ameera
             </h2>
             
-            <div class="divider" style="color: var(--gold-pure);">✦ ⚜ ✦</div>
+            <div class="divider stagger-anim delay-3" style="color: var(--gold-pure);">✦ ⚜ ✦</div>
             
-            <p style="font-size: 0.9rem; line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300; font-style: italic; color: var(--sandalwood); padding: 0 1rem; letter-spacing: 0.5px;">
+            <p class="stagger-anim delay-4" style="font-size: 0.9rem; line-height: 1.9; margin-bottom: 2.5rem; font-weight: 300; font-style: italic; color: var(--sandalwood); padding: 0 1rem; letter-spacing: 0.5px;">
                 Assalamu alaikum Wr. Wb.<br><br>
                 We cordially invite you to share in our joy and receive blessings on the auspicious occasion of the wedding reception of our beloved brother and sister.
             </p>
             
-            <button class="btn" onclick="grantEntranceToInvitationSite()">✨ Enter Experience</button>
+            <button class="btn stagger-anim delay-5" onclick="grantEntranceToInvitationSite()">✨ Enter Experience</button>
         </div>
     </div>
 
@@ -1207,7 +1208,6 @@
                 </div>
             </section>
 
-            <!-- Hashtag block moved outside into the image background -->
             <section class="animate-on-scroll" style="padding-top: 0; padding-bottom: 4rem;">
                 <div class="hashtag-text" style="text-shadow: 0 4px 15px rgba(0,0,0,0.8);">#TwoAsBecomeOne • 12.09.2026</div>
             </section>
