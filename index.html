@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script>
+  // Always land at the top on refresh/reload/direct load instead of the
+  // browser restoring the last scroll position or jumping to a #hash
+  // left over from a previous in-page link click.
+  if (window.history && 'scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
+  if (window.location.hash && window.history && window.history.replaceState) {
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Walimatul Ursy — Azmin &amp; Ameera</title>
